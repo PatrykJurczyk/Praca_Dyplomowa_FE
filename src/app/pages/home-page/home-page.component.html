@@ -7,6 +7,11 @@
     <div class="offerInfo">Liczba domów: {{ houses.length }}</div>
   </div>
   <div *ngFor="let house of houses">
-    <app-house-card [house]="house"></app-house-card>
+    <app-house-card
+      [house]="house"
+      [favourites]="favourites"
+      [userId]="userId"
+      [isLoggedIn]="isLoggedIn"
+    ></app-house-card>
   </div>
 </div>
