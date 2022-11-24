@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { openModal } from './models/user.interface';
-import {ModalService} from "./services/modal.service";
+import { ModalService } from './services/modal.service';
+import { HouseDetailModel } from './models/houseModel';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   openModal: openModal = { isOpen: false, type: '' };
-  // modalDetail!: HouseDetailModel;
+  modalDetail!: HouseDetailModel;
 
   constructor(private modalService: ModalService) {}
 
@@ -17,9 +18,9 @@ export class AppComponent {
     this.modalService.modalStateSubject.subscribe(
       (data) => (this.openModal = data)
     );
-    // this.modalService.modalDetailSubject.subscribe(
-    //   (data) => (this.modalDetail = data)
-    // );
+    this.modalService.modalDetailSubject.subscribe(
+      (data) => (this.modalDetail = data)
+    );
   }
 
   closeModal() {

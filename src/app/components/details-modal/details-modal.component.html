@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="closeIcon" (click)="onClose()">
+    <ng-icon name="bootstrapX"></ng-icon>
+  </div>
+  <div class="leftSide">
+    <div class="title">
+      <div class="address">
+        <p>{{ house.street }} {{ house.houseNr }},</p>
+        <p>{{ house.country }}</p>
+      </div>
+      <ng-icon
+        name="bootstrapHeart"
+        *ngIf="!favourites.includes(house._id)"
+      ></ng-icon>
+      <ng-icon
+        name="bootstrapHeartFill"
+        class="heartFill"
+        *ngIf="favourites.includes(house._id)"
+      ></ng-icon>
+    </div>
+    <div class="imgWrapper">
+      <div class="mainImg">
+        <img
+          src="{{
+            house.images[0]
+              ? house.images[0]
+              : '../../../assets/image/nophoto.png'
+          }}"
+          alt="Zdjęcie domu"
+        />
+      </div>
+      <div class="restImg">
+        <div>
+          <img
+            src="{{
+              house.images[1]
+                ? house.images[1]
+                : '../../../assets/image/nophoto.png'
+            }}"
+            alt="Zdjęcie domu"
+          />
+        </div>
+        <div>
+          <img
+            src="{{
+              house.images[2]
+                ? house.images[2]
+                : '../../../assets/image/nophoto.png'
+            }}"
+            alt="Zdjęcie domu"
+          />
+        </div>
+        <div>
+          <img
+            src="{{
+              house.images[3]
+                ? house.images[3]
+                : '../../../assets/image/nophoto.png'
+            }}"
+            alt="Zdjęcie domu"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="priceContainer">
+      <p>{{ house.price }}zł</p>
+    </div>
+    <div class="buttonWrapper">
+      <button>Kup Dom</button>
+      <button>Kontakt</button>
+    </div>
+  </div>
+  <div class="rightSide">
+    <p class="propertyTitle">Property information</p>
+    <div class="basicInfo">
+      <div class="propertyWrapper">
+        <p class="label">Województwo</p>
+        <p class="info">{{ house.province }}</p>
+      </div>
+      <div class="propertyWrapper">
+        <p class="label">Miasto</p>
+        <p class="info">{{ house.city }}</p>
+      </div>
+      <div class="propertyWrapper">
+        <p class="label">Ulica</p>
+        <p class="info">{{ house.street }} {{ house.houseNr }}</p>
+      </div>
+      <div class="propertyWrapper">
+        <p class="label">Rok budowy</p>
+        <p class="info">{{ house.yearBuilt }}</p>
+      </div>
+      <div class="propertyWrapper">
+        <p class="label">Powierzchnia w m<sup>2</sup></p>
+        <p class="info">{{ house.dimension }}</p>
+      </div>
+      <div class="propertyWrapper">
+        <p class="label">Ilość pięter</p>
+        <p class="info">{{ house.floorsInBuilding }}</p>
+      </div>
+      <div class="propertyWrapper">
+        <p class="label">Ilośc pokoi</p>
+        <p class="info">{{ house.roomsNumber }}</p>
+      </div>
+      <div class="propertyWrapper">
+        <p class="label">Ilość łazienek</p>
+        <p class="info">{{ house.bathroomNumber }}</p>
+      </div>
+    </div>
+    <p class="propertyTitle">More facilities</p>
+    <div class="facilitiesContainer">
+      <ng-container *ngIf="house.otherFeatures?.length">
+        <div
+          class="facilityWrapper"
+          *ngFor="let facility of house.otherFeatures"
+        >
+          <div class="checked">
+            <ng-icon name="bootstrapCheckSquareFill"></ng-icon>
+          </div>
+          <p class="nameOfFacility">{{ facility }}</p>
+        </div>
+      </ng-container>
+
+      <div class="facilityWrapper" *ngIf="!house.otherFeatures?.length">
+        <div class="checked" *ngIf="house.otherFeatures?.length">
+          <ng-icon name="bootstrapCheckSquareFill"></ng-icon>
+        </div>
+        <p class="nameOfFacility">Brak dodatkowych udogodnien</p>
+      </div>
+    </div>
+    <div>
+      <p class="propertyTitle">More information</p>
+      <p class="description">
+        {{
+          house.descriptionField
+            ? house.descriptionField
+            : "Brak dodatkowych informacji"
+        }}
+      </p>
+    </div>
+  </div>
+</div>

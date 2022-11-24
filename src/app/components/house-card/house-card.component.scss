@@ -1,0 +1,126 @@
+.cardWrapper {
+  display: grid;
+  grid-template-columns: 292px 1fr;
+  position: relative;
+  border: 1px solid #d6d6d6;
+  margin-bottom: 16px;
+  border-radius: 5px;
+
+  .imgWrapper {
+    display: inline-block;
+    background: #ececec;
+    width: 292px;
+    height: 244px;
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+
+    .contentWrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-left: 47px;
+      margin-bottom: 17px;
+
+      .basicInfo {
+        margin-top: 20px;
+
+        p:first-child {
+          font-size: 20px;
+          color: #000;
+          margin-bottom: 13px;
+          width: 250px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        p:last-child {
+          font-size: 16px;
+          color: #ff8842;
+        }
+      }
+
+      .aboutHouse {
+        display: flex;
+
+        p {
+          margin-right: 60px;
+          font-size: 24px;
+        }
+      }
+
+      .owner {
+        font-size: 24px;
+      }
+    }
+
+    .butFavWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      margin-top: 26px;
+      margin-right: 14px;
+
+      .iconWrapper {
+        font-size: 23px;
+
+        .heart {
+          color: #00000030;
+        }
+
+        .heartFill {
+          color: #f00;
+        }
+
+        .heart:hover,
+        .heartFill:hover {
+          cursor: pointer;
+        }
+      }
+
+      button {
+        background: #ff8842;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        padding: 11px 26px;
+      }
+
+      button:hover {
+        cursor: pointer;
+        background: #ff731f;
+      }
+    }
+  }
+
+  .isReserved {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #cacaca66;
+
+    p {
+      display: inline-block;
+      margin: auto;
+      text-transform: uppercase;
+      color: #00000070;
+      font-size: 72px;
+      transform: rotate(-11deg);
+    }
+  }
+}

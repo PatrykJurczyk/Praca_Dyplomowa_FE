@@ -1,1 +1,12 @@
-<p>home-page works!</p>
+<div class="container">
+  <div class="topBar">
+    <div class="sortBy">
+      Sortuj:
+      <button (click)="onClick()">{{ valueOfButton }}</button>
+    </div>
+    <div class="offerInfo">Liczba domów: {{ houses.length }}</div>
+  </div>
+  <div *ngFor="let house of houses">
+    <app-house-card [house]="house"></app-house-card>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div>
+  <div class="cardWrapper">
+    <div class="imgWrapper">
+      <img
+        *ngIf="!house.images[0]"
+        src="../../../assets/image/nophoto.png"
+        alt="Brak zdjęcia"
+      />
+      <img
+        *ngIf="!!house.images[0]"
+        src="{{ house.images[0] }}"
+        alt="Zdjęcie domu"
+      />
+    </div>
+    <div class="container">
+      <div class="contentWrapper">
+        <div class="basicInfo">
+          <p>{{ house.descriptionField }}</p>
+          <p>
+            {{ house.province }} {{ house.city }}, ul.{{ house.street }}
+            {{ house.houseNr }}
+          </p>
+        </div>
+        <div class="aboutHouse">
+          <p>{{ house.price }}zł</p>
+          <p>
+            {{ (house.price / house.dimension).toFixed() }}<sup>zł</sup>/<sub
+              >m<sup>2</sup></sub
+            >
+          </p>
+          <p>{{ house.roomsNumber }} pokoje</p>
+          <p>{{ house.dimension }}m<sup>2</sup></p>
+        </div>
+        <div class="owner">
+          <p>Osoba prywatna</p>
+        </div>
+      </div>
+
+      <div class="butFavWrapper">
+        <div class="iconWrapper">
+          <div *ngIf="isLoggedIn">
+            <ng-icon
+              name="bootstrapHeart"
+              class="heart"
+              *ngIf="!favourites.includes(house._id)"
+            ></ng-icon>
+            <ng-icon
+              name="bootstrapHeartFill"
+              class="heartFill"
+              *ngIf="favourites.includes(house._id)"
+            ></ng-icon>
+          </div>
+        </div>
+        <button (click)="openDetailsModal(house._id)">Więcej szczegółów</button>
+      </div>
+    </div>
+    <div *ngIf="this.house.isReserved === isReservedHouse" class="isReserved">
+      <p>zarezerwowane</p>
+    </div>
+  </div>
+  <div class="modalDetails">
+    <app-details-modal
+      [favourites]="favourites"
+      [house]="house"
+      *ngIf="
+        openModalDetails.open === true && openModalDetails.idHouse === house._id
+      "
+      [isOpen]="openModalDetails.open"
+    ></app-details-modal>
+  </div>
+</div>

@@ -1,7 +1,6 @@
 <div>
-<!--  [ngClass]="{ bgOpacity: openModal.isOpen || modalDetail.open }"-->
   <div
-    [ngClass]="{ bgOpacity: openModal.isOpen }"
+    [ngClass]="{ bgOpacity: openModal.isOpen || modalDetail.open }"
     (click)="closeModal()"
   ></div>
 
@@ -11,9 +10,9 @@
   <div *ngIf="openModal.isOpen && openModal.type === 'register'">
     <app-register></app-register>
   </div>
-<!--  <div *ngIf="openModal.isOpen && openModal.type === 'changePassword'">-->
-<!--    <app-user-new-password></app-user-new-password>-->
-<!--  </div>-->
+  <!--  <div *ngIf="openModal.isOpen && openModal.type === 'changePassword'">-->
+  <!--    <app-user-new-password></app-user-new-password>-->
+  <!--  </div>-->
 
   <app-header></app-header>
   <div class="container">
