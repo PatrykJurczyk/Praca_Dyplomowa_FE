@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="header">
+    <div class="imgWrapper">
+      <img src="../../../assets/image/nophoto.png" alt="Logo" />
+    </div>
+    <button
+      class="logInOutButton"
+      (click)="onClick()"
+      *ngIf="isLoggedIn !== 'User'"
+    >
+      {{ isLoggedIn ? "Logout" : "Login" }}
+    </button>
+    <div
+      class="userAvatarButton"
+      (click)="onAvatarClick()"
+      *ngIf="isLoggedIn === 'User'"
+    >
+      <img
+        src="{{ userAvatar ? userAvatar : '../../../assets/image/avatar.png' }}"
+        alt="User avatar"
+      />
+    </div>
+  </div>
+  <app-nav-popup *ngIf="openNavPopup" [userName]="user.name"></app-nav-popup>
+</div>

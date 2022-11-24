@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="formTitle">
+    <h1>Welcome to YourHome!</h1>
+  </div>
+  <div class="buttons">
+    <button
+      type="button"
+      class="signInButton"
+      (click)="setIsSignInClicked()"
+      [ngClass]="{ borderBottomButton: isSignInClicked }"
+    >
+      Sign in
+    </button>
+    <button type="button" class="signUpButton" (click)="setIsSignUpClicked()">
+      New account
+    </button>
+  </div>
+  <div class="formWrapper">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div class="emailInputWrapper">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="text"
+          placeholder="Enter email"
+          name="email"
+          formControlName="email"
+        />
+        <div
+          *ngIf="
+            !form.controls['email'].valid && form.controls['email'].touched
+          "
+        >
+          <ng-icon
+            name="bootstrapExclamationTriangleFill"
+            class="errorIcon"
+          ></ng-icon>
+          <p class="errorMessage">
+            {{ 'Wprowadź poprawny email' }}
+          </p>
+        </div>
+      </div>
+      <div class="passwordInputWrapper">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          placeholder="Enter password"
+          name="password"
+          formControlName="password"
+        />
+        <div
+          *ngIf="
+            !form.controls['password'].valid &&
+            form.controls['password'].touched
+          "
+        >
+          <ng-icon
+            name="bootstrapExclamationTriangleFill"
+            class="errorIcon"
+          ></ng-icon>
+          <p class="errorMessage">
+            {{ 'Hasło musi mieć minimum 6 znaków' }}
+          </p>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="submitButton"
+        [ngClass]="{
+          disabled:
+            !form.controls['email'].valid || !form.controls['password'].valid
+        }"
+        [disabled]="
+          !form.controls['email'].valid || !form.controls['password'].valid
+        "
+      >
+        <p>Sign up</p>
+      </button>
+    </form>
+  </div>
+</div>

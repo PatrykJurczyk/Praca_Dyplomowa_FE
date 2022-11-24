@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #cbced2;
+  height: 125px;
+  width: 100%;
+
+  a {
+    display: flex;
+    align-items: center;
+    color: #5b636f;
+    text-decoration: none;
+
+    ng-icon {
+      font-size: 35px;
+    }
+  }
+
+  p {
+    padding-right: 15px;
+    font-size: 24px;
+  }
+
+  p:hover,
+  svg:hover {
+    cursor: pointer;
+  }
+
+  .icon {
+    color: #000000;
+  }
+}

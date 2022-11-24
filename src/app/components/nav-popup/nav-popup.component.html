@@ -1,0 +1,16 @@
+<div class="menuWrapper">
+  <div class="title">
+    <p>Witaj, {{ userName || "User" }}!</p>
+  </div>
+  <div class="menuItemWrapper">
+    <p class="menuItem" routerLink="/user">Ustawienia konta</p>
+    <p class="menuItem" routerLink="/user">Ulubione domy</p>
+    <p class="menuItem" routerLink="/user">Moje domy</p>
+    <p class="menuItem" routerLink="/user">Dodaj nowy dom</p>
+    <p class="menuItem" routerLink="/user">Zarezerwowane domy</p>
+  </div>
+  <div class="logoutWrapper" (click)="logOut()">
+    <div>Wyloguj</div>
+    <ng-icon name="bootstrapBoxArrowRight" class="icon"></ng-icon>
+  </div>
+</div>
