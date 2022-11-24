@@ -1,7 +1,6 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { HouseModel } from '../../models/houseModel';
-import { isReserved, UserStorage } from '../../enums/enum';
-import { UserService } from '../../services/user.service';
+import { isReserved } from '../../enums/enum';
 import { ModalService } from '../../services/modal.service';
 import { Subject, takeUntil } from 'rxjs';
 

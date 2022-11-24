@@ -78,11 +78,20 @@
     }
 
     .priceContainer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       font-size: 40px;
       margin: 40px 0 30px 0;
 
-      p {
-        text-align: right;
+      span {
+        display: inline-block;
+        font-size: 15px;
+        color: #ff8842;
+      }
+
+      div {
+        font-size: 30px;
       }
     }
 

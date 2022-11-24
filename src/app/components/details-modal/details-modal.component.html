@@ -5,25 +5,25 @@
   <div class="leftSide">
     <div class="title">
       <div class="address">
-        <p>{{ house.street }} {{ house.houseNr }},</p>
-        <p>{{ house.country }}</p>
+        <p>{{ houseData.street }} {{ houseData.houseNr }},</p>
+        <p>{{ houseData.country }}</p>
       </div>
       <ng-icon
         name="bootstrapHeart"
-        *ngIf="!favourites.includes(house._id)"
+        *ngIf="!favourites.includes(houseData._id)"
       ></ng-icon>
       <ng-icon
         name="bootstrapHeartFill"
         class="heartFill"
-        *ngIf="favourites.includes(house._id)"
+        *ngIf="favourites.includes(houseData._id)"
       ></ng-icon>
     </div>
     <div class="imgWrapper">
       <div class="mainImg">
         <img
           src="{{
-            house.images[0]
-              ? house.images[0]
+            houseData.images[0]
+              ? houseData.images[0]
               : '../../../assets/image/nophoto.png'
           }}"
           alt="Zdjęcie domu"
@@ -33,8 +33,8 @@
         <div>
           <img
             src="{{
-              house.images[1]
-                ? house.images[1]
+              houseData.images[1]
+                ? houseData.images[1]
                 : '../../../assets/image/nophoto.png'
             }}"
             alt="Zdjęcie domu"
@@ -43,8 +43,8 @@
         <div>
           <img
             src="{{
-              house.images[2]
-                ? house.images[2]
+              houseData.images[2]
+                ? houseData.images[2]
                 : '../../../assets/image/nophoto.png'
             }}"
             alt="Zdjęcie domu"
@@ -53,8 +53,8 @@
         <div>
           <img
             src="{{
-              house.images[3]
-                ? house.images[3]
+              houseData.images[3]
+                ? houseData.images[3]
                 : '../../../assets/image/nophoto.png'
             }}"
             alt="Zdjęcie domu"
@@ -63,14 +63,12 @@
       </div>
     </div>
     <div class="priceContainer">
-      <p>{{ house.price }}zł</p>
+      <span *ngIf="!!(houseData.owner === userId)">Wystawiono: {{ time }}</span>
+      <div>{{ houseData.price }}zł</div>
     </div>
-    <div class="buttonWrapper" *ngIf="!(house.owner === userId)">
+    <div class="buttonWrapper" *ngIf="!(houseData.owner === userId)">
       <button>Kup Dom</button>
       <button>Kontakt</button>
-    </div>
-    <div class="buttonWrapper" *ngIf="!!(house.owner === userId)">
-      <div>Wystawiono: {{ time }}</div>
     </div>
   </div>
   <div class="rightSide">
@@ -78,43 +76,43 @@
     <div class="basicInfo">
       <div class="propertyWrapper">
         <p class="label">Województwo</p>
-        <p class="info">{{ house.province }}</p>
+        <p class="info">{{ houseData.province }}</p>
       </div>
       <div class="propertyWrapper">
         <p class="label">Miasto</p>
-        <p class="info">{{ house.city }}</p>
+        <p class="info">{{ houseData.city }}</p>
       </div>
       <div class="propertyWrapper">
         <p class="label">Ulica</p>
-        <p class="info">{{ house.street }} {{ house.houseNr }}</p>
+        <p class="info">{{ houseData.street }} {{ houseData.houseNr }}</p>
       </div>
       <div class="propertyWrapper">
         <p class="label">Rok budowy</p>
-        <p class="info">{{ house.yearBuilt }}</p>
+        <p class="info">{{ houseData.yearBuilt }}</p>
       </div>
       <div class="propertyWrapper">
         <p class="label">Powierzchnia w m<sup>2</sup></p>
-        <p class="info">{{ house.dimension }}</p>
+        <p class="info">{{ houseData.dimension }}</p>
       </div>
       <div class="propertyWrapper">
         <p class="label">Ilość pięter</p>
-        <p class="info">{{ house.floorsInBuilding }}</p>
+        <p class="info">{{ houseData.floorsInBuilding }}</p>
       </div>
       <div class="propertyWrapper">
         <p class="label">Ilośc pokoi</p>
-        <p class="info">{{ house.roomsNumber }}</p>
+        <p class="info">{{ houseData.roomsNumber }}</p>
       </div>
       <div class="propertyWrapper">
         <p class="label">Ilość łazienek</p>
-        <p class="info">{{ house.bathroomNumber }}</p>
+        <p class="info">{{ houseData.bathroomNumber }}</p>
       </div>
     </div>
     <p class="propertyTitle">More facilities</p>
     <div class="facilitiesContainer">
-      <ng-container *ngIf="house.otherFeatures?.length">
+      <ng-container *ngIf="houseData.otherFeatures?.length">
         <div
           class="facilityWrapper"
-          *ngFor="let facility of house.otherFeatures"
+          *ngFor="let facility of houseData.otherFeatures"
         >
           <div class="checked">
             <ng-icon name="bootstrapCheckSquareFill"></ng-icon>
@@ -123,8 +121,8 @@
         </div>
       </ng-container>
 
-      <div class="facilityWrapper" *ngIf="!house.otherFeatures?.length">
-        <div class="checked" *ngIf="house.otherFeatures?.length">
+      <div class="facilityWrapper" *ngIf="!houseData.otherFeatures?.length">
+        <div class="checked" *ngIf="houseData.otherFeatures?.length">
           <ng-icon name="bootstrapCheckSquareFill"></ng-icon>
         </div>
         <p class="nameOfFacility">Brak dodatkowych udogodnien</p>
@@ -134,8 +132,8 @@
       <p class="propertyTitle">More information</p>
       <p class="description">
         {{
-          house.descriptionField
-            ? house.descriptionField
+          houseData.descriptionField
+            ? houseData.descriptionField
             : "Brak dodatkowych informacji"
         }}
       </p>

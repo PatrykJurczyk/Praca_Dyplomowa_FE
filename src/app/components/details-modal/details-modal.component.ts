@@ -9,13 +9,15 @@ import * as moment from 'moment/moment';
   styleUrls: ['./details-modal.component.scss'],
 })
 export class DetailsModalComponent {
-  @Input() house!: HouseModel;
+  @Input() set house(value: HouseModel) {
+    this.time = moment(value?.createdAt).format('DD-MM-YYYY HH:mm');
+    this.houseData = value;
+  }
   @Input() isOpen!: boolean;
   @Input() favourites: string[] = [];
   @Input() userId!: string;
-  protected time: string = moment(this.house?.createdAt).format(
-    'DD-MM-YYYY HH:mm'
-  );
+  protected time!: string;
+  protected houseData!: HouseModel;
 
   constructor(private modalDetail: ModalService) {}
 
