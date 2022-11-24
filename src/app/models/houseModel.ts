@@ -11,6 +11,7 @@ export interface HouseModel {
   dimension: number;
   floorsInBuilding: number;
   floor?: number;
+  createdAt: string;
   roomsNumber: number;
   bathroomNumber: number;
   otherFeatures?: string[];

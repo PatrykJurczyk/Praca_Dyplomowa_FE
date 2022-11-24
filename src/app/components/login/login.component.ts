@@ -49,7 +49,7 @@ export class LoginComponent implements OnDestroy {
         (data) => {
           window.sessionStorage.setItem(
             UserStorage.USER_KEY,
-            data.id as string
+            data._id as string
           );
           window.sessionStorage.setItem(
             UserStorage.USER_ROLE,

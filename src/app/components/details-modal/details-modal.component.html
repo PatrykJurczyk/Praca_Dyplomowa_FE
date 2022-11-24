@@ -65,9 +65,12 @@
     <div class="priceContainer">
       <p>{{ house.price }}zł</p>
     </div>
-    <div class="buttonWrapper">
+    <div class="buttonWrapper" *ngIf="!(house.owner === userId)">
       <button>Kup Dom</button>
       <button>Kontakt</button>
+    </div>
+    <div class="buttonWrapper" *ngIf="!!(house.owner === userId)">
+      <div>Wystawiono: {{ time }}</div>
     </div>
   </div>
   <div class="rightSide">

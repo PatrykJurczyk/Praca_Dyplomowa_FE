@@ -15,6 +15,7 @@ export class HouseCardComponent implements OnDestroy {
   isLoggedIn: boolean = !!window.sessionStorage.getItem(UserStorage.USER_KEY);
   isReservedHouse: number = isReserved.zarezerwowany;
   favourites: string[] = [];
+  userId!: string;
 
   openModalDetails: { open: boolean; idHouse: string } = {
     open: false,
@@ -33,6 +34,7 @@ export class HouseCardComponent implements OnDestroy {
           )
           .pipe(takeUntil(this.destroy$))
           .subscribe((value) => {
+            this.userId = value._id;
             this.favourites = value.favorites as string[];
           })
       : null;
