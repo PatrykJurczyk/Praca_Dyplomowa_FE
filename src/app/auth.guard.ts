@@ -1,19 +1,30 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router,Route, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  Route,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { Observable } from 'rxjs';
+import { UserStorage } from './enums/enum';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    const userRole = window.sessionStorage.getItem('')
+    state: RouterStateSnapshot
+  ):
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    const userRole = window.sessionStorage.getItem(UserStorage.USER_ROLE);
     const { routeConfig } = route;
     const { path } = routeConfig as Route;
 
@@ -32,5 +43,4 @@ export class AuthGuard implements CanActivate {
     this.router.navigateByUrl('/forbidden');
     return false;
   }
-
 }

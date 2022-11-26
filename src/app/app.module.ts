@@ -29,6 +29,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { NavPopupComponent } from './components/nav-popup/nav-popup.component';
 import { DetailsModalComponent } from './components/details-modal/details-modal.component';
 import { HouseCardComponent } from './components/house-card/house-card.component';
+import { UserRoutingModule } from './pages/user-panel-page/user-routing.module';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { HouseCardComponent } from './components/house-card/house-card.component
     }),
     FormsModule,
     ReactiveFormsModule,
+    UserRoutingModule,
     AppRoutingModule,
     AngularToastifyModule,
   ],
