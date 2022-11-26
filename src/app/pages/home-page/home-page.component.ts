@@ -14,9 +14,21 @@ import { ModalService } from '../../services/modal.service';
 export class HomePageComponent implements OnDestroy {
   protected valueOfButton: string = 'Cena rosnąco';
   protected houses: HouseModel[] = [];
-  favourites: string[] = [];
-  userId!: string;
-  isLoggedIn: boolean = !!window.sessionStorage.getItem(UserStorage.USER_KEY);
+  protected favourites: string[] = [];
+  protected userId!: string;
+  protected isLoggedIn: boolean = !!window.sessionStorage.getItem(
+    UserStorage.USER_KEY
+  );
+  protected listOption: string[] = [
+    'Wybierz opcję sortowania',
+    'Cena rosnąco',
+    'Cena malejąco',
+    'data dodania: najnowsze',
+    'data dodania: najstarsze',
+    'powierzchnia: od najmniejszej',
+    'powierzchnia: od największej',
+  ];
+  selectedOption: string = 'Wybierz opcję sortowania';
 
   private destroy$: Subject<void> = new Subject();
   constructor(
@@ -49,8 +61,32 @@ export class HomePageComponent implements OnDestroy {
     this.destroy$.complete();
   }
 
-  // todo
+  // todo zapisać to w inny sposób + zminić jakoś zapis w html aby była jakaś wartość na start podana
   onClick(): void {
-    this.valueOfButton = this.valueOfButton;
+    if (this.selectedOption === 'Cena rosnąco') {
+      this.houses = this.houses.sort((a, b) => a.price - b.price);
+    }
+    if (this.selectedOption === 'Cena malejąco') {
+      this.houses = this.houses.sort((a, b) => b.price - a.price);
+    }
+    if (this.selectedOption === 'data dodania: najnowsze') {
+      console.log(this.houses[0].createdAt);
+      this.houses = this.houses.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      );
+    }
+    if (this.selectedOption === 'data dodania: najstarsze') {
+      this.houses = this.houses.sort(
+        (a, b) =>
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      );
+    }
+    if (this.selectedOption === 'powierzchnia: od najmniejszej') {
+      this.houses = this.houses.sort((a, b) => a.dimension - b.dimension);
+    }
+    if (this.selectedOption === 'powierzchnia: od największej') {
+      this.houses = this.houses.sort((a, b) => b.dimension - a.dimension);
+    }
   }
 }

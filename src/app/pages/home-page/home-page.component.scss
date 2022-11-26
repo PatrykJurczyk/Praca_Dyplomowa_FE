@@ -9,16 +9,30 @@
     font-size: 16px;
 
     .sortBy {
-      button {
+      select {
         background: #ffffff;
         border: 1px solid #535c6830;
         padding: 2px 18px;
-        color: #ff8842;
       }
 
-      button:hover {
+      select:hover {
         background: #ebebeb30;
         cursor: pointer;
+      }
+      select:focus,
+      select:active {
+        border: 1px solid #535c6830;
+        outline: none;
+      }
+
+      option {
+        font-weight: 600;
+      }
+
+      option[selected],
+      option:checked {
+        background: none;
+        color: #ff8842;
       }
     }
   }

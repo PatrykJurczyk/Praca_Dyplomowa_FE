@@ -2,7 +2,15 @@
   <div class="topBar">
     <div class="sortBy">
       Sortuj:
-      <button (click)="onClick()">{{ valueOfButton }}</button>
+      <select (click)="onClick()" [(ngModel)]="selectedOption">
+        <option
+          *ngFor="let option of listOption"
+          [ngValue]="option"
+          [hidden]="option === 'Wybierz opcję sortowania'"
+        >
+          {{ option }}
+        </option>
+      </select>
     </div>
     <div class="offerInfo">Liczba domów: {{ houses.length }}</div>
   </div>
