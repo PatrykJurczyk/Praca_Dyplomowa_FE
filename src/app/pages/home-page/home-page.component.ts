@@ -5,6 +5,7 @@ import { isReserved, UserStorage } from '../../enums/enum';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { ModalService } from '../../services/modal.service';
+import { UserModel } from '../../models/user.interface';
 
 @Component({
   selector: 'app-home-page',

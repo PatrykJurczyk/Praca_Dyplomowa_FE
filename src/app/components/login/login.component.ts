@@ -46,11 +46,9 @@ export class LoginComponent implements OnDestroy {
       .loginUser(data)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
-        (data) => {
-          window.sessionStorage.setItem(
-            UserStorage.USER_KEY,
-            data._id as string
-          );
+        (data: UserModel) => {
+          console.log(data);
+          window.sessionStorage.setItem(UserStorage.USER_KEY, data.id);
           window.sessionStorage.setItem(
             UserStorage.USER_ROLE,
             data.role as string
