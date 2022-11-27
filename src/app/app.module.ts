@@ -16,7 +16,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { MenegerPageComponent } from './pages/meneger-page/meneger-page.component';
 import { UserPanelPageComponent } from './pages/user-panel-page/user-panel-page.component';
-import { AngularToastifyModule } from 'angular-toastify';
+import { ToastService, AngularToastifyModule } from 'angular-toastify';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { LoginComponent } from './components/login/login.component';
@@ -57,7 +57,7 @@ import { UserModule } from './pages/user-panel-page/user.module';
     SharedModule,
     UserModule,
   ],
-  providers: [],
+  providers: [ToastService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

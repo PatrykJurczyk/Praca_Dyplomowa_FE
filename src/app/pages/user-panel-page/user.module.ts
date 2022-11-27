@@ -10,6 +10,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { SharedModule } from '../../shared-module.module';
 import { NgIconsModule } from '@ng-icons/core';
 import { bootstrapHeartFill } from '@ng-icons/bootstrap-icons';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { bootstrapHeartFill } from '@ng-icons/bootstrap-icons';
     NgIconsModule.withIcons({
       bootstrapHeartFill,
     }),
+    ReactiveFormsModule,
   ],
   exports: [
     AccountSettingsComponent,

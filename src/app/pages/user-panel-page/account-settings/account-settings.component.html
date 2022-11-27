@@ -1,1 +1,106 @@
-<p>account-settings works!</p>
+<div class="container">
+  <div class="avatarWrapper">
+    <div class="imgWrapper">
+      <img
+        class="first"
+        src="{{ userAvatar ? userAvatar : '../../../assets/image/avatar.png' }}"
+        alt="Avatar"
+      />
+      <img
+        class="second"
+        src="{{ userAvatar ? userAvatar : '../../../assets/image/avatar.png' }}"
+        alt="Avatar"
+      />
+      <img
+        class="third"
+        src="{{ userAvatar ? userAvatar : '../../../assets/image/avatar.png' }}"
+        alt="Avatar"
+      />
+    </div>
+    <div class="avatarButtonContainer">
+      <!--      name="avatar"-->
+      <!--      formControlName="avatar"-->
+      <div class="wrapperButtonAvatar">
+        <input
+          id="img"
+          type="file"
+          style="display: none"
+          multiple
+          accept="image/png, image/gif, image/jpeg, image/jpg"
+        />
+        <label for="img">Prześlij swój awatar</label>
+      </div>
+      <p>
+        Prześlij plik ze swojego urządzenia. Obraz powinien być kwadratem o
+        wymiarach przynajmniej 184 x 184 piksele.
+      </p>
+    </div>
+  </div>
+  <div class="dataWrapper">
+    <form [formGroup]="form" (ngSubmit)="confirm(form.value)">
+      <div class="nameContainer">
+        <div class="input">
+          <label for="name">Name</label>
+          <div>
+            <!--            Zrobić inputa żeby działał-->
+            <input
+              type="text"
+              id="name"
+              name="name"
+              formControlName="name"
+              value="{{ userName }}"
+            />
+            <button class="editButton" type="button">Edytuj</button>
+            <button class="acceptButton">Akceptuj</button>
+          </div>
+        </div>
+      </div>
+      <div class="phoneContainer">
+        <div class="input">
+          <label for="phone">Phone</label>
+          <div>
+            <!--            Zrobić inputa żeby działał-->
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              formControlName="phone"
+              value="{{ userPhone }}"
+            />
+            <button class="editButton" type="button">Edytuj</button>
+            <button class="acceptButton">Akceptuj</button>
+          </div>
+        </div>
+      </div>
+      <div class="emailContainer">
+        <div class="input">
+          <label for="email">Email</label>
+          <div>
+            <input
+              type="text"
+              id="email"
+              disabled
+              placeholder="{{ userEmail }}"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="passwordContainer">
+        <div class="input">
+          <label for="password">Password</label>
+          <div>
+            <input
+              type="password"
+              id="password"
+              value="qwertyqwertyqwerty"
+              disabled
+            />
+            <button class="editButton" (click)="editPasswordClick()">
+              Edytuj
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
