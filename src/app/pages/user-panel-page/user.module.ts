@@ -7,6 +7,9 @@ import { UserHousesComponent } from './user-houses/user-houses.component';
 import { UserNewHouseComponent } from './user-new-house/user-new-house.component';
 import { UserNewPasswordComponent } from './user-new-password/user-new-password.component';
 import { UserRoutingModule } from './user-routing.module';
+import { SharedModule } from '../../shared-module.module';
+import { NgIconsModule } from '@ng-icons/core';
+import { bootstrapHeartFill } from '@ng-icons/bootstrap-icons';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,14 @@ import { UserRoutingModule } from './user-routing.module';
     UserNewHouseComponent,
     UserNewPasswordComponent,
   ],
-  imports: [CommonModule, UserRoutingModule],
+  imports: [
+    SharedModule,
+    CommonModule,
+    UserRoutingModule,
+    NgIconsModule.withIcons({
+      bootstrapHeartFill,
+    }),
+  ],
   exports: [
     AccountSettingsComponent,
     HouseReservedComponent,

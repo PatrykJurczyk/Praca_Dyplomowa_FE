@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgIconsModule } from '@ng-icons/core';
@@ -10,10 +9,6 @@ import {
   bootstrapGithub,
   bootstrapExclamationTriangleFill,
   bootstrapBoxArrowRight,
-  bootstrapHeart,
-  bootstrapHeartFill,
-  bootstrapX,
-  bootstrapCheckSquareFill,
 } from '@ng-icons/bootstrap-icons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
@@ -27,9 +22,9 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NavPopupComponent } from './components/nav-popup/nav-popup.component';
-import { DetailsModalComponent } from './components/details-modal/details-modal.component';
-import { HouseCardComponent } from './components/house-card/house-card.component';
 import { UserRoutingModule } from './pages/user-panel-page/user-routing.module';
+import { SharedModule } from './shared-module.module';
+import { UserModule } from './pages/user-panel-page/user.module';
 
 @NgModule({
   declarations: [
@@ -45,8 +40,6 @@ import { UserRoutingModule } from './pages/user-panel-page/user-routing.module';
     LoginComponent,
     RegisterComponent,
     NavPopupComponent,
-    DetailsModalComponent,
-    HouseCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,16 +48,14 @@ import { UserRoutingModule } from './pages/user-panel-page/user-routing.module';
       bootstrapGithub,
       bootstrapExclamationTriangleFill,
       bootstrapBoxArrowRight,
-      bootstrapHeart,
-      bootstrapHeartFill,
-      bootstrapX,
-      bootstrapCheckSquareFill,
     }),
     FormsModule,
     ReactiveFormsModule,
     UserRoutingModule,
     AppRoutingModule,
     AngularToastifyModule,
+    SharedModule,
+    UserModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -2,16 +2,17 @@
 <div class="container">
   <div class="wrapper" *ngIf="house?.length">
     <ng-container *ngFor="let houses of house">
-      <!--      <app-house-card></app-house-card>-->
+      <!--      <app-house-card-->
+      <!--        [house]="houses"-->
+      <!--        [favourites]="favourites"-->
+      <!--        [userId]="userId"-->
+      <!--        [isLoggedIn]="isLoggedIn"-->
+      <!--      ></app-house-card>-->
     </ng-container>
   </div>
 </div>
 
-<!--      <div *ngIf="!house?.length" class="noFavorite">-->
-<!--        <ng-icon name="bootstrapHeartFill"></ng-icon>-->
-<!--        <p>Brak domów ulubionych</p>-->
-<!--      </div>-->
-<!--      <app-user-favorite-->
-<!--        *ngIf="house?.length"-->
-<!--        [favoritesHouse]="house"-->
-<!--      ></app-user-favorite>-->
+<div *ngIf="!house?.length" class="noFavorite">
+  <ng-icon name="bootstrapHeartFill"></ng-icon>
+  <p>Brak domów ulubionych</p>
+</div>
