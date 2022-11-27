@@ -2,12 +2,12 @@
 <div class="container">
   <div class="wrapper" *ngIf="house?.length">
     <ng-container *ngFor="let houses of house">
-      <!--      <app-house-card-->
-      <!--        [house]="houses"-->
-      <!--        [favourites]="favourites"-->
-      <!--        [userId]="userId"-->
-      <!--        [isLoggedIn]="isLoggedIn"-->
-      <!--      ></app-house-card>-->
+      <app-house-card
+        [house]="houses"
+        [favourites]="favourites"
+        [userId]="userId"
+        [isLoggedIn]="isLoggedIn"
+      ></app-house-card>
     </ng-container>
   </div>
 </div>
