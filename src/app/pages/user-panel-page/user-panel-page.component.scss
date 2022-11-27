@@ -1,0 +1,51 @@
+.container {
+  width: 70%;
+  min-height: 664px;
+  margin: 0px auto;
+  transform: translateY(20px);
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(146, 146, 146, 0.5);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(146, 146, 146, 0.5);
+  box-shadow: 0px 0px 10px 0px rgba(146, 146, 146, 0.5);
+
+  .navBar {
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+
+    button {
+      margin: 0 10px;
+      text-transform: uppercase;
+      color: #535c68;
+      background: unset;
+      border: none;
+      padding: 5px 10px;
+      font-weight: 600;
+    }
+
+    button:hover {
+      cursor: pointer;
+      color: #414141;
+    }
+
+    .borderBottomButton {
+      border-bottom: 2px solid #535c68;
+      padding: 4px 10px;
+    }
+  }
+  .pages {
+    margin: 25px 0;
+
+    .noFavorite {
+      position: absolute;
+      margin: 0;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #d6d6d6;
+      text-transform: uppercase;
+      font-size: 36px;
+    }
+  }
+}

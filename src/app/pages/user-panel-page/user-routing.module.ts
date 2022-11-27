@@ -6,7 +6,6 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { HouseReservedComponent } from './house-reserved/house-reserved.component';
 import { UserFavoriteComponent } from './user-favorite/user-favorite.component';
 import { UserHousesComponent } from './user-houses/user-houses.component';
-import { UserNewPasswordComponent } from './user-new-password/user-new-password.component';
 import { UserNewHouseComponent } from './user-new-house/user-new-house.component';
 
 const routes: Routes = [
@@ -20,7 +19,8 @@ const routes: Routes = [
       { path: 'favorite', component: UserFavoriteComponent },
       { path: 'my-houses', component: UserHousesComponent },
       { path: 'new-house', component: UserNewHouseComponent },
-      { path: 'new-password', component: UserNewPasswordComponent },
+      //todo nowe hasło będzie jako popup wyświetlane
+      // { path: 'new-password', component: UserNewPasswordComponent },
     ],
   },
 ];

@@ -3,11 +3,11 @@
     <p>Witaj, {{ userName || "User" }}!</p>
   </div>
   <div class="menuItemWrapper">
-    <p class="menuItem" routerLink="/user">Ustawienia konta</p>
-    <p class="menuItem" routerLink="/user">Ulubione domy</p>
-    <p class="menuItem" routerLink="/user">Moje domy</p>
-    <p class="menuItem" routerLink="/user">Dodaj nowy dom</p>
-    <p class="menuItem" routerLink="/user">Zarezerwowane domy</p>
+    <p class="menuItem" routerLink="/user/settings">Ustawienia konta</p>
+    <p class="menuItem" routerLink="/user/favorite">Ulubione domy</p>
+    <p class="menuItem" routerLink="/user/my-houses">Moje domy</p>
+    <p class="menuItem" routerLink="/user/new-house">Dodaj nowy dom</p>
+    <p class="menuItem" routerLink="/user/house-reserved">Zarezerwowane domy</p>
   </div>
   <div class="logoutWrapper" (click)="logOut()">
     <div>Wyloguj</div>

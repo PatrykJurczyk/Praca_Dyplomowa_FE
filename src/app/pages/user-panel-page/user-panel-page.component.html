@@ -1,1 +1,29 @@
-<router-outlet></router-outlet>
+<div class="container">
+  <div class="navBar">
+    <button routerLink="/user/settings" routerLinkActive="borderBottomButton">
+      Ustawienia konta
+    </button>
+    <button routerLink="/user/my-houses" routerLinkActive="borderBottomButton">
+      Moje domy
+    </button>
+    <button routerLink="/user/favorite" routerLinkActive="borderBottomButton">
+      Ulubione domy
+    </button>
+    <button
+      routerLink="/user/house-reserved"
+      routerLinkActive="borderBottomButton"
+    >
+      Zarezerwowane domy
+    </button>
+    <button routerLink="/user/new-house" routerLinkActive="borderBottomButton">
+      Dodaj nowy dom
+    </button>
+  </div>
+  <div class="pages">
+    <!--    <app-account-settings-->
+    <!--      [user]="user"-->
+    <!--      *ngIf="userPanelChecked.type === 'ustawienia'"-->
+    <!--    ></app-account-settings>-->
+    <router-outlet></router-outlet>
+  </div>
+</div>
