@@ -1,3 +1,8 @@
+<!--todo ekran ładowania-->
+<ng-container *ngIf="loading$ | async">
+  <div class="overlay"></div
+></ng-container>
+
 <div>
   <div
     [ngClass]="{ bgOpacity: openModal.isOpen || modalDetail.open }"
@@ -10,9 +15,9 @@
   <div *ngIf="openModal.isOpen && openModal.type === 'register'">
     <app-register></app-register>
   </div>
-  <!--  <div *ngIf="openModal.isOpen && openModal.type === 'changePassword'">-->
-  <!--    <app-user-new-password></app-user-new-password>-->
-  <!--  </div>-->
+  <div *ngIf="openModal.isOpen && openModal.type === 'changePassword'">
+    <app-user-new-password></app-user-new-password>
+  </div>
 
   <app-header></app-header>
   <div class="container">

@@ -15,25 +15,21 @@ export class UserFavoriteComponent implements OnInit {
   userId!: string;
 
   constructor(private userService: UserService, private houses: HouseService) {
-    this.isLoggedIn
-      ? this.userService
-          .getUser(window.sessionStorage.getItem('auth-user') as string)
-          .subscribe((value) => {
-            this.userId = value.id;
-            this.favourites = value.favorites as string[];
-            this.houses
-              .getHouses()
-              .subscribe(
-                (value1) =>
-                  (this.house = value1.filter((element: HouseModel) =>
-                    value.favorites?.includes(element._id)
-                  ))
-              );
-          })
-      : null;
+    this.userService
+      .getUser(window.sessionStorage.getItem('auth-user') as string)
+      .subscribe((value) => {
+        this.userId = value.id;
+        this.favourites = value.favorites as string[];
+      });
+    this.houses
+      .getHouses()
+      .subscribe(
+        (value1) =>
+          (this.house = value1.filter((element: HouseModel) =>
+            this.favourites?.includes(element._id)
+          ))
+      );
   }
 
-  ngOnInit(): void {
-    console.log(this.house);
-  }
+  ngOnInit(): void {}
 }

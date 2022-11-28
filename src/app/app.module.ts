@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgIconsModule } from '@ng-icons/core';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {
   bootstrapGithub,
   bootstrapExclamationTriangleFill,
@@ -25,6 +25,7 @@ import { NavPopupComponent } from './components/nav-popup/nav-popup.component';
 import { UserRoutingModule } from './pages/user-panel-page/user-routing.module';
 import { SharedModule } from './shared-module.module';
 import { UserModule } from './pages/user-panel-page/user.module';
+import { NetworkInterceptor } from './network.interceptor';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,14 @@ import { UserModule } from './pages/user-panel-page/user.module';
     SharedModule,
     UserModule,
   ],
-  providers: [ToastService],
+  providers: [
+    ToastService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NetworkInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

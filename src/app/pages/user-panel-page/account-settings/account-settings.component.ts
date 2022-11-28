@@ -3,6 +3,7 @@ import { ModalService } from '../../../services/modal.service';
 import { UserService } from '../../../services/user.service';
 import { ToastService } from 'angular-toastify';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { UserStorage } from '../../../enums/enum';
 
 @Component({
   selector: 'app-account-settings',
@@ -24,7 +25,7 @@ export class AccountSettingsComponent implements OnInit {
     private _toastService: ToastService
   ) {
     this.userService
-      .getUser(window.sessionStorage.getItem('auth-user') as string)
+      .getUser(window.sessionStorage.getItem(UserStorage.USER_KEY) as string)
       .subscribe((value) => {
         this.userAvatar = value.avatar ? value.avatar : '';
         this.userName = value.name ? value.name : '';
@@ -41,7 +42,10 @@ export class AccountSettingsComponent implements OnInit {
 
   confirm(data: unknown) {
     this.userService
-      .updateUser(window.sessionStorage.getItem('auth-user') as string, data)
+      .updateUser(
+        window.sessionStorage.getItem(UserStorage.USER_KEY) as string,
+        data
+      )
       .subscribe(
         () => {
           this._toastService.success('Pomyślnie zaktualizowano użytkownika');
