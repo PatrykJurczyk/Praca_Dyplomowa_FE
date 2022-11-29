@@ -1,48 +1,58 @@
 <div class="container">
-  <div class="avatarWrapper">
-    <div class="imgWrapper">
-      <img
-        class="first"
-        src="{{ userAvatar ? userAvatar : '../../../assets/image/avatar.png' }}"
-        alt="Avatar"
-      />
-      <img
-        class="second"
-        src="{{ userAvatar ? userAvatar : '../../../assets/image/avatar.png' }}"
-        alt="Avatar"
-      />
-      <img
-        class="third"
-        src="{{ userAvatar ? userAvatar : '../../../assets/image/avatar.png' }}"
-        alt="Avatar"
-      />
-    </div>
-    <div class="avatarButtonContainer">
-      <!--      name="avatar"-->
-      <!--      formControlName="avatar"-->
-      <div class="wrapperButtonAvatar">
-        <input
-          id="img"
-          type="file"
-          style="display: none"
-          multiple
-          accept="image/png, image/gif, image/jpeg, image/jpg"
+  <form [formGroup]="form" (ngSubmit)="confirm(form.value)">
+    <div class="avatarWrapper">
+      <div class="imgWrapper">
+        <img
+          class="first"
+          src="{{
+            userAvatar ? userAvatar : '../../../assets/image/avatar.png'
+          }}"
+          alt="Avatar"
         />
-        <label for="img">Prześlij swój awatar</label>
+        <img
+          class="second"
+          src="{{
+            userAvatar ? userAvatar : '../../../assets/image/avatar.png'
+          }}"
+          alt="Avatar"
+        />
+        <img
+          class="third"
+          src="{{
+            userAvatar ? userAvatar : '../../../assets/image/avatar.png'
+          }}"
+          alt="Avatar"
+        />
       </div>
-      <p>
-        Prześlij plik ze swojego urządzenia. Obraz powinien być kwadratem o
-        wymiarach przynajmniej 184 x 184 piksele.
-      </p>
+      <!--      *ngIf="this.form.get('avatar')?.disabled"-->
+      <!--      todo wysyłanie zdjęcia na backend coś nie działa grubsza robota-->
+      <div class="avatarButtonContainer">
+        <div
+          class="wrapperButtonAvatar"
+          (click)="this.form.get('avatar')?.enable()"
+        >
+          <input
+            id="img"
+            name="avatar"
+            formControlName="avatar"
+            type="file"
+            style="display: none"
+            multiple
+            accept="image/png, image/gif, image/jpeg, image/jpg"
+          />
+          <label for="img">Prześlij swój awatar</label>
+        </div>
+        <p>
+          Prześlij plik ze swojego urządzenia. Obraz powinien być kwadratem o
+          wymiarach przynajmniej 184 x 184 piksele.
+        </p>
+      </div>
     </div>
-  </div>
-  <div class="dataWrapper">
-    <form [formGroup]="form" (ngSubmit)="confirm(form.value)">
+    <div class="dataWrapper">
       <div class="nameContainer">
         <div class="input">
           <label for="name">Name</label>
           <div>
-            <!--            Zrobić inputa żeby działał-->
             <input
               type="text"
               id="name"
@@ -50,8 +60,17 @@
               formControlName="name"
               value="{{ userName }}"
             />
-            <button class="editButton" type="button">Edytuj</button>
-            <button class="acceptButton">Akceptuj</button>
+            <button
+              class="editButton"
+              type="button"
+              *ngIf="this.form.get('name')?.disabled"
+              (click)="this.form.get('name')?.enable()"
+            >
+              Edytuj
+            </button>
+            <button class="acceptButton" *ngIf="this.form.get('name')?.enabled">
+              Akceptuj
+            </button>
           </div>
         </div>
       </div>
@@ -59,7 +78,6 @@
         <div class="input">
           <label for="phone">Phone</label>
           <div>
-            <!--            Zrobić inputa żeby działał-->
             <input
               type="text"
               id="phone"
@@ -67,8 +85,20 @@
               formControlName="phone"
               value="{{ userPhone }}"
             />
-            <button class="editButton" type="button">Edytuj</button>
-            <button class="acceptButton">Akceptuj</button>
+            <button
+              class="editButton"
+              type="button"
+              *ngIf="this.form.get('phone')?.disabled"
+              (click)="this.form.get('phone')?.enable()"
+            >
+              Edytuj
+            </button>
+            <button
+              class="acceptButton"
+              *ngIf="this.form.get('phone')?.enabled"
+            >
+              Akceptuj
+            </button>
           </div>
         </div>
       </div>
@@ -105,6 +135,6 @@
           </div>
         </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>

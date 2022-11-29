@@ -2,8 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ModalService } from '../../../services/modal.service';
 import { UserService } from '../../../services/user.service';
 import { ToastService } from 'angular-toastify';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { UserStorage } from '../../../enums/enum';
+
+interface editUserInterface {
+  name?: string;
+  phone?: string;
+  avatar?: File;
+}
 
 @Component({
   selector: 'app-account-settings',
@@ -16,7 +22,6 @@ export class AccountSettingsComponent implements OnInit {
   protected userName?: string;
   protected userPhone?: string;
   protected userEmail?: string;
-  isEdited: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -33,14 +38,24 @@ export class AccountSettingsComponent implements OnInit {
         this.userEmail = value.email ? value.email : '';
       });
     this.form = fb.group({
-      name: this.userName,
-      phone: this.userPhone,
+      name: new FormControl({
+        value: this.userName,
+        disabled: true,
+      }),
+      phone: new FormControl({
+        value: this.userPhone,
+        disabled: true,
+      }),
+      avatar: new FormControl({
+        value: this.userAvatar,
+        disabled: true,
+      }),
     });
   }
 
   ngOnInit(): void {}
 
-  confirm(data: unknown) {
+  confirm(data: editUserInterface) {
     this.userService
       .updateUser(
         window.sessionStorage.getItem(UserStorage.USER_KEY) as string,
@@ -52,7 +67,8 @@ export class AccountSettingsComponent implements OnInit {
         },
         (err) => this._toastService.error(err.error.message)
       );
-    this.isEdited = false;
+    this.form.get('name')?.disable();
+    this.form.get('phone')?.disable();
   }
 
   editPasswordClick() {
@@ -60,9 +76,5 @@ export class AccountSettingsComponent implements OnInit {
       isOpen: true,
       type: 'changePassword',
     });
-  }
-
-  showAccept() {
-    this.isEdited = true;
   }
 }

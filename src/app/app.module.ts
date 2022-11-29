@@ -59,12 +59,12 @@ import { NetworkInterceptor } from './network.interceptor';
     UserModule,
   ],
   providers: [
-    ToastService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: NetworkInterceptor,
       multi: true,
     },
+    ToastService,
   ],
   bootstrap: [AppComponent],
 })
