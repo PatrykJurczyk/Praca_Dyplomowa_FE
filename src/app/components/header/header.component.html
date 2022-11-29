@@ -21,5 +21,9 @@
       />
     </div>
   </div>
-  <app-nav-popup *ngIf="openNavPopup" [userName]="user.name"></app-nav-popup>
+  <app-nav-popup
+    *ngIf="openNavPopup"
+    [userName]="user.name"
+    (closePopup)="closeNavPopoup()"
+  ></app-nav-popup>
 </div>

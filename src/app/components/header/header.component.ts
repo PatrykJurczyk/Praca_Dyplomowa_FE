@@ -63,4 +63,8 @@ export class HeaderComponent implements OnDestroy {
   onAvatarClick() {
     this.openNavPopup = !this.openNavPopup;
   }
+
+  closeNavPopoup() {
+    this.openNavPopup = false;
+  }
 }

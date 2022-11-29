@@ -3,11 +3,25 @@
     <p>Witaj, {{ userName || "User" }}!</p>
   </div>
   <div class="menuItemWrapper">
-    <p class="menuItem" routerLink="/user/settings">Ustawienia konta</p>
-    <p class="menuItem" routerLink="/user/favorite">Ulubione domy</p>
-    <p class="menuItem" routerLink="/user/my-houses">Moje domy</p>
-    <p class="menuItem" routerLink="/user/new-house">Dodaj nowy dom</p>
-    <p class="menuItem" routerLink="/user/house-reserved">Zarezerwowane domy</p>
+    <p class="menuItem" routerLink="/user/settings" (click)="closeNavPopup()">
+      Ustawienia konta
+    </p>
+    <p class="menuItem" routerLink="/user/favorite" (click)="closeNavPopup()">
+      Ulubione domy
+    </p>
+    <p class="menuItem" routerLink="/user/my-houses" (click)="closeNavPopup()">
+      Moje domy
+    </p>
+    <p class="menuItem" routerLink="/user/new-house" (click)="closeNavPopup()">
+      Dodaj nowy dom
+    </p>
+    <p
+      class="menuItem"
+      routerLink="/user/house-reserved"
+      (click)="closeNavPopup()"
+    >
+      Zarezerwowane domy
+    </p>
   </div>
   <div class="logoutWrapper" (click)="logOut()">
     <div>Wyloguj</div>
