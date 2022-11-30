@@ -1,0 +1,26 @@
+.container {
+  width: 80%;
+  margin: 45px auto;
+  .wrapper {
+    .topBar {
+      display: flex;
+      justify-content: space-between;
+
+      p {
+        color: #ff8842;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 20px;
+      }
+      ng-icon {
+        color: #ff8842;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    }
+    .itemWrapper {
+    }
+  }
+}
