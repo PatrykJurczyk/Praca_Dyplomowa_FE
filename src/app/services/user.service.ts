@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {  UserModel } from '../models/user.interface';
+import { UserModel } from '../models/user.interface';
 
 const API_URL = 'http://localhost:3001/api/';
 
@@ -25,11 +25,7 @@ export class UserService {
   }
 
   createUser(user: UserModel): Observable<UserModel> {
-    return this.http.post<UserModel>(
-      API_URL + '/users',
-      user,
-      httpOptions
-    );
+    return this.http.post<UserModel>(API_URL + '/users', user, httpOptions);
   }
 
   getUsers(): Observable<any> {
@@ -52,6 +48,13 @@ export class UserService {
     );
   }
 
-  //  http://localhost:3001/api/users/636e9d442e5cdd6aebcb5e51/favorite
+  updateUserFavorites(id: string, data: unknown): Observable<any> {
+    return this.http.patch(
+      API_URL + 'users/' + id + '/favorite',
+      data,
+      httpOptions
+    );
+  }
+
   //  http://localhost:3001/api/users/636e9d442e5cdd6aebcb5e51/deletion
 }

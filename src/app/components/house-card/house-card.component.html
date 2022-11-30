@@ -43,11 +43,13 @@
               name="bootstrapHeart"
               class="heart"
               *ngIf="!favourites.includes(house._id)"
+              (click)="updateFavorite(house._id)"
             ></ng-icon>
             <ng-icon
               name="bootstrapHeartFill"
               class="heartFill"
               *ngIf="favourites.includes(house._id)"
+              (click)="updateFavorite(house._id)"
             ></ng-icon>
           </div>
         </div>

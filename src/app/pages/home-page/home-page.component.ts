@@ -1,11 +1,9 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { HouseService } from '../../services/house.service';
 import { HouseModel } from '../../models/houseModel';
 import { isReserved, UserStorage } from '../../enums/enum';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
-import { ModalService } from '../../services/modal.service';
-import { UserModel } from '../../models/user.interface';
 
 @Component({
   selector: 'app-home-page',
