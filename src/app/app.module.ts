@@ -26,6 +26,7 @@ import { UserRoutingModule } from './pages/user-panel-page/user-routing.module';
 import { SharedModule } from './shared-module.module';
 import { UserModule } from './pages/user-panel-page/user.module';
 import { NetworkInterceptor } from './network.interceptor';
+import { UserCardComponent } from './components/user-card/user-card.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { NetworkInterceptor } from './network.interceptor';
     LoginComponent,
     RegisterComponent,
     NavPopupComponent,
+    UserCardComponent,
   ],
   imports: [
     BrowserModule,

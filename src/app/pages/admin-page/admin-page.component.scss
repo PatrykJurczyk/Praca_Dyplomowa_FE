@@ -1,0 +1,28 @@
+.container {
+  .topBar {
+    text-transform: uppercase;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    margin: 35px 0;
+
+    .user {
+      padding: 16px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .manager {
+      padding: 16px;
+      cursor: pointer;
+    }
+  }
+  .cardsContainer {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.borderBottom {
+  border-bottom: 2px solid #000000;
+}
