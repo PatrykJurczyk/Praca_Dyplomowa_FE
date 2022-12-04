@@ -27,6 +27,7 @@ import { SharedModule } from './shared-module.module';
 import { UserModule } from './pages/user-panel-page/user.module';
 import { NetworkInterceptor } from './network.interceptor';
 import { UserCardComponent } from './components/user-card/user-card.component';
+import { PopupAcceptCancelComponent } from './components/popup-accept-cancel/popup-accept-cancel.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { UserCardComponent } from './components/user-card/user-card.component';
     RegisterComponent,
     NavPopupComponent,
     UserCardComponent,
+    PopupAcceptCancelComponent,
   ],
   imports: [
     BrowserModule,

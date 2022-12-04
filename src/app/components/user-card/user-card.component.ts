@@ -9,6 +9,9 @@ import { HouseModel } from '../../models/houseModel';
 })
 export class UserCardComponent implements OnInit {
   protected userHouses: HouseModel[] = [];
+  protected openPopup: boolean = false;
+  protected userId!: string;
+  protected title: string = 'Czy chcesz zablokować użytkownika?';
 
   @Input() set person(user: UserModel) {
     this.user = user;
@@ -30,4 +33,10 @@ export class UserCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  blockPerson(id: string) {
+    this.userId = id;
+    this.openPopup = true;
+    console.log('Siema' + id);
+  }
 }

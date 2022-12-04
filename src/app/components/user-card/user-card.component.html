@@ -27,6 +27,15 @@
     </div>
   </div>
   <div class="button">
-    <button>Blokuj użytkownika</button>
+    <button (click)="blockPerson(user._id)">Blokuj użytkownika</button>
   </div>
 </div>
+
+<div class="popup">
+  <app-popup-accept-cancel
+    [isOpened]="openPopup"
+    [title]="title"
+  ></app-popup-accept-cancel>
+</div>
+
+<div class="bgColor" *ngIf="openPopup && user._id === userId"></div>
