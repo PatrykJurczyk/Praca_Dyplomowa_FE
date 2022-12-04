@@ -1,0 +1,117 @@
+.container {
+  width: 500px;
+  margin: auto;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(146, 146, 146, 0.5);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(146, 146, 146, 0.5);
+  box-shadow: 0px 0px 10px 0px rgba(146, 146, 146, 0.5);
+  .title {
+    text-align: center;
+    font-size: 24px;
+    padding-top: 12px;
+    font-weight: 600;
+  }
+  .formContainer {
+    padding: 15px 31px;
+    .wrapperAddress,
+    .wrapperInformation {
+      border: 1px solid #c0c0c0;
+      border-radius: 5px;
+      padding: 8px 18px 8px 18px;
+    }
+
+    .wrapperInformation {
+      margin-top: 10px;
+    }
+    .properTitle {
+      font-size: 12px;
+      color: #ff8842;
+      font-weight: 600;
+    }
+
+    .moreFacilities {
+      margin: 8px 0px;
+      width: 100%;
+      background: none;
+      border-radius: 3px;
+      border: 1px solid #ff8842;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 12px;
+      color: #ff8842;
+      padding: 5px 0px;
+    }
+    .moreFacilities:hover {
+      cursor: pointer;
+      background: #f3f3f3;
+    }
+
+    textarea {
+      width: 100%;
+      height: 90px;
+      border: 1px solid #c0c0c0;
+      border-radius: 5px;
+      padding: 5px;
+      resize: none;
+    }
+
+    textarea:focus {
+      outline: none;
+    }
+    .wrapperImage {
+      margin-top: 5px;
+      label {
+        margin-top: 10px;
+        background: #ff8842;
+        border: none;
+        color: #ffffff;
+        padding: 5px 20px;
+        font-size: 12px;
+        border-radius: 5px;
+        margin-top: 10px;
+        text-transform: uppercase;
+      }
+      label:hover {
+        cursor: pointer;
+      }
+    }
+    .btnAdd {
+      width: 100%;
+      background: #ff8842;
+      border: none;
+      color: #ffffff;
+      padding: 5px;
+      font-size: 12px;
+      border-radius: 5px;
+      margin-top: 10px;
+      text-transform: uppercase;
+    }
+    .btnAdd:hover {
+      cursor: pointer;
+    }
+
+    .inputWrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 5px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+
+      input {
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #b9b9b9;
+        width: 100%;
+
+        &::placeholder {
+          font-size: 12px;
+          font-weight: bold;
+        }
+      }
+
+      input:focus {
+        outline: none;
+      }
+    }
+  }
+}

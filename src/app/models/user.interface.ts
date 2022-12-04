@@ -17,9 +17,15 @@ export interface UserModel {
   favorites?: string[];
   token?: string;
   role?: string;
+  createdAt?: string;
 }
 
 export interface errorMessage {
   message: string;
   status: string;
+}
+
+export interface adminPage {
+  user: boolean;
+  manager: boolean;
 }

@@ -1,0 +1,105 @@
+.container {
+  width: 300px;
+  -webkit-box-shadow: 0px 0px 24px 0px rgba(185, 185, 185, 1);
+  -moz-box-shadow: 0px 0px 24px 0px rgba(185, 185, 185, 1);
+  box-shadow: 0px 0px 24px 0px rgba(185, 185, 185, 1);
+  border-radius: 5px;
+  font-size: 14px;
+  margin: 0 20px 20px 20px;
+
+  .imgWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 20px 20px 20px;
+
+    .img {
+      width: 108px;
+      height: 121px;
+      background-color: #00000020;
+      margin-top: 20px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        object-fit: contain;
+      }
+    }
+    .name {
+      font-weight: 600;
+    }
+  }
+  .infoWrapper {
+    margin: 20px 20px 0 20px;
+    color: #535c68;
+
+    .email {
+      font-weight: 600;
+      font-size: 12px;
+      p:first-child {
+        margin-bottom: 5px;
+      }
+      p:last-child {
+        color: #ff8842;
+      }
+    }
+    .line {
+      border: 1px solid #000000;
+      margin: 10px 0;
+    }
+    .time {
+      font-weight: 500;
+      margin-bottom: 5px;
+      p {
+        span {
+          color: #ff8842;
+        }
+      }
+    }
+    .countHouses {
+      font-weight: 500;
+      margin-bottom: 5px;
+      p {
+        span {
+          color: #ff8842;
+        }
+      }
+    }
+    .reservedHouses {
+      font-weight: 500;
+      margin-bottom: 22px;
+      p {
+        span {
+          color: #ff8842;
+        }
+      }
+    }
+  }
+  .button {
+    padding: 0 20px 22px 20px;
+    button {
+      width: 100%;
+      padding: 6px 0;
+      background: #ff5555;
+      color: #ffffff;
+      text-transform: uppercase;
+      font-weight: 600;
+      border: none;
+    }
+
+    button:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.bgColor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #7d7d7e50;
+  z-index: 1;
+}

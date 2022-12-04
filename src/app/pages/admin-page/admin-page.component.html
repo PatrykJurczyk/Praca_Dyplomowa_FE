@@ -1,1 +1,30 @@
-<p>admin-page works!</p>
+<div class="container">
+  <div class="topBar">
+    <div
+      class="user borderBottom"
+      (click)="userClicked()"
+      [ngClass]="{ borderBottom: selectedPage.user }"
+    >
+      user
+    </div>
+    <div
+      class="manager"
+      (click)="managerClicked()"
+      [ngClass]="{ borderBottom: selectedPage.manager }"
+    >
+      manager
+    </div>
+  </div>
+  <div class="cardsContainer">
+    <ng-container *ngIf="selectedPage.user">
+      <ng-container *ngFor="let user of users">
+        <app-user-card [person]="user" [houses]="houses"></app-user-card>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="selectedPage.manager">
+      <ng-container *ngFor="let manager of managers">
+        <app-user-card [person]="manager" [houses]="houses"></app-user-card>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

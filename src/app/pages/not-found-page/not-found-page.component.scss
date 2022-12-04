@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 125px - 99px);
+  flex-direction: column;
+
+  .code {
+    font-size: 200px;
+  }
+
+  .info {
+    font-size: 50px;
+  }
+}

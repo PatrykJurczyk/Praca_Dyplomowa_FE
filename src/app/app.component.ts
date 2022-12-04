@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { openModal } from './models/user.interface';
 import { ModalService } from './services/modal.service';
 import { HouseDetailModel } from './models/houseModel';
+import { LoadingService } from './loading.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,11 @@ export class AppComponent {
   openModal: openModal = { isOpen: false, type: '' };
   modalDetail!: HouseDetailModel;
 
-  constructor(private modalService: ModalService) {}
+  loading$ = this.loader.loading$;
+  constructor(
+    private modalService: ModalService,
+    public loader: LoadingService
+  ) {}
 
   ngOnInit(): void {
     this.modalService.modalStateSubject.subscribe(

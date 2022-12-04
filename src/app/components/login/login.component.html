@@ -36,7 +36,7 @@
             class="errorIcon"
           ></ng-icon>
           <p class="errorMessage">
-            {{ 'Wprowadź poprawny email' }}
+            {{ "Wprowadź poprawny email" }}
           </p>
         </div>
       </div>
@@ -60,7 +60,7 @@
             class="errorIcon"
           ></ng-icon>
           <p class="errorMessage">
-            {{ 'Hasło musi mieć minimum 6 znaków' }}
+            {{ "Hasło musi mieć minimum 6 znaków" }}
           </p>
         </div>
       </div>
@@ -68,6 +68,7 @@
       <button
         type="submit"
         class="submitButton"
+        routerLink="/"
         [ngClass]="{
           disabled:
             !form.controls['email'].valid || !form.controls['password'].valid

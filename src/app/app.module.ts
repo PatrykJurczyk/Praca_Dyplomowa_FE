@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgIconsModule } from '@ng-icons/core';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {
   bootstrapGithub,
   bootstrapExclamationTriangleFill,
@@ -16,7 +16,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { MenegerPageComponent } from './pages/meneger-page/meneger-page.component';
 import { UserPanelPageComponent } from './pages/user-panel-page/user-panel-page.component';
-import { AngularToastifyModule } from 'angular-toastify';
+import { ToastService, AngularToastifyModule } from 'angular-toastify';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { LoginComponent } from './components/login/login.component';
@@ -25,6 +25,9 @@ import { NavPopupComponent } from './components/nav-popup/nav-popup.component';
 import { UserRoutingModule } from './pages/user-panel-page/user-routing.module';
 import { SharedModule } from './shared-module.module';
 import { UserModule } from './pages/user-panel-page/user.module';
+import { NetworkInterceptor } from './network.interceptor';
+import { UserCardComponent } from './components/user-card/user-card.component';
+import { PopupAcceptCancelComponent } from './components/popup-accept-cancel/popup-accept-cancel.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ import { UserModule } from './pages/user-panel-page/user.module';
     LoginComponent,
     RegisterComponent,
     NavPopupComponent,
+    UserCardComponent,
+    PopupAcceptCancelComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +62,14 @@ import { UserModule } from './pages/user-panel-page/user.module';
     SharedModule,
     UserModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NetworkInterceptor,
+      multi: true,
+    },
+    ToastService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

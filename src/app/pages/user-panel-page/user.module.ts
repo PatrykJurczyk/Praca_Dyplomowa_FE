@@ -9,7 +9,13 @@ import { UserNewPasswordComponent } from './user-new-password/user-new-password.
 import { UserRoutingModule } from './user-routing.module';
 import { SharedModule } from '../../shared-module.module';
 import { NgIconsModule } from '@ng-icons/core';
-import { bootstrapHeartFill } from '@ng-icons/bootstrap-icons';
+import {
+  bootstrapHeartFill,
+  bootstrapChevronDown,
+  bootstrapChevronUp,
+  bootstrapThreeDots,
+} from '@ng-icons/bootstrap-icons';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +32,11 @@ import { bootstrapHeartFill } from '@ng-icons/bootstrap-icons';
     UserRoutingModule,
     NgIconsModule.withIcons({
       bootstrapHeartFill,
+      bootstrapChevronDown,
+      bootstrapChevronUp,
+      bootstrapThreeDots,
     }),
+    ReactiveFormsModule,
   ],
   exports: [
     AccountSettingsComponent,

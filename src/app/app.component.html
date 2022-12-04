@@ -10,12 +10,20 @@
   <div *ngIf="openModal.isOpen && openModal.type === 'register'">
     <app-register></app-register>
   </div>
-  <!--  <div *ngIf="openModal.isOpen && openModal.type === 'changePassword'">-->
-  <!--    <app-user-new-password></app-user-new-password>-->
-  <!--  </div>-->
+  <div *ngIf="openModal.isOpen && openModal.type === 'changePassword'">
+    <app-user-new-password></app-user-new-password>
+  </div>
 
   <app-header></app-header>
   <div class="container">
+    <div class="loaderContainer">
+      <ng-container *ngIf="loading$ | async">
+        <div class="loaderWrapper">
+          <div class="loader"></div>
+        </div>
+        <div class="overlay"></div
+      ></ng-container>
+    </div>
     <router-outlet></router-outlet>
     <lib-toastify-toast-container
       [autoClose]="2000"

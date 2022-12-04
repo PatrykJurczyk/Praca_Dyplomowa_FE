@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="imgWrapper">
+    <div class="img">
+      <img src="./assets/image/nophoto.png" alt="" />
+    </div>
+  </div>
+  <div class="infoWrapper">
+    <div class="email">
+      <p>Email</p>
+      <p>{{ user.email }}</p>
+    </div>
+    <div class="line"></div>
+    <div class="time">
+      <p>
+        Na platformie od: <span>{{ createdDatePerson }}</span>
+      </p>
+    </div>
+    <div class="countHouses">
+      <p>
+        Ilość wystawionych domów: <span>{{ userHouses.length }}</span>
+      </p>
+    </div>
+    <div class="reservedHouses">
+      <p>
+        Ilość ulubionych domów: <span>{{ user.favorites?.length }}</span>
+      </p>
+    </div>
+  </div>
+  <div class="button">
+    <button (click)="blockPerson(user._id)">Blokuj użytkownika</button>
+  </div>
+</div>
+
+<div class="popup">
+  <app-popup-accept-cancel
+    [isOpened]="openPopup"
+    [title]="title"
+  ></app-popup-accept-cancel>
+</div>
+
+<div class="bgColor" *ngIf="openPopup && user._id === userId"></div>

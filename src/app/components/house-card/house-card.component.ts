@@ -3,6 +3,7 @@ import { HouseModel } from '../../models/houseModel';
 import { isReserved } from '../../enums/enum';
 import { ModalService } from '../../services/modal.service';
 import { Subject, takeUntil } from 'rxjs';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-house-card',
@@ -23,7 +24,10 @@ export class HouseCardComponent implements OnDestroy {
   };
 
   private destroy$: Subject<void> = new Subject();
-  constructor(private modalDetail: ModalService) {
+  constructor(
+    private modalDetail: ModalService,
+    private userService: UserService
+  ) {
     this.modalDetail.modalDetailSubject
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => (this.openModalDetails = data));
@@ -37,5 +41,12 @@ export class HouseCardComponent implements OnDestroy {
   openDetailsModal(id: string) {
     this.openModalDetails.open = true;
     this.openModalDetails.idHouse = id;
+  }
+
+  updateFavorite(id: string) {
+    this.userService
+      .updateUserFavorites(this.userId, { favorites: id })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
   }
 }

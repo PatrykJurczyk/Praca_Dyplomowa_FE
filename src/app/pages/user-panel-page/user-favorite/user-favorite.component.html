@@ -1,4 +1,3 @@
-<!--<p>user-favorite works!</p>-->
 <div class="container">
   <div class="wrapper" *ngIf="house?.length">
     <ng-container *ngFor="let houses of house">
@@ -10,9 +9,8 @@
       ></app-house-card>
     </ng-container>
   </div>
-</div>
-
-<div *ngIf="!house?.length" class="noFavorite">
-  <ng-icon name="bootstrapHeartFill"></ng-icon>
-  <p>Brak domów ulubionych</p>
+  <div *ngIf="!favourites?.length" class="noFavorite">
+    <ng-icon name="bootstrapHeartFill"></ng-icon>
+    <p>Brak domów ulubionych</p>
+  </div>
 </div>
