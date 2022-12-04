@@ -1,26 +1,28 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ModalService } from '../../services/modal.service';
 import { adminPage, UserModel } from '../../models/user.interface';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { HouseService } from '../../services/house.service';
+import { HouseModel } from '../../models/houseModel';
 
 @Component({
   selector: 'app-admin-page',
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.scss'],
 })
-export class AdminPageComponent implements OnInit, OnDestroy {
+export class AdminPageComponent implements OnDestroy {
   protected selectedPage!: adminPage;
   protected users!: UserModel[];
   protected managers!: UserModel[];
-
-  tam: any = ['sd', 'asdf', 'asdf'];
+  protected houses!: HouseModel[];
 
   private destroy$: Subject<void> = new Subject();
 
   constructor(
     private modalService: ModalService,
-    private userService: UserService
+    private userService: UserService,
+    private houseService: HouseService
   ) {
     this.modalService.adminPageSubject
       .pipe(takeUntil(this.destroy$))
@@ -34,12 +36,13 @@ export class AdminPageComponent implements OnInit, OnDestroy {
         this.managers = value.filter(
           (value: UserModel) => value.role === 'Manager'
         );
-        console.log(this.users);
-        console.log(this.managers);
       });
-  }
 
-  ngOnInit(): void {}
+    this.houseService
+      .getHouses()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((house: HouseModel[]) => (this.houses = house));
+  }
 
   ngOnDestroy() {
     this.destroy$.next();

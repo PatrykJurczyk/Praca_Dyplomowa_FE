@@ -3,22 +3,27 @@
     <div class="img">
       <img src="./assets/image/nophoto.png" alt="" />
     </div>
-    <div class="name">Adrian Kowalski</div>
   </div>
   <div class="infoWrapper">
     <div class="email">
       <p>Email</p>
-      <p>adriankowalski@gmail.com</p>
+      <p>{{ user.email }}</p>
     </div>
     <div class="line"></div>
     <div class="time">
-      <p>Na platformie od: <span>22.10.2022</span></p>
+      <p>
+        Na platformie od: <span>{{ createdDatePerson }}</span>
+      </p>
     </div>
     <div class="countHouses">
-      <p>Ilość wystawionych domów: <span>100</span></p>
+      <p>
+        Ilość wystawionych domów: <span>{{ userHouses.length }}</span>
+      </p>
     </div>
     <div class="reservedHouses">
-      <p>Ilość zarezerwowanych domów: <span>6</span></p>
+      <p>
+        Ilość ulubionych domów: <span>{{ user.favorites?.length }}</span>
+      </p>
     </div>
   </div>
   <div class="button">

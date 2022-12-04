@@ -17,6 +17,7 @@ export interface UserModel {
   favorites?: string[];
   token?: string;
   role?: string;
+  createdAt?: string;
 }
 
 export interface errorMessage {
