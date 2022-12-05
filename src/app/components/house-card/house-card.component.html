@@ -65,10 +65,15 @@
       [favourites]="favourites"
       [house]="house"
       [userId]="userId"
+      [manager]="manager"
+      [info]="info"
+      [color]="color"
+      [buttons]="buttons"
       *ngIf="
         openModalDetails.open === true && openModalDetails.idHouse === house._id
       "
       [isOpen]="openModalDetails.open"
-    ></app-details-modal>
+    >
+    </app-details-modal>
   </div>
 </div>

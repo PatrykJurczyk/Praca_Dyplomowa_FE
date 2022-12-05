@@ -22,4 +22,12 @@ export class HouseService {
   getHouses(): Observable<any> {
     return this.http.get(API_URL + 'house', httpOptions);
   }
+
+  updateStatus(id: string, data: unknown): Observable<any> {
+    return this.http.patch(
+      API_URL + 'house/' + id + '/statusAccepted',
+      data,
+      httpOptions
+    );
+  }
 }

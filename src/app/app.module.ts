@@ -14,7 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
-import { MenegerPageComponent } from './pages/meneger-page/meneger-page.component';
+import { ManagerPageComponent } from './pages/manager-page/manager-page.component';
 import { UserPanelPageComponent } from './pages/user-panel-page/user-panel-page.component';
 import { ToastService, AngularToastifyModule } from 'angular-toastify';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
@@ -36,7 +36,7 @@ import { PopupAcceptCancelComponent } from './components/popup-accept-cancel/pop
     HeaderComponent,
     HomePageComponent,
     AdminPageComponent,
-    MenegerPageComponent,
+    ManagerPageComponent,
     UserPanelPageComponent,
     ErrorPageComponent,
     NotFoundPageComponent,

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { adminPage, openModal } from '../models/user.interface';
+import { adminPage, managerPage, openModal } from '../models/user.interface';
 import { HouseDetailModel } from '../models/houseModel';
 
 @Injectable({
@@ -19,4 +19,7 @@ export class ModalService {
   adminPageSubject: BehaviorSubject<adminPage> = new BehaviorSubject<adminPage>(
     { manager: false, user: true }
   );
+
+  managerPageSubject: BehaviorSubject<managerPage> =
+    new BehaviorSubject<managerPage>({ type: 'toAccept' });
 }

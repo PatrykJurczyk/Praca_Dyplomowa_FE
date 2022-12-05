@@ -15,6 +15,10 @@ export class HouseCardComponent implements OnDestroy {
   @Input() favourites: string[] = [];
   @Input() userId!: string;
   @Input() isLoggedIn!: boolean;
+  @Input() manager!: boolean;
+  @Input() info!: string;
+  @Input() color!: any;
+  @Input() buttons!: boolean;
 
   protected isReservedHouse: number = isReserved.zarezerwowany;
 

@@ -19,6 +19,7 @@ export interface HouseModel {
   images: string[];
   isAccepted: 0 | 1 | 2;
   isReserved: 0 | 1 | 2 | 3;
+  updatedAt: string;
 }
 
 export interface HouseDetailModel {

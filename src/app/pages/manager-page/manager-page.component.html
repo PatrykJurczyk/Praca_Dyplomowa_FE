@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="topBar">
+    <div
+      class="toAccept"
+      (click)="mode({ type: 'toAccept' })"
+      [ngClass]="{ borderBottom: selectedPage.type === 'toAccept' }"
+    >
+      Do zaakceptowania
+    </div>
+    <div
+      class="accepted"
+      (click)="mode({ type: 'accepted' })"
+      [ngClass]="{ borderBottom: selectedPage.type === 'accepted' }"
+    >
+      Zaakceptowane
+    </div>
+    <div
+      class="rejected"
+      (click)="mode({ type: 'rejected' })"
+      [ngClass]="{ borderBottom: selectedPage.type === 'rejected' }"
+    >
+      Odrzucone
+    </div>
+  </div>
+  <div class="cardsContainer">
+    <ng-container *ngIf="selectedPage.type === 'toAccept'">
+      <ng-container *ngFor="let house of houseToAccepted">
+        <app-house-card [house]="house" [manager]="true" [buttons]="true">
+        </app-house-card>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="selectedPage.type === 'accepted'">
+      <ng-container *ngFor="let house of houseAccepted">
+        <app-house-card
+          [house]="house"
+          [manager]="true"
+          [info]="'Zatwierdzono' + ' ' + house.updatedAt.split('T')[0]"
+          [color]="{ color: '#33B828' }"
+        ></app-house-card>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="selectedPage.type === 'rejected'">
+      <ng-container *ngFor="let house of houseRejected">
+        <app-house-card
+          [house]="house"
+          [manager]="true"
+          [info]="'Odrzucono' + ' ' + house.updatedAt.split('T')[0]"
+          [color]="{ color: '#FF5555' }"
+        ></app-house-card>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

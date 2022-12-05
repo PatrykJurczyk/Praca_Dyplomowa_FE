@@ -29,3 +29,7 @@ export interface adminPage {
   user: boolean;
   manager: boolean;
 }
+
+export interface managerPage {
+  type: 'toAccept' | 'accepted' | 'rejected';
+}

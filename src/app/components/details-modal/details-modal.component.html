@@ -66,10 +66,35 @@
       <span *ngIf="!!(houseData.owner === userId)">Wystawiono: {{ time }}</span>
       <div>{{ houseData.price }}zł</div>
     </div>
-    <div class="buttonWrapper" *ngIf="!(houseData.owner === userId)">
-      <button>Kup Dom</button>
-      <button>Kontakt</button>
-    </div>
+    <ng-container *ngIf="!manager">
+      <div class="buttonWrapper" *ngIf="!(houseData.owner === userId)">
+        <button>Kup Dom</button>
+        <button>Kontakt</button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="manager">
+      <div class="info" [ngStyle]="color">
+        {{ info }}
+      </div>
+      <div *ngIf="buttons">
+        <div class="buttonContainer">
+          <button
+            type="button"
+            class="accept"
+            (click)="updateStatus(houseData._id, 2)"
+          >
+            Akceptuj
+          </button>
+          <button
+            type="button"
+            class="reject"
+            (click)="updateStatus(houseData._id, 0)"
+          >
+            Odrzuć
+          </button>
+        </div>
+      </div>
+    </ng-container>
   </div>
   <div class="rightSide">
     <p class="propertyTitle">Property information</p>

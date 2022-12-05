@@ -118,6 +118,12 @@
         background: #ff731f;
       }
     }
+
+    .info {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 17px;
+    }
   }
 
   .rightSide {
@@ -171,5 +177,36 @@
     .description {
       font-size: 12px;
     }
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+
+  .accept {
+    color: #ffffff;
+    padding: 13px 43px;
+    width: 100%;
+    margin-right: 20px;
+    cursor: pointer;
+    background: #33b828;
+    text-transform: uppercase;
+    border-radius: 4px;
+    margin-bottom: 17px;
+    border: none;
+    font-weight: 600;
+  }
+  .reject {
+    color: #ffffff;
+    padding: 13px 43px;
+    width: 100%;
+    background: #ff5555;
+    cursor: pointer;
+    text-transform: uppercase;
+    border-radius: 4px;
+    margin-bottom: 17px;
+    border: none;
+    font-weight: 600;
   }
 }

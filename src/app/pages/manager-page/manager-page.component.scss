@@ -1,0 +1,32 @@
+.container {
+  width: 80%;
+  margin: auto;
+  .topBar {
+    text-transform: uppercase;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    padding: 35px 0;
+
+    .toAccept {
+      padding: 16px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .rejected {
+      padding: 16px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .accepted {
+      padding: 16px;
+      cursor: pointer;
+    }
+  }
+}
+
+.borderBottom {
+  border-bottom: 2px solid #000000;
+}

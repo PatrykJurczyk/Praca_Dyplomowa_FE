@@ -39,7 +39,9 @@ export class HomePageComponent implements OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
         this.houses = value.filter(
-          (house: HouseModel) => house.isReserved !== isReserved.archiwizowany
+          (house: HouseModel) =>
+            house.isReserved !== isReserved.archiwizowany &&
+            house.isAccepted === 2
         );
       });
     this.isLoggedIn
