@@ -33,8 +33,10 @@
 
 <div class="popup">
   <app-popup-accept-cancel
-    [isOpened]="openPopup"
+    (isOpened)="closePopup()"
+    [openPopup]="openPopup"
     [title]="title"
+    [userId]="user._id"
   ></app-popup-accept-cancel>
 </div>
 

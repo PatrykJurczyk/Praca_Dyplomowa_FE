@@ -1,9 +1,9 @@
-<div class="container" *ngIf="isOpened">
+<div class="container" *ngIf="openPopup">
   <div class="title">
     {{ title }}
   </div>
   <div class="buttonWrapper">
-    <button class="accept">Akceptuj</button>
-    <button class="cancel">Odrzuć</button>
+    <button class="accept" (click)="blockPerson()">Blokuj</button>
+    <button class="cancel" (click)="cancel()">Anuluj</button>
   </div>
 </div>

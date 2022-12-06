@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-popup-accept-cancel',
@@ -6,10 +6,18 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./popup-accept-cancel.component.scss'],
 })
 export class PopupAcceptCancelComponent implements OnInit {
-  @Input() isOpened!: boolean;
+  @Output() isOpened = new EventEmitter<void>();
+  @Input() openPopup!: boolean;
   @Input() title!: string;
+  @Input() userId!: string;
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  blockPerson() {}
+
+  cancel() {
+    this.isOpened.emit();
+  }
 }
