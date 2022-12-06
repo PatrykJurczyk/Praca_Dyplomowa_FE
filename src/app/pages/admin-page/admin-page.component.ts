@@ -28,6 +28,20 @@ export class AdminPageComponent implements OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((value: adminPage) => (this.selectedPage = value));
 
+    this.getUsers();
+    this.userService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
+      () => {
+        this.getUsers();
+      }
+    );
+
+    this.houseService
+      .getHouses()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((house: HouseModel[]) => (this.houses = house));
+  }
+
+  private getUsers() {
     this.userService
       .getUsers()
       .pipe(takeUntil(this.destroy$))
@@ -37,11 +51,6 @@ export class AdminPageComponent implements OnDestroy {
           (value: UserModel) => value.role === 'Manager'
         );
       });
-
-    this.houseService
-      .getHouses()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((house: HouseModel[]) => (this.houses = house));
   }
 
   ngOnDestroy() {

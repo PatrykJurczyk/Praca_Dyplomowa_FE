@@ -29,12 +29,17 @@
   <div class="button">
     <button (click)="blockPerson(user._id)">Blokuj użytkownika</button>
   </div>
+  <div class="isBlockedUser" *ngIf="user.status === 0">
+    <p class="text">Zablokowany</p>
+  </div>
 </div>
 
 <div class="popup">
   <app-popup-accept-cancel
-    [isOpened]="openPopup"
+    (isOpened)="closePopup()"
+    [openPopup]="openPopup"
     [title]="title"
+    [userId]="user._id"
   ></app-popup-accept-cancel>
 </div>
 

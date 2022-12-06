@@ -37,6 +37,9 @@ export class UserCardComponent implements OnInit {
   blockPerson(id: string) {
     this.userId = id;
     this.openPopup = true;
-    console.log('Siema' + id);
+  }
+
+  closePopup() {
+    this.openPopup = false;
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject, tap } from "rxjs";
 
 const API_URL = 'http://localhost:3001/api/';
 
@@ -19,6 +19,13 @@ const httpOptions = {
 export class HouseService {
   constructor(private http: HttpClient) {}
 
+  private _refreshrequired = new Subject<void>()
+
+  get Refreshrequired() {
+    return this._refreshrequired
+  }
+
+
   getHouses(): Observable<any> {
     return this.http.get(API_URL + 'house', httpOptions);
   }
@@ -28,6 +35,6 @@ export class HouseService {
       API_URL + 'house/' + id + '/statusAccepted',
       data,
       httpOptions
-    );
+    ).pipe(tap(() => this.Refreshrequired.next()));
   }
 }
