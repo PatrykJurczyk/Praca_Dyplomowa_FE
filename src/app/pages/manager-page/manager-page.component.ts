@@ -26,6 +26,13 @@ export class ManagerPageComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((value: managerPage) => (this.selectedPage = value));
 
+    this.getHouses();
+    this.houseService.Refreshrequired.subscribe(() => {
+      this.getHouses();
+    })
+  }
+
+  private getHouses() {
     this.houseService
       .getHouses()
       .pipe(takeUntil(this.destroy$))
@@ -41,6 +48,7 @@ export class ManagerPageComponent implements OnInit, OnDestroy {
         );
       });
   }
+
 
   ngOnDestroy() {
     this.destroy$.next();
