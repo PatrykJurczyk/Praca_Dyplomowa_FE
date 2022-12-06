@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-popup-accept-cancel',
@@ -11,11 +12,13 @@ export class PopupAcceptCancelComponent implements OnInit {
   @Input() title!: string;
   @Input() userId!: string;
 
-  constructor() {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {}
 
-  blockPerson() {}
+  blockPerson() {
+    this.userService.updateUserDeletion(this.userId, {}).subscribe();
+  }
 
   cancel() {
     this.isOpened.emit();
