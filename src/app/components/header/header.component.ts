@@ -25,22 +25,29 @@ export class HeaderComponent implements OnDestroy {
     private userService: UserService,
     private modalService: ModalService,
     private _toastService: ToastService
-  ) {}
+  ) {
+    this.userService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
+      () => {
+        this.getUsers();
+      }
+    );
+  }
 
   ngOnInit(): void {
     window.sessionStorage.getItem(UserStorage.USER_KEY)
-      ? this.userService
-          .getUser(
-            window.sessionStorage.getItem(UserStorage.USER_KEY) as string
-          )
-          .pipe(takeUntil(this.destroy$))
-          .subscribe((value: UserModel) => {
-            this.userAvatar = value.avatar ? value.avatar : '';
-            this.user = value;
-          })
+      ? this.getUsers()
       : null;
   }
 
+  private getUsers() {
+    this.userService
+      .getUser(window.sessionStorage.getItem(UserStorage.USER_KEY) as string)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value: UserModel) => {
+        this.userAvatar = value.avatar ? value.avatar : '';
+        this.user = value;
+      });
+  }
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
