@@ -37,8 +37,8 @@
             formControlName="avatar"
             type="file"
             style="display: none"
-            multiple
             accept="image/png, image/gif, image/jpeg, image/jpg"
+            (change)="sendImage($event.target)"
           />
           <label for="img">Prześlij swój awatar</label>
         </div>

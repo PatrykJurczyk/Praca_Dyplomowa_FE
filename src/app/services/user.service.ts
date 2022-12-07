@@ -43,7 +43,9 @@ export class UserService {
   }
 
   updateUser(id: string, data: unknown): Observable<any> {
-    return this.http.patch(API_URL + 'users/' + id, data, httpOptions);
+    return this.http
+      .patch(API_URL + 'users/' + id, data)
+      .pipe(tap(() => this.Refreshrequired.next()));
   }
 
   updateUserPassword(id: string, data: unknown): Observable<any> {

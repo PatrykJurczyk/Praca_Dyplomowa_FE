@@ -24,6 +24,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
   protected userPhone?: string;
   protected userEmail?: string;
   private destroy$: Subject<void> = new Subject();
+
   constructor(
     private fb: FormBuilder,
     private modalService: ModalService,
@@ -70,12 +71,21 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  confirm(data: editUserInterface) {
+  protected sendImage(img: any) {
+    const file: File = img.files[0];
+
+    const formData: FormData = new FormData();
+    formData.append('avatar', file);
+    this.confirm(formData);
+  }
+
+  protected confirm(data: any) {
     this.userService
       .updateUser(
         window.sessionStorage.getItem(UserStorage.USER_KEY) as string,
         data
       )
+      .pipe(takeUntil(this.destroy$))
       .subscribe(
         () => {
           this._toastService.success('Pomyślnie zaktualizowano użytkownika');
@@ -84,6 +94,7 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
       );
     this.form.get('name')?.disable();
     this.form.get('phone')?.disable();
+    this.form.get('avatar')?.disable();
   }
 
   editPasswordClick() {
