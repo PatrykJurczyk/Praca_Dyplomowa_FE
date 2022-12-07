@@ -33,6 +33,14 @@ export class DetailsModalComponent implements OnDestroy {
     private houseService: HouseService
   ) {}
 
+  reserveHouse(id: string) {
+    this.houseService
+      .statusExist(id, { isExist: 2 })
+      .pipe(takeUntil(this.destroy$))
+      .pipe(tap(() => this.onClose()))
+      .subscribe();
+  }
+
   onClose() {
     this.modalDetail.modalDetailSubject.next({
       open: false,

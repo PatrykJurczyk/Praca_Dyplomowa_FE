@@ -2,6 +2,9 @@
   width: 80%;
   margin: 45px auto;
   .wrapper {
+    height: calc(50vh - 62.5px - 44.5px - 90px);
+    overflow-y: scroll;
+
     .topBar {
       display: flex;
       justify-content: space-between;
@@ -21,6 +24,20 @@
       }
     }
     .itemWrapper {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 2px;
+      border-top: 1px solid #b9b9b9;
+      .content {
+        display: flex;
+        align-items: center;
+        img {
+          width: 100px;
+          background: red;
+          margin-right: 15px;
+        }
+      }
     }
   }
 }

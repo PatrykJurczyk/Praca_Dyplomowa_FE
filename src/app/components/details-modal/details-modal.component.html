@@ -68,7 +68,7 @@
     </div>
     <ng-container *ngIf="!manager">
       <div class="buttonWrapper" *ngIf="!(houseData.owner === userId)">
-        <button>Kup Dom</button>
+        <button (click)="reserveHouse(houseData._id)">Zarezerwuj Dom</button>
         <button>Kontakt</button>
       </div>
     </ng-container>

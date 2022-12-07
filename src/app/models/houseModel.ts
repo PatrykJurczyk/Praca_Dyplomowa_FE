@@ -18,7 +18,7 @@ export interface HouseModel {
   descriptionField?: string;
   images: string[];
   isAccepted: 0 | 1 | 2;
-  isReserved: 0 | 1 | 2 | 3;
+  isExist: 0 | 1 | 2 | 3;
   updatedAt: string;
 }
 

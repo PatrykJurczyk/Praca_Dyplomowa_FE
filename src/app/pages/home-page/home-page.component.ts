@@ -34,16 +34,13 @@ export class HomePageComponent implements OnDestroy {
     private housesService: HouseService,
     private userService: UserService
   ) {
-    housesService
-      .getHouses()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value) => {
-        this.houses = value.filter(
-          (house: HouseModel) =>
-            house.isReserved !== isReserved.archiwizowany &&
-            house.isAccepted === 2
-        );
-      });
+    this.getHouses();
+    this.housesService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
+      () => {
+        this.getHouses();
+      }
+    );
+
     this.isLoggedIn
       ? this.userService
           .getUser(
@@ -55,11 +52,36 @@ export class HomePageComponent implements OnDestroy {
             this.favourites = value.favorites as string[];
           })
       : null;
+    this.userService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
+      () => {
+        this.userService
+          .getUser(
+            window.sessionStorage.getItem(UserStorage.USER_KEY) as string
+          )
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((value) => {
+            this.userId = value._id;
+            this.favourites = value.favorites as string[];
+          });
+      }
+    );
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  getHouses() {
+    this.housesService
+      .getHouses()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.houses = value.filter(
+          (house: HouseModel) =>
+            house.isExist !== isReserved.archiwizowany && house.isAccepted === 2
+        );
+      });
   }
 
   // todo zapisać to w inny sposób + zminić jakoś zapis w html aby była jakaś wartość na start podana

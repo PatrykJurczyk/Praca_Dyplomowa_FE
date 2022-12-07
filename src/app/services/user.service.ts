@@ -57,11 +57,9 @@ export class UserService {
   }
 
   updateUserFavorites(id: string, data: unknown): Observable<any> {
-    return this.http.patch(
-      API_URL + 'users/' + id + '/favorite',
-      data,
-      httpOptions
-    );
+    return this.http
+      .patch(API_URL + 'users/' + id + '/favorite', data, httpOptions)
+      .pipe(tap(() => this.Refreshrequired.next()));
   }
 
   updateUserDeletion(id: string, data: unknown): Observable<any> {

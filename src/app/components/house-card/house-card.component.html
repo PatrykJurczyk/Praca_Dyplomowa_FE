@@ -56,7 +56,7 @@
         <button (click)="openDetailsModal(house._id)">Więcej szczegółów</button>
       </div>
     </div>
-    <div *ngIf="this.house.isReserved === isReservedHouse" class="isReserved">
+    <div *ngIf="house.isExist === isReservedHouse" class="isReserved">
       <p>zarezerwowane</p>
     </div>
   </div>
