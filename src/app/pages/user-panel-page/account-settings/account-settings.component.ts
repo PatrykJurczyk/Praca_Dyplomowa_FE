@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ModalService } from '../../../services/modal.service';
 import { UserService } from '../../../services/user.service';
 import { ToastService } from 'angular-toastify';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { UserStorage } from '../../../enums/enum';
+import { Subject, takeUntil } from 'rxjs';
 
 interface editUserInterface {
   name?: string;
@@ -16,27 +17,25 @@ interface editUserInterface {
   templateUrl: './account-settings.component.html',
   styleUrls: ['./account-settings.component.scss'],
 })
-export class AccountSettingsComponent implements OnInit {
+export class AccountSettingsComponent implements OnInit, OnDestroy {
   form!: FormGroup;
   protected userAvatar?: string;
   protected userName?: string;
   protected userPhone?: string;
   protected userEmail?: string;
-
+  private destroy$: Subject<void> = new Subject();
   constructor(
     private fb: FormBuilder,
     private modalService: ModalService,
     private userService: UserService,
     private _toastService: ToastService
   ) {
-    this.userService
-      .getUser(window.sessionStorage.getItem(UserStorage.USER_KEY) as string)
-      .subscribe((value) => {
-        this.userAvatar = value.avatar ? value.avatar : '';
-        this.userName = value.name ? value.name : '';
-        this.userPhone = value.phone ? value.phone : '';
-        this.userEmail = value.email ? value.email : '';
-      });
+    this.getUser();
+    this.userService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
+      () => {
+        this.getUser();
+      }
+    );
     this.form = fb.group({
       name: new FormControl({
         value: this.userName,
@@ -53,7 +52,23 @@ export class AccountSettingsComponent implements OnInit {
     });
   }
 
+  private getUser() {
+    this.userService
+      .getUser(window.sessionStorage.getItem(UserStorage.USER_KEY) as string)
+      .subscribe((value) => {
+        this.userAvatar = value.avatar ? value.avatar : '';
+        this.userName = value.name ? value.name : '';
+        this.userPhone = value.phone ? value.phone : '';
+        this.userEmail = value.email ? value.email : '';
+      });
+  }
+
   ngOnInit(): void {}
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   confirm(data: editUserInterface) {
     this.userService
