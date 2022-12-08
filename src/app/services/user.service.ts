@@ -53,7 +53,7 @@ export class UserService {
       API_URL + 'users/' + id + '/password',
       data,
       httpOptions
-    );
+    ).pipe(tap(() => this.Refreshrequired.next()));
   }
 
   updateUserFavorites(id: string, data: unknown): Observable<any> {
