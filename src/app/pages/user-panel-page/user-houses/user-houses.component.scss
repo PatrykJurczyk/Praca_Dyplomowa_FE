@@ -1,13 +1,28 @@
 .container {
   width: 80%;
   margin: 45px auto;
+
   .wrapper {
-    height: calc(50vh - 62.5px - 44.5px - 90px);
     overflow-y: scroll;
+  }
+
+  .wrapper1{
+    padding-top: 20px;
+  }
+
+  .wrapper,
+  .wrapper1 {
+    height: calc(50vh - 62.5px - 44.5px - 90px);
+    margin-top: 50px;
 
     .topBar {
       display: flex;
       justify-content: space-between;
+      padding-right: 10px;
+      position: fixed;
+      background: #ffffff;
+      width: 100%;
+      transform: translateY(-25px);
 
       p {
         color: #ff8842;
@@ -15,27 +30,28 @@
         font-weight: 600;
         font-size: 20px;
       }
-      ng-icon {
-        color: #ff8842;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 20px;
-        cursor: pointer;
-      }
     }
     .itemWrapper {
       display: flex;
       justify-content: space-between;
       margin-top: 20px;
       padding-top: 2px;
+      padding-right: 10px;
       border-top: 1px solid #b9b9b9;
+
+      ng-icon{
+        cursor: pointer;
+      }
+
       .content {
         display: flex;
         align-items: center;
         img {
           width: 100px;
-          background: red;
+          height: 55px;
           margin-right: 15px;
+          overflow: hidden;
+          object-fit: contain;
         }
       }
     }

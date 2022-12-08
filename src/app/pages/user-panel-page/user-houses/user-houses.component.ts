@@ -12,8 +12,8 @@ import { isReserved, UserStorage } from '../../../enums/enum';
 export class UserHousesComponent implements OnDestroy {
   protected myHouses!: HouseModel[];
   protected archivedHouses!: HouseModel[];
-
   private destroy$: Subject<void> = new Subject();
+
   constructor(private houseService: HouseService) {
     this.getHouses();
     this.houseService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
