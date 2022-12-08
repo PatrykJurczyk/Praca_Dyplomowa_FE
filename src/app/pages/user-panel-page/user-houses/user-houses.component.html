@@ -1,43 +1,75 @@
 <div class="container">
-
   <div class="wrapper">
     <div class="topBar">
       <p>Domy na sprzedaż</p>
     </div>
-
-    <ng-container *ngFor="let myHouse of myHouses">
+    <ng-container *ngFor="let myHouse of myHouses; let index = index">
       <div class="itemWrapper">
         <div class="content">
-          <img src="{{myHouse.images[0] ? myHouse.images[0]: './assets/image/nophoto.png'}}" alt="Zdjęcie domu" />
+          <img
+            src="{{
+              myHouse.images[0]
+                ? myHouse.images[0]
+                : './assets/image/nophoto.png'
+            }}"
+            alt="Zdjęcie domu"
+          />
           <div>
-            <p>{{myHouse.street}} {{myHouse.houseNr}}, {{myHouse.city}}</p>
-            <p>{{myHouse.price}}zł</p>
+            <p>
+              {{ myHouse.street }} {{ myHouse.houseNr }}, {{ myHouse.city }}
+            </p>
+            <p>{{ myHouse.price }}zł</p>
           </div>
         </div>
-        <ng-icon  name="bootstrapThreeDots"></ng-icon>
+        <div class="icon">
+          <ng-icon
+            name="bootstrapThreeDots"
+            (click)="openOptions(myHouse._id)"
+          ></ng-icon>
+          <div class="options" *ngIf="houseId === myHouse._id">
+            <div class="option option1">Więcej informacji</div>
+            <div class="option option2">Edytuj</div>
+            <div class="option option3">Archiwizuj</div>
+          </div>
+        </div>
       </div>
     </ng-container>
-
   </div>
 
   <div class="wrapper1">
     <div class="topBar">
       <p>Archiwizowane</p>
     </div>
-
-      <ng-container *ngFor="let archiveHouse of archivedHouses">
-        <div class="itemWrapper">
-          <div class="content">
-            <img src="{{archiveHouse.images[0] ? archiveHouse.images[0]: './assets/image/nophoto.png'}}" alt="Zdjęcie domu" />
-            <div>
-              <p>{{archiveHouse.street}} {{archiveHouse.houseNr}}, {{archiveHouse.city}}</p>
-              <p>{{archiveHouse.price}}zł</p>
-            </div>
+    <ng-container *ngFor="let archiveHouse of archivedHouses">
+      <div class="itemWrapper">
+        <div class="content">
+          <img
+            src="{{
+              archiveHouse.images[0]
+                ? archiveHouse.images[0]
+                : './assets/image/nophoto.png'
+            }}"
+            alt="Zdjęcie domu"
+          />
+          <div>
+            <p>
+              {{ archiveHouse.street }} {{ archiveHouse.houseNr }},
+              {{ archiveHouse.city }}
+            </p>
+            <p>{{ archiveHouse.price }}zł</p>
           </div>
-          <ng-icon  name="bootstrapThreeDots"></ng-icon>
         </div>
-      </ng-container>
-
-
+        <div class="icon">
+          <ng-icon
+            name="bootstrapThreeDots"
+            (click)="openOptions(archiveHouse._id)"
+          ></ng-icon>
+          <div class="options" *ngIf="houseId === archiveHouse._id">
+            <div class="option option1">Więcej informacji</div>
+            <div class="option option2">Przywróć dom</div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </div>

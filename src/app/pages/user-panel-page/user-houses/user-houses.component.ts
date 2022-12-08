@@ -13,6 +13,7 @@ export class UserHousesComponent implements OnDestroy {
   protected myHouses!: HouseModel[];
   protected archivedHouses!: HouseModel[];
   private destroy$: Subject<void> = new Subject();
+  protected houseId!: string;
 
   constructor(private houseService: HouseService) {
     this.getHouses();
@@ -34,7 +35,7 @@ export class UserHousesComponent implements OnDestroy {
       .subscribe((houses: HouseModel[]) => {
         this.myHouses = houses.filter(
           (house: HouseModel) =>
-            house.owner === window.sessionStorage.getItem(UserStorage.USER_KEY)
+            house.owner === window.sessionStorage.getItem(UserStorage.USER_KEY) && house.isExist !== isReserved.archiwizowany
         );
 
         this.archivedHouses = houses.filter(
@@ -43,8 +44,14 @@ export class UserHousesComponent implements OnDestroy {
               window.sessionStorage.getItem(UserStorage.USER_KEY) &&
             house.isExist === isReserved.archiwizowany
         );
-        console.log(this.myHouses);
-        console.log(this.archivedHouses);
       });
+  }
+
+  openOptions(_id: string) {
+    if (_id === this.houseId){
+      this.houseId = ''
+    } else{
+      this.houseId = _id
+    }
   }
 }

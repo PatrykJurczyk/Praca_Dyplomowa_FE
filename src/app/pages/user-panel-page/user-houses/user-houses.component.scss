@@ -4,10 +4,13 @@
 
   .wrapper {
     overflow-y: scroll;
+    overflow-x: hidden;
   }
 
-  .wrapper1{
+  .wrapper1 {
     padding-top: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .wrapper,
@@ -38,9 +41,31 @@
       padding-top: 2px;
       padding-right: 10px;
       border-top: 1px solid #b9b9b9;
+      .icon {
+        position: relative;
+        ng-icon {
+          cursor: pointer;
+        }
+        .options {
+          position: absolute;
+          top: 0px;
+          right: 20px;
+          background: #d9d9d9;
+          width: 200px;
+          font-size: 18px;
+          font-weight: 600;
+          border-radius: 3px;
 
-      ng-icon{
-        cursor: pointer;
+          .option{
+            margin: 8px;
+            padding: 2px;
+            cursor: pointer;
+            border-bottom: 1px solid #c0c0c0;
+          }
+          .option:last-child{
+            border-bottom: none;
+          }
+        }
       }
 
       .content {
