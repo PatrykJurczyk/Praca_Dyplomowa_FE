@@ -76,6 +76,6 @@ export class UserHousesComponent implements OnDestroy {
   }
 
   editHouse(_id: string) {
-    
+    this.houseService.editHouse(_id, {})
   }
 }
