@@ -54,4 +54,8 @@ export class UserHousesComponent implements OnDestroy {
       this.houseId = _id
     }
   }
+
+  archive(_id: string, number: number) {
+    this.houseService.statusExist(_id, {isExist: number}).pipe(takeUntil(this.destroy$)).subscribe(() => this.houseId = '')
+  }
 }
