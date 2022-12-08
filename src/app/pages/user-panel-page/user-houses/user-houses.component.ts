@@ -3,6 +3,7 @@ import { HouseService } from '../../../services/house.service';
 import { Subject, takeUntil } from 'rxjs';
 import { HouseModel } from '../../../models/houseModel';
 import { isReserved, UserStorage } from '../../../enums/enum';
+import { ModalService } from "../../../services/modal.service";
 
 @Component({
   selector: 'app-user-houses',
@@ -15,13 +16,22 @@ export class UserHousesComponent implements OnDestroy {
   private destroy$: Subject<void> = new Subject();
   protected houseId!: string;
 
-  constructor(private houseService: HouseService) {
+  openModalDetails: { open: boolean; idHouse: string } = {
+    open: false,
+    idHouse: '',
+  };
+
+  constructor(private houseService: HouseService, private modalDetail: ModalService,) {
     this.getHouses();
     this.houseService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
       () => {
         this.getHouses();
       }
     );
+
+    this.modalDetail.modalDetailSubject
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => (this.openModalDetails = data));
   }
 
   ngOnDestroy() {
@@ -57,5 +67,15 @@ export class UserHousesComponent implements OnDestroy {
 
   archive(_id: string, number: number) {
     this.houseService.statusExist(_id, {isExist: number}).pipe(takeUntil(this.destroy$)).subscribe(() => this.houseId = '')
+  }
+
+  showMoreInfo(_id: string) {
+    console.log(_id)
+    this.openModalDetails.open = true;
+    this.openModalDetails.idHouse = _id;
+  }
+
+  editHouse(_id: string) {
+    
   }
 }
