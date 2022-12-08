@@ -1,37 +1,41 @@
 <div class="container">
   <div class="title">Add new house</div>
-  <form (ngSubmit)="submit()" class="formContainer">
+  <form [formGroup]="form" (ngSubmit)="submit(this.form)" class="formContainer">
     <div class="wrapperAddress">
       <div class="properTitle">Address information</div>
       <div class="inputWrapper">
-        <input type="text" name="" placeholder="Państwo*" />
-        <input type="text" name="" placeholder="Województwo*" />
-        <input type="text" name="" placeholder="Miasto*" />
-        <input type="text" name="" placeholder="Nazwa Ulicy*" />
-        <input type="number" name="" placeholder="Numer domu*" />
+        <input type="text" name="country" formControlName="country" placeholder="Państwo*" />
+        <input type="text" name="province" formControlName="province" placeholder="Województwo*" />
+        <input type="text" name="city" formControlName="city" placeholder="Miasto*" />
+        <input type="text" name="street" formControlName="street" placeholder="Nazwa Ulicy*" />
+        <input type="number" name="houseNr" formControlName="houseNr" placeholder="Numer domu*" />
+
       </div>
     </div>
     <div class="wrapperInformation">
       <div class="properTitle">Property information</div>
       <div class="inputWrapper">
-        <input type="number" name="" placeholder="Rok wybudowania*" />
-        <input type="number" name="" placeholder="Cena*" />
-        <input type="number" name="" placeholder="Ilość pięter*" />
-        <input type="number" name="" placeholder="Piętro" />
-        <input type="number" name="" placeholder="Ilość pokoi" />
-        <input type="number" name="" placeholder="Ilość łazienek" />
+        <input type="number" name="yearBuilt" formControlName="yearBuilt" placeholder="Rok wybudowania*" />
+        <input type="number" name="price" formControlName="price" placeholder="Cena*" />
+        <input type="number" name="dimension" formControlName="dimension" placeholder="Powierzchnia*" />
+        <input type="number" name="floorsInBuilding" formControlName="floorsInBuilding" placeholder="Ilość pięter*" />
+        <input type="number" name="floor" formControlName="floor" placeholder="Piętro" />
+        <input type="number" name="roomsNumber" formControlName="roomsNumber" placeholder="Ilość pokoi" />
+        <input type="number" name="bathroomNumber" formControlName="bathroomNumber" placeholder="Ilość łazienek" />
       </div>
     </div>
     <!--    todo more facilities-->
-    <button type="button" class="moreFacilities">More facilities</button>
-    <textarea placeholder="More information" maxlength="350"></textarea>
+<!--    <button type="button" class="moreFacilities">More facilities</button>-->
+<!--    <textarea placeholder="More information" maxlength="350"></textarea>-->
     <div class="wrapperImage">
       <input
         id="img"
+
         type="file"
         style="display: none"
         multiple
         accept="image/png, image/gif, image/jpeg, image/jpg"
+        (change)="images($event.target)"
       />
       <label for="img">Wybierz zdjęcie</label>
     </div>
