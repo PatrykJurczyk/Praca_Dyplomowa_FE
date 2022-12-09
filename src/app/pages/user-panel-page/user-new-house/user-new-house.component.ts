@@ -11,7 +11,59 @@ import { UserStorage } from '../../../enums/enum';
 export class UserNewHouseComponent {
   images: File[] = [];
   arrayOfImages = { photo: [] };
+  arrayOfFacilities: string[] = [
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+    'Garaż',
+  ];
+  addedFacilities: string[] = [];
+
   form!: FormGroup;
+
   constructor(private fb: FormBuilder, private houseService: HouseService) {
     this.form = fb.group({
       owner: window.sessionStorage.getItem(UserStorage.USER_KEY),
@@ -27,7 +79,10 @@ export class UserNewHouseComponent {
       floor: ['', Validators.compose([Validators.required])],
       roomsNumber: ['', Validators.compose([Validators.required])],
       bathroomNumber: ['', Validators.compose([Validators.required])],
-      otherFeatures: [[], Validators.compose([Validators.required])],
+      otherFeatures: [
+        this.addedFacilities,
+        Validators.compose([Validators.required]),
+      ],
       descriptionField: ['', Validators.compose([Validators.required])],
     });
   }
@@ -43,15 +98,13 @@ export class UserNewHouseComponent {
       for (let i = 0; i < files.length; i++) {
         let reader = new FileReader();
         file = files[i];
-        reader.onload = (file) => {
+        reader.onload = () => {
           //@ts-ignore
           this.arrayOfImages.photo[i] = reader.result;
         };
         reader.readAsDataURL(file);
       }
     }
-
-    console.log(this.arrayOfImages);
   }
 
   submit(event: any) {
@@ -70,4 +123,6 @@ export class UserNewHouseComponent {
 
     this.houseService.createHouse(payload).subscribe();
   }
+
+  moreFacilities() {}
 }

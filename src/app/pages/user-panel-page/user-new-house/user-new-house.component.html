@@ -135,8 +135,69 @@
         />
       </div>
     </div>
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
     <!--    todo more facilities-->
-    <button type="button" class="moreFacilities">More facilities</button>
+    <button type="button" class="moreFacilities" (click)="moreFacilities()">More facilities</button>
+    <div class="moreFacilitiesSelect">
+      <ng-container *ngFor="let facility of arrayOfFacilities; let index = index">
+        <label [for]="facility+index">{{facility}}</label>
+        <input type="checkbox" [id]="facility+index" [value]="facility">
+      </ng-container>
+    </div>
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
+<!--    -->
     <textarea
       placeholder="More information"
       name="descriptionField"
