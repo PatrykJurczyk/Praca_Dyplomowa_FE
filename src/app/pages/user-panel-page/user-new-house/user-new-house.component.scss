@@ -1,5 +1,5 @@
 .container {
-  width: 500px;
+  width: 550px;
   margin: auto;
   border-radius: 5px;
   -webkit-box-shadow: 0px 0px 10px 0px rgba(146, 146, 146, 0.5);
@@ -90,12 +90,25 @@
       cursor: pointer;
     }
 
+    .disable {
+      cursor: unset;
+
+      &:hover {
+        cursor: unset;
+        background: #ff8842;
+      }
+    }
+
     .inputWrapper {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 5px;
       margin-top: 5px;
       margin-bottom: 5px;
+
+      .borderColor {
+        border: 1px solid #ff0000;
+      }
 
       input {
         padding: 5px;

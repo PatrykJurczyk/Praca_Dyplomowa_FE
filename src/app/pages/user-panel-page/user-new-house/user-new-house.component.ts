@@ -1,34 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HouseService } from '../../../services/house.service';
+import { UserStorage } from '../../../enums/enum';
 
 @Component({
   selector: 'app-user-new-house',
   templateUrl: './user-new-house.component.html',
   styleUrls: ['./user-new-house.component.scss'],
 })
-export class UserNewHouseComponent implements OnInit {
+export class UserNewHouseComponent {
   images: File[] = [];
   form!: FormGroup;
   constructor(private fb: FormBuilder, private houseService: HouseService) {
     this.form = fb.group({
-      owner: '6379e8f9f37778e961dfb271',
-      country: [null, Validators.compose([Validators.required])],
-      province: [null, Validators.compose([Validators.required])],
-      city: [null, Validators.compose([Validators.required])],
-      street: [null, Validators.compose([Validators.required])],
-      houseNr: [null, Validators.compose([Validators.required])],
-      yearBuilt: [null, Validators.compose([Validators.required])],
-      price: [null, Validators.compose([Validators.required])],
-      dimension: [null, Validators.compose([Validators.required])],
-      floorsInBuilding: [null, Validators.compose([Validators.required])],
-      floor: [null, Validators.compose([Validators.required])],
-      roomsNumber: [null, Validators.compose([Validators.required])],
-      bathroomNumber: [null, Validators.compose([Validators.required])],
-      otherFeatures: [
-        ['asda', 'asd'],
-        Validators.compose([Validators.required]),
-      ],
+      owner: window.sessionStorage.getItem(UserStorage.USER_KEY),
+      country: ['', Validators.compose([Validators.required])],
+      province: ['', Validators.compose([Validators.required])],
+      city: ['', Validators.compose([Validators.required])],
+      street: ['', Validators.compose([Validators.required])],
+      houseNr: ['', Validators.compose([Validators.required])],
+      yearBuilt: ['', Validators.compose([Validators.required])],
+      price: ['', Validators.compose([Validators.required])],
+      dimension: ['', Validators.compose([Validators.required])],
+      floorsInBuilding: ['', Validators.compose([Validators.required])],
+      floor: ['', Validators.compose([Validators.required])],
+      roomsNumber: ['', Validators.compose([Validators.required])],
+      bathroomNumber: ['', Validators.compose([Validators.required])],
+      otherFeatures: [[], Validators.compose([Validators.required])],
       descriptionField: ['', Validators.compose([Validators.required])],
     });
   }
@@ -40,22 +38,20 @@ export class UserNewHouseComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
   submit(event: any) {
-    const payload = new FormData();
+    let payload = new FormData();
 
     this.images.forEach((image: File) =>
       payload.append('images', image, image.name)
     );
-    console.log(this.form.value);
-    Object.entries(this.form.value).forEach(
+
+    Object.entries(event.value).forEach(
       //@ts-ignore
-      ([key, value]: [key: string, value: string | number]) =>
-        payload.append(key, `${value}`)
+      ([key, value]: [key: string, value: string | Blob]) => {
+        payload.append(key, value);
+      }
     );
 
-    this.houseService
-      .createHouse(payload)
-      .subscribe((data: any) => console.log(data));
+    this.houseService.createHouse(payload).subscribe();
   }
 }

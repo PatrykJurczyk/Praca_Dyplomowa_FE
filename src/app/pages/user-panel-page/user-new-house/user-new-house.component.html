@@ -9,30 +9,53 @@
           name="country"
           formControlName="country"
           placeholder="Państwo*"
+          [ngClass]="{
+            borderColor:
+              !form.controls['country'].valid &&
+              form.controls['country'].touched
+          }"
         />
         <input
           type="text"
           name="province"
           formControlName="province"
           placeholder="Województwo*"
+          [ngClass]="{
+            borderColor:
+              !form.controls['province'].valid &&
+              form.controls['province'].touched
+          }"
         />
         <input
           type="text"
           name="city"
           formControlName="city"
           placeholder="Miasto*"
+          [ngClass]="{
+            borderColor:
+              !form.controls['city'].valid && form.controls['city'].touched
+          }"
         />
         <input
           type="text"
           name="street"
           formControlName="street"
           placeholder="Nazwa Ulicy*"
+          [ngClass]="{
+            borderColor:
+              !form.controls['street'].valid && form.controls['street'].touched
+          }"
         />
         <input
           type="number"
           name="houseNr"
           formControlName="houseNr"
           placeholder="Numer domu*"
+          [ngClass]="{
+            borderColor:
+              !form.controls['houseNr'].valid &&
+              form.controls['houseNr'].touched
+          }"
         />
       </div>
     </div>
@@ -44,24 +67,43 @@
           name="yearBuilt"
           formControlName="yearBuilt"
           placeholder="Rok wybudowania*"
+          [ngClass]="{
+            borderColor:
+              !form.controls['yearBuilt'].valid &&
+              form.controls['yearBuilt'].touched
+          }"
         />
         <input
           type="number"
           name="price"
           formControlName="price"
           placeholder="Cena*"
+          [ngClass]="{
+            borderColor:
+              !form.controls['price'].valid && form.controls['price'].touched
+          }"
         />
         <input
           type="number"
           name="dimension"
           formControlName="dimension"
           placeholder="Powierzchnia*"
+          [ngClass]="{
+            borderColor:
+              !form.controls['dimension'].valid &&
+              form.controls['dimension'].touched
+          }"
         />
         <input
           type="number"
           name="floorsInBuilding"
           formControlName="floorsInBuilding"
           placeholder="Ilość pięter*"
+          [ngClass]="{
+            borderColor:
+              !form.controls['floorsInBuilding'].valid &&
+              form.controls['floorsInBuilding'].touched
+          }"
         />
         <input
           type="number"
@@ -73,19 +115,34 @@
           type="number"
           name="roomsNumber"
           formControlName="roomsNumber"
-          placeholder="Ilość pokoi"
+          placeholder="Ilość pokoi*"
+          [ngClass]="{
+            borderColor:
+              !form.controls['roomsNumber'].valid &&
+              form.controls['roomsNumber'].touched
+          }"
         />
         <input
           type="number"
           name="bathroomNumber"
           formControlName="bathroomNumber"
-          placeholder="Ilość łazienek"
+          placeholder="Ilość łazienek*"
+          [ngClass]="{
+            borderColor:
+              !form.controls['bathroomNumber'].valid &&
+              form.controls['bathroomNumber'].touched
+          }"
         />
       </div>
     </div>
     <!--    todo more facilities-->
     <button type="button" class="moreFacilities">More facilities</button>
-    <textarea placeholder="More information" maxlength="350"></textarea>
+    <textarea
+      placeholder="More information"
+      name="descriptionField"
+      formControlName="descriptionField"
+      maxlength="350"
+    ></textarea>
     <div class="wrapperImage">
       <input
         id="img"
@@ -98,6 +155,38 @@
 
       <label for="img">Wybierz zdjęcie</label>
     </div>
-    <button type="submit" class="btnAdd">Dodaj dom</button>
+    <button
+      type="submit"
+      class="btnAdd"
+      [ngClass]="{
+        disable:
+          !form.controls['country'].valid ||
+          !form.controls['province'].valid ||
+          !form.controls['city'].valid ||
+          !form.controls['street'].valid ||
+          !form.controls['houseNr'].valid ||
+          !form.controls['yearBuilt'].valid ||
+          !form.controls['price'].valid ||
+          !form.controls['dimension'].valid ||
+          !form.controls['floorsInBuilding'].valid ||
+          !form.controls['roomsNumber'].valid ||
+          !form.controls['bathroomNumber'].valid
+      }"
+      [disabled]="
+        !form.controls['country'].valid ||
+        !form.controls['province'].valid ||
+        !form.controls['city'].valid ||
+        !form.controls['street'].valid ||
+        !form.controls['houseNr'].valid ||
+        !form.controls['yearBuilt'].valid ||
+        !form.controls['price'].valid ||
+        !form.controls['dimension'].valid ||
+        !form.controls['floorsInBuilding'].valid ||
+        !form.controls['roomsNumber'].valid ||
+        !form.controls['bathroomNumber'].valid
+      "
+    >
+      Dodaj dom
+    </button>
   </form>
 </div>
