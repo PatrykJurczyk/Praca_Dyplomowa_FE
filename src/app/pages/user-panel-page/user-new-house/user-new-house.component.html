@@ -135,69 +135,25 @@
         />
       </div>
     </div>
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-    <!--    todo more facilities-->
-    <button type="button" class="moreFacilities" (click)="moreFacilities()">More facilities</button>
+    <button type="button" class="moreFacilities" (click)="moreFacilities()">
+      More facilities
+    </button>
     <div class="moreFacilitiesSelect">
-      <ng-container *ngFor="let facility of arrayOfFacilities; let index = index">
-        <label [for]="facility+index">{{facility}}</label>
-        <input type="checkbox" [id]="facility+index" [value]="facility">
-      </ng-container>
+      <div
+        formArrayName="otherFeatures"
+        *ngFor="let facility of arrayOfFacilities; let index = index"
+      >
+        <div [formGroupName]="index">
+          <label [for]="facility + index">{{ facility }}</label>
+          <input
+            type="checkbox"
+            formControlName="checked"
+            [id]="facility + index"
+            [value]="facility"
+          />
+        </div>
+      </div>
     </div>
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
-<!--    -->
     <textarea
       placeholder="More information"
       name="descriptionField"
@@ -218,7 +174,7 @@
       </div>
       <ng-container *ngFor="let image of arrayOfImages.photo">
         <div class="smallImg">
-          <img src="{{image}}" alt="">
+          <img src="{{ image }}" alt="" />
         </div>
       </ng-container>
     </div>

@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { HouseService } from '../../../services/house.service';
 import { UserStorage } from '../../../enums/enum';
 
@@ -11,57 +17,7 @@ import { UserStorage } from '../../../enums/enum';
 export class UserNewHouseComponent {
   images: File[] = [];
   arrayOfImages = { photo: [] };
-  arrayOfFacilities: string[] = [
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-    'Garaż',
-  ];
-  addedFacilities: string[] = [];
-
+  arrayOfFacilities: string[] = ['Garaż', 'Garaż', 'Garaż', 'Garaż', 'Garaż'];
   form!: FormGroup;
 
   constructor(private fb: FormBuilder, private houseService: HouseService) {
@@ -79,12 +35,17 @@ export class UserNewHouseComponent {
       floor: ['', Validators.compose([Validators.required])],
       roomsNumber: ['', Validators.compose([Validators.required])],
       bathroomNumber: ['', Validators.compose([Validators.required])],
-      otherFeatures: [
-        this.addedFacilities,
-        Validators.compose([Validators.required]),
-      ],
+      otherFeatures: this.fb.array([]),
       descriptionField: ['', Validators.compose([Validators.required])],
     });
+
+    this.arrayOfFacilities.forEach((name: string) =>
+      this.getOtherFeatures.push(this.initOtherFacilitiesForm(name))
+    );
+  }
+
+  get getOtherFeatures() {
+    return this.form.get('otherFeatures') as FormArray;
   }
 
   addImages(rawImages: EventTarget | null) {
@@ -107,6 +68,13 @@ export class UserNewHouseComponent {
     }
   }
 
+  initOtherFacilitiesForm(name: string) {
+    return this.fb.group({
+      name: name,
+      checked: false,
+    });
+  }
+
   submit(event: any) {
     let payload = new FormData();
 
@@ -117,12 +85,21 @@ export class UserNewHouseComponent {
     Object.entries(event.value).forEach(
       //@ts-ignore
       ([key, value]: [key: string, value: string | Blob]) => {
-        payload.append(key, value);
+        if (key !== 'otherFeatures') {
+          payload.append(key, value);
+        }
       }
     );
 
+    this.getOtherFeatures.controls
+      .filter((control: AbstractControl) => control.value.checked === true)
+      .forEach((control: AbstractControl) =>
+        payload.append('otherFeatures', control.value.name)
+      );
     this.houseService.createHouse(payload).subscribe();
   }
 
-  moreFacilities() {}
+  moreFacilities() {
+    // zamknij otwórz popup
+  }
 }
