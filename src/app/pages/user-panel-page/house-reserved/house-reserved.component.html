@@ -1,1 +1,14 @@
-<p>house-reserved works!</p>
+<div class="container">
+  <div class="wrapper" *ngIf="houseReserved?.length">
+    <ng-container *ngFor="let houses of houseReserved">
+      <app-house-card
+        [house]="houses"
+        [userId]="userId"
+        [isLoggedIn]="!!userId"
+      ></app-house-card>
+    </ng-container>
+  </div>
+  <div *ngIf="!houseReserved?.length" class="noFavorite">
+    <p>Brak zarezerwowanych domów</p>
+  </div>
+</div>

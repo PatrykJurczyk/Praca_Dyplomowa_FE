@@ -20,6 +20,7 @@ export interface HouseModel {
   isAccepted: 0 | 1 | 2;
   isExist: 0 | 1 | 2 | 3;
   updatedAt: string;
+  reservedBy: string;
 }
 
 export interface HouseDetailModel {

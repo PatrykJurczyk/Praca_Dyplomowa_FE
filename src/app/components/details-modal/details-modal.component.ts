@@ -35,7 +35,7 @@ export class DetailsModalComponent implements OnDestroy {
 
   reserveHouse(id: string) {
     this.houseService
-      .statusExist(id, { isExist: 2 })
+      .statusExist(id, { isExist: 2, reservedBy: this.userId })
       .pipe(takeUntil(this.destroy$))
       .pipe(tap(() => this.onClose()))
       .subscribe();
