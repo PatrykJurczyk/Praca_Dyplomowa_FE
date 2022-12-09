@@ -1,5 +1,5 @@
 .container {
-  width: 550px;
+  width: 600px;
   margin: auto;
   border-radius: 5px;
   -webkit-box-shadow: 0px 0px 10px 0px rgba(146, 146, 146, 0.5);
@@ -14,36 +14,24 @@
   .formContainer {
     padding: 15px 31px;
     .wrapperAddress,
-    .wrapperInformation {
+    .wrapperInformation,
+    .wrapperFacilities {
       border: 1px solid #c0c0c0;
       border-radius: 5px;
       padding: 8px 18px 8px 18px;
     }
 
-    .wrapperInformation {
+    .wrapperInformation,
+    .wrapperFacilities {
       margin-top: 10px;
+    }
+    .wrapperFacilities {
+      margin-bottom: 10px;
     }
     .properTitle {
       font-size: 12px;
       color: #ff8842;
       font-weight: 600;
-    }
-
-    .moreFacilities {
-      margin: 8px 0px;
-      width: 100%;
-      background: none;
-      border-radius: 3px;
-      border: 1px solid #ff8842;
-      text-transform: uppercase;
-      font-weight: 600;
-      font-size: 12px;
-      color: #ff8842;
-      padding: 5px 0px;
-    }
-    .moreFacilities:hover {
-      cursor: pointer;
-      background: #f3f3f3;
     }
 
     textarea {
@@ -141,6 +129,22 @@
       }
     }
     .moreFacilitiesSelect {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+
+      .inputCheckbox {
+        input {
+          margin-right: 5px;
+        }
+      }
+      label {
+        font-size: 16px;
+        font-weight: bold;
+        color: #8a8a8a;
+      }
     }
   }
 }

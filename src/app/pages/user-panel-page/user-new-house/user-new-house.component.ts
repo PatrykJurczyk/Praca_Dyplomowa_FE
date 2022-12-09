@@ -17,7 +17,28 @@ import { UserStorage } from '../../../enums/enum';
 export class UserNewHouseComponent {
   images: File[] = [];
   arrayOfImages = { photo: [] };
-  arrayOfFacilities: string[] = ['Garaż', 'Garaż', 'Garaż', 'Garaż', 'Garaż'];
+  arrayOfFacilities: string[] = [
+    'Garaż',
+    'Ogród',
+    'Balkon',
+    'Piwnica',
+    'Basen',
+    'Sauna',
+    'Alarm',
+    'rolety antywłamaniowe',
+    'drzwi / okna antywłamaniowe',
+    'domofon / wideofon',
+    'monitoring / ochrona',
+    'Ogrodzenie',
+    'Ogrzewanie gazowe',
+    'Fotowoltaika',
+    'Pompa cipła',
+    'Oczyszczalnia',
+    'Kostka brukowa',
+    'Strych',
+    'Klimatyzacja',
+    'Umeblowanie',
+  ];
   form!: FormGroup;
 
   constructor(private fb: FormBuilder, private houseService: HouseService) {
@@ -97,9 +118,5 @@ export class UserNewHouseComponent {
         payload.append('otherFeatures', control.value.name)
       );
     this.houseService.createHouse(payload).subscribe();
-  }
-
-  moreFacilities() {
-    // zamknij otwórz popup
   }
 }

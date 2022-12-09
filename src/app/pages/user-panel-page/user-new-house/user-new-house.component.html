@@ -135,25 +135,37 @@
         />
       </div>
     </div>
-    <button type="button" class="moreFacilities" (click)="moreFacilities()">
-      More facilities
-    </button>
-    <div class="moreFacilitiesSelect">
-      <div
-        formArrayName="otherFeatures"
-        *ngFor="let facility of arrayOfFacilities; let index = index"
-      >
-        <div [formGroupName]="index">
-          <label [for]="facility + index">{{ facility }}</label>
-          <input
-            type="checkbox"
-            formControlName="checked"
-            [id]="facility + index"
-            [value]="facility"
-          />
+    <!--    -->
+    <!--    -->
+    <!--    -->
+    <!--    -->
+    <!--    -->
+    <!--    -->
+    <!--    -->
+    <div class="wrapperFacilities">
+      <div class="properTitle">More Facilities</div>
+      <div class="moreFacilitiesSelect">
+        <div
+          formArrayName="otherFeatures"
+          *ngFor="let facility of arrayOfFacilities; let index = index"
+        >
+          <div [formGroupName]="index" class="inputCheckbox">
+            <input
+              type="checkbox"
+              formControlName="checked"
+              [id]="facility + index"
+              [value]="facility"
+            />
+            <label [for]="facility + index">{{ facility }}</label>
+          </div>
         </div>
       </div>
     </div>
+    <!--      -->
+    <!--      -->
+    <!--      -->
+    <!--      -->
+    <!--      -->
     <textarea
       placeholder="More information"
       name="descriptionField"
