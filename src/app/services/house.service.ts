@@ -29,6 +29,12 @@ export class HouseService {
     return this.http.get(API_URL + 'house', httpOptions);
   }
 
+  createHouse(data: unknown): Observable<any> {
+    return this.http
+      .post(API_URL + 'house', data)
+      .pipe(tap(() => this.Refreshrequired.next()));
+  }
+
   editHouse(id: string, data: unknown): Observable<any> {
     return this.http
       .patch(API_URL + 'house/' + id, data)
