@@ -152,9 +152,16 @@
         accept="image/png, image/gif, image/jpeg, image/jpg"
         (change)="addImages($event.target)"
       />
-
-      <label for="img">Wybierz zdjęcie</label>
+      <div>
+        <label for="img">Wybierz zdjęcie</label>
+      </div>
+      <ng-container *ngFor="let image of arrayOfImages.photo">
+        <div class="smallImg">
+          <img src="{{image}}" alt="">
+        </div>
+      </ng-container>
     </div>
+
     <button
       type="submit"
       class="btnAdd"

@@ -10,6 +10,7 @@ import { UserStorage } from '../../../enums/enum';
 })
 export class UserNewHouseComponent {
   images: File[] = [];
+  arrayOfImages = { photo: [] };
   form!: FormGroup;
   constructor(private fb: FormBuilder, private houseService: HouseService) {
     this.form = fb.group({
@@ -35,7 +36,22 @@ export class UserNewHouseComponent {
     if (rawImages !== null) {
       //@ts-ignore
       this.images = Array.from(rawImages.files);
+
+      //@ts-ignore
+      let files = rawImages.files;
+      let file;
+      for (let i = 0; i < files.length; i++) {
+        let reader = new FileReader();
+        file = files[i];
+        reader.onload = (file) => {
+          //@ts-ignore
+          this.arrayOfImages.photo[i] = reader.result;
+        };
+        reader.readAsDataURL(file);
+      }
     }
+
+    console.log(this.arrayOfImages);
   }
 
   submit(event: any) {
