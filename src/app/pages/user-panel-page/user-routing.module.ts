@@ -12,8 +12,6 @@ const routes: Routes = [
   { path: 'favorite', component: UserFavoriteComponent },
   { path: 'my-houses', component: UserHousesComponent },
   { path: 'new-house', component: UserNewHouseComponent },
-  //todo nowe hasło będzie jako popup wyświetlane
-  // { path: 'new-password', component: UserNewPasswordComponent },
 ];
 
 @NgModule({
