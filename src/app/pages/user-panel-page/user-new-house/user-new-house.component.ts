@@ -118,8 +118,8 @@ export class UserNewHouseComponent {
           .get('owner')
           ?.setValue(window.sessionStorage.getItem(UserStorage.USER_KEY));
       },
-      error: (error) => {
-        this._toastService.error(error.error.message);
+      error: () => {
+        this._toastService.error('Sprawdz poprawność formularza!');
       },
     });
   }
