@@ -46,7 +46,7 @@ export class ManagerPageComponent implements OnDestroy {
           (house: HouseModel) => house.isAccepted === 0
         );
         this.houseToAccepted = houses.filter(
-          (house: HouseModel) => house.isAccepted === 1
+          (house: HouseModel) => house.isAccepted === 1 && house.isExist !== 3
         );
         this.houseAccepted = houses.filter(
           (house: HouseModel) => house.isAccepted === 2
