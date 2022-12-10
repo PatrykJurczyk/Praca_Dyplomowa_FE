@@ -10,16 +10,14 @@ import { LoadingService } from './loading.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  openModal: openModal = { isOpen: false, type: '' };
-  modalDetail!: HouseDetailModel;
+  protected openModal: openModal = { isOpen: false, type: '' };
+  protected modalDetail!: HouseDetailModel;
+  protected loading$ = this.loader.loading$;
 
-  loading$ = this.loader.loading$;
   constructor(
     private modalService: ModalService,
     public loader: LoadingService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.modalService.modalStateSubject.subscribe(
       (data) => (this.openModal = data)
     );
@@ -28,7 +26,7 @@ export class AppComponent {
     );
   }
 
-  closeModal() {
+  protected closeModal() {
     this.modalService.modalStateSubject.next({ isOpen: false, type: '' });
   }
 }

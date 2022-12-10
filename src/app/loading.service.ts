@@ -8,9 +8,7 @@ export class LoadingService {
   private _loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
-  public readonly loading$ = this._loading.asObservable();
-
-  constructor() {}
+  readonly loading$ = this._loading.asObservable();
 
   show() {
     this._loading.next(true);
