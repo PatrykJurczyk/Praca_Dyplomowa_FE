@@ -99,7 +99,7 @@
     </ng-container>
   </div>
   <div class="rightSide">
-    <p class="propertyTitle">Property information</p>
+    <p class="propertyTitle">Informacje o nieruchomości</p>
     <div class="basicInfo">
       <div class="propertyWrapper">
         <p class="label">Województwo</p>
@@ -134,7 +134,7 @@
         <p class="info">{{ houseData.bathroomNumber }}</p>
       </div>
     </div>
-    <p class="propertyTitle">More facilities</p>
+    <p class="propertyTitle">Udogodnienia</p>
     <div class="facilitiesContainer">
       <ng-container *ngIf="houseData.otherFeatures?.length">
         <div
@@ -156,7 +156,7 @@
       </div>
     </div>
     <div>
-      <p class="propertyTitle">More information</p>
+      <p class="propertyTitle">Więcej inforamcji</p>
       <p class="description">
         {{
           houseData.descriptionField
