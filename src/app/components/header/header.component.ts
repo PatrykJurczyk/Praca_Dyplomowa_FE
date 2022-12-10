@@ -61,7 +61,8 @@ export class HeaderComponent implements OnDestroy {
         })
       : (this.modalService.modalStateSubject.next({ isOpen: false, type: '' }),
         this._router.navigateByUrl('/').then(() => {
-          this._toastService.error('Pomyślnie wylogowano');
+          //todo
+          // this._toastService.error('Pomyślnie wylogowano');
           window.sessionStorage.clear();
           window.location.reload();
         }));

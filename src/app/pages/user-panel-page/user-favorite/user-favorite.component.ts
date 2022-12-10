@@ -19,16 +19,13 @@ export class UserFavoriteComponent implements OnDestroy {
 
   constructor(private userService: UserService, private houses: HouseService) {
     this.getUser();
+    this.getHouses();
+
     this.userService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
       () => {
         this.getUser();
       }
     );
-
-    this.getHouses();
-    this.houses.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.getHouses();
-    });
   }
 
   ngOnDestroy() {
@@ -43,6 +40,7 @@ export class UserFavoriteComponent implements OnDestroy {
       .subscribe((value) => {
         this.userId = value._id;
         this.favourites = value.favorites as string[];
+        this.getHouses();
       });
   }
 
