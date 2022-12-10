@@ -1,14 +1,14 @@
 <div class="container">
   <div class="header">
     <div class="imgWrapper">
-      <img src="../../../assets/image/nophoto.png" alt="Logo" routerLink="" />
+      <img src="../../../assets/image/nophoto.png" alt="Logo" routerLink="/" />
     </div>
     <button
       class="logInOutButton"
       (click)="onClick()"
       *ngIf="isLoggedIn !== 'User'"
     >
-      {{ isLoggedIn ? "Logout" : "Login" }}
+      {{ isLoggedIn ? "Wyloguj" : "Zaloguj" }}
     </button>
     <div
       class="userAvatarButton"
@@ -17,13 +17,13 @@
     >
       <img
         src="{{ userAvatar ? userAvatar : '../../../assets/image/avatar.png' }}"
-        alt="User avatar"
+        alt="Awatar użytkownika"
       />
     </div>
   </div>
   <app-nav-popup
     *ngIf="openNavPopup"
     [userName]="user.name"
-    (closePopup)="closeNavPopoup()"
+    (closePopup)="closeNavPopup()"
   ></app-nav-popup>
 </div>

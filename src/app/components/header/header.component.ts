@@ -12,13 +12,12 @@ import { UserStorage } from '../../enums/enum';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnDestroy {
-  protected readonly isLoggedIn: string | null = window.sessionStorage.getItem(
+  protected readonly isLoggedIn: string = window.sessionStorage.getItem(
     UserStorage.USER_ROLE
-  );
+  ) as string;
   protected user!: UserModel;
   protected userAvatar?: string;
   protected openNavPopup: boolean = false;
-
   private destroy$: Subject<void> = new Subject();
 
   constructor(
@@ -26,6 +25,10 @@ export class HeaderComponent implements OnDestroy {
     private modalService: ModalService,
     private _toastService: ToastService
   ) {
+    if (window.sessionStorage.getItem(UserStorage.USER_KEY)) {
+      this.getUsers();
+    }
+
     this.userService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
       () => {
         this.getUsers();
@@ -33,10 +36,9 @@ export class HeaderComponent implements OnDestroy {
     );
   }
 
-  ngOnInit(): void {
-    window.sessionStorage.getItem(UserStorage.USER_KEY)
-      ? this.getUsers()
-      : null;
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   private getUsers() {
@@ -48,12 +50,8 @@ export class HeaderComponent implements OnDestroy {
         this.user = value;
       });
   }
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 
-  onClick() {
+  protected onClick() {
     !this.isLoggedIn
       ? this.modalService.modalStateSubject.next({
           isOpen: true,
@@ -61,17 +59,14 @@ export class HeaderComponent implements OnDestroy {
         })
       : (window.sessionStorage.clear(),
         this.modalService.modalStateSubject.next({ isOpen: false, type: '' }),
-        this._toastService.error('Pomyślnie wylogowano'),
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000));
+        window.location.reload());
   }
 
-  onAvatarClick() {
+  protected onAvatarClick() {
     this.openNavPopup = !this.openNavPopup;
   }
 
-  closeNavPopoup() {
+  protected closeNavPopup() {
     this.openNavPopup = false;
   }
 }
