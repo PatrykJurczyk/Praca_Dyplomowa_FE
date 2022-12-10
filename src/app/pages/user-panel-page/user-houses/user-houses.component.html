@@ -27,9 +27,12 @@
             (click)="openOptions(myHouse._id)"
           ></ng-icon>
           <div class="options" *ngIf="houseId === myHouse._id">
-            <div class="option option1" (click)="showMoreInfo(myHouse._id)">Więcej informacji</div>
-            <div class="option option2" (click)="editHouse(myHouse._id)">Edytuj</div>
-            <div class="option option3" (click)="archive(myHouse._id, 3)">Archiwizuj</div>
+            <div class="option option1" (click)="showMoreInfo(myHouse._id)">
+              Więcej informacji
+            </div>
+            <div class="option option3" (click)="archive(myHouse._id, 3)">
+              Archiwizuj
+            </div>
           </div>
         </div>
       </div>
@@ -39,8 +42,9 @@
           [userId]="myHouse.owner"
           [buttons]="false"
           *ngIf="
-        openModalDetails.open === true && openModalDetails.idHouse === myHouse._id
-      "
+            openModalDetails.open === true &&
+            openModalDetails.idHouse === myHouse._id
+          "
           [isOpen]="openModalDetails.open"
         >
         </app-details-modal>
@@ -77,8 +81,15 @@
             (click)="openOptions(archiveHouse._id)"
           ></ng-icon>
           <div class="options" *ngIf="houseId === archiveHouse._id">
-            <div class="option option1" (click)="showMoreInfo(archiveHouse._id)">Więcej informacji</div>
-            <div class="option option2" (click)="archive(archiveHouse._id, 0)">Przywróć dom</div>
+            <div
+              class="option option1"
+              (click)="showMoreInfo(archiveHouse._id)"
+            >
+              Więcej informacji
+            </div>
+            <div class="option option2" (click)="archive(archiveHouse._id, 0)">
+              Przywróć dom
+            </div>
           </div>
         </div>
       </div>
@@ -88,13 +99,13 @@
           [userId]="archiveHouse.owner"
           [buttons]="false"
           *ngIf="
-        openModalDetails.open === true && openModalDetails.idHouse === archiveHouse._id
-      "
+            openModalDetails.open === true &&
+            openModalDetails.idHouse === archiveHouse._id
+          "
           [isOpen]="openModalDetails.open"
         >
         </app-details-modal>
       </div>
     </ng-container>
   </div>
-
 </div>

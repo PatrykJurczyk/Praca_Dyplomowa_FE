@@ -82,9 +82,4 @@ export class UserHousesComponent implements OnDestroy {
     this.openModalDetails.open = true;
     this.openModalDetails.idHouse = _id;
   }
-
-  //todo
-  protected editHouse(_id: string) {
-    this.houseService.editHouse(_id, {});
-  }
 }
