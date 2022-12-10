@@ -62,12 +62,12 @@ export class UserNewHouseComponent {
   protected addImages(rawImages: EventTarget | null) {
     if (rawImages !== null) {
       //@ts-ignore
-      this.images = Array.from(rawImages.files);
+      this.images = Array.from(rawImages.files).slice(0, 4);
 
       //@ts-ignore
       let files = rawImages.files;
       let file;
-      for (let i = 0; i < files.length; i++) {
+      for (let i = 0; i < 4; i++) {
         let reader = new FileReader();
         file = files[i];
         reader.onload = () => {
@@ -110,6 +110,7 @@ export class UserNewHouseComponent {
         }
         return payload.append('otherFeatures', control.value.name);
       });
+
     this.houseService.createHouse(payload).subscribe({
       next: () => {
         this.form.reset();
