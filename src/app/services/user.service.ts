@@ -33,7 +33,9 @@ export class UserService {
   }
 
   createUser(user: UserModel): Observable<UserModel> {
-    return this.http.post<UserModel>(API_URL + '/users', user, httpOptions);
+    return this.http
+      .post<UserModel>(API_URL + '/users', user, httpOptions)
+      .pipe(tap(() => this.Refreshrequired.next()));
   }
 
   getUsers(): Observable<any> {
