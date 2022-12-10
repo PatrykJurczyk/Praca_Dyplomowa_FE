@@ -31,6 +31,11 @@ export class UserFavoriteComponent implements OnDestroy {
     });
   }
 
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   private getUser() {
     this.userService
       .getUser(window.sessionStorage.getItem('auth-user') as string)
@@ -51,10 +56,5 @@ export class UserFavoriteComponent implements OnDestroy {
             this.favourites?.includes(element._id)
           ))
       );
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }
