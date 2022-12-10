@@ -5,6 +5,7 @@ import { ModalService } from '../../services/modal.service';
 import { UserModel } from '../../models/user.interface';
 import { Subject, takeUntil } from 'rxjs';
 import { UserStorage } from '../../enums/enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +24,8 @@ export class HeaderComponent implements OnDestroy {
   constructor(
     private userService: UserService,
     private modalService: ModalService,
-    private _toastService: ToastService
+    private _toastService: ToastService,
+    private _router: Router
   ) {
     if (window.sessionStorage.getItem(UserStorage.USER_KEY)) {
       this.getUsers();
@@ -57,9 +59,12 @@ export class HeaderComponent implements OnDestroy {
           isOpen: true,
           type: 'login',
         })
-      : (window.sessionStorage.clear(),
-        this.modalService.modalStateSubject.next({ isOpen: false, type: '' }),
-        window.location.reload());
+      : (this.modalService.modalStateSubject.next({ isOpen: false, type: '' }),
+        this._router.navigateByUrl('/').then(() => {
+          this._toastService.error('Pomyślnie wylogowano');
+          window.sessionStorage.clear();
+          window.location.reload();
+        }));
   }
 
   protected onAvatarClick() {

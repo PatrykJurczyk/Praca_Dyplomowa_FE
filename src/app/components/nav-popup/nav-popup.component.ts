@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav-popup.component.scss'],
 })
 export class NavPopupComponent {
-  @Input()
-  userName!: string | undefined;
+  @Input() userName!: string | undefined;
   @Output() closePopup = new EventEmitter<void>();
 
   constructor(
@@ -21,15 +20,16 @@ export class NavPopupComponent {
     private _router: Router
   ) {}
 
-  logOut() {
-    window.sessionStorage.clear();
+  protected logOut() {
     this.modalService.modalStateSubject.next({ isOpen: false, type: '' });
     this._toastService.error('Pomyślnie wylogowano');
-    window.location.reload();
-    this._router.navigateByUrl('');
+    this._router.navigateByUrl('/').then(() => {
+      window.sessionStorage.clear();
+      window.location.reload();
+    });
   }
 
-  closeNavPopup() {
+  protected closeNavPopup() {
     this.closePopup.emit();
   }
 }
