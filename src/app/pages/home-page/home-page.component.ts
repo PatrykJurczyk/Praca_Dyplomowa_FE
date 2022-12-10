@@ -23,10 +23,10 @@ export class HomePageComponent implements OnDestroy {
     'Wybierz opcję sortowania',
     'Cena rosnąco',
     'Cena malejąco',
-    'data dodania: najnowsze',
-    'data dodania: najstarsze',
-    'powierzchnia: od najmniejszej',
-    'powierzchnia: od największej',
+    'Data dodania: najnowsze',
+    'Data dodania: najstarsze',
+    'Powierzchnia: rosnąco',
+    'Powierzchnia: malejąco',
   ];
 
   private destroy$: Subject<void> = new Subject();

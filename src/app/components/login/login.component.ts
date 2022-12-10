@@ -64,6 +64,7 @@ export class LoginComponent implements OnDestroy {
               isOpen: false,
               type: '',
             });
+            this._toastService.success('Pomyślnie zalogowano');
             window.location.reload();
           });
         },
