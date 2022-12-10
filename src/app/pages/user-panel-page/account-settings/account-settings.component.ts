@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ModalService } from '../../../services/modal.service';
 import { UserService } from '../../../services/user.service';
 import { ToastService } from 'angular-toastify';
@@ -6,18 +6,12 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { UserStorage } from '../../../enums/enum';
 import { Subject, takeUntil } from 'rxjs';
 
-interface editUserInterface {
-  name?: string;
-  phone?: string;
-  avatar?: File;
-}
-
 @Component({
   selector: 'app-account-settings',
   templateUrl: './account-settings.component.html',
   styleUrls: ['./account-settings.component.scss'],
 })
-export class AccountSettingsComponent implements OnInit, OnDestroy {
+export class AccountSettingsComponent implements OnDestroy {
   form!: FormGroup;
   protected userAvatar?: string;
   protected userName?: string;
@@ -37,20 +31,12 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
         this.getUser();
       }
     );
-    this.form = fb.group({
-      name: new FormControl({
-        value: this.userName,
-        disabled: true,
-      }),
-      phone: new FormControl({
-        value: this.userPhone,
-        disabled: true,
-      }),
-      avatar: new FormControl({
-        value: this.userAvatar,
-        disabled: true,
-      }),
-    });
+    this.form = this.initForm();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   private getUser() {
@@ -62,13 +48,6 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
         this.userPhone = value.phone ? value.phone : '';
         this.userEmail = value.email ? value.email : '';
       });
-  }
-
-  ngOnInit(): void {}
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
   protected sendImage(img: any) {
@@ -97,10 +76,27 @@ export class AccountSettingsComponent implements OnInit, OnDestroy {
     this.form.get('avatar')?.disable();
   }
 
-  editPasswordClick() {
+  protected editPasswordClick() {
     this.modalService.modalStateSubject.next({
       isOpen: true,
       type: 'changePassword',
+    });
+  }
+
+  private initForm(): FormGroup {
+    return this.fb.group({
+      name: new FormControl({
+        value: this.userName,
+        disabled: true,
+      }),
+      phone: new FormControl({
+        value: this.userPhone,
+        disabled: true,
+      }),
+      avatar: new FormControl({
+        value: this.userAvatar,
+        disabled: true,
+      }),
     });
   }
 }
