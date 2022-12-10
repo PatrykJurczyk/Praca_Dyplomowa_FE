@@ -22,6 +22,7 @@ export class DetailsModalComponent implements OnDestroy {
   @Input() info!: string;
   @Input() color!: any;
   @Input() buttons!: boolean;
+  @Input() email!: string;
 
   protected time!: string;
   protected houseData!: HouseModel;
