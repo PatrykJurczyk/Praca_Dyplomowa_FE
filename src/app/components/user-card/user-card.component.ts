@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UserModel } from '../../models/user.interface';
 import { HouseModel } from '../../models/houseModel';
 
@@ -7,7 +7,7 @@ import { HouseModel } from '../../models/houseModel';
   templateUrl: './user-card.component.html',
   styleUrls: ['./user-card.component.scss'],
 })
-export class UserCardComponent implements OnInit {
+export class UserCardComponent {
   protected userHouses: HouseModel[] = [];
   protected openPopup: boolean = false;
   protected userId!: string;
@@ -30,16 +30,12 @@ export class UserCardComponent implements OnInit {
   protected user!: UserModel;
   protected createdDatePerson?: string;
 
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  blockPerson(id: string) {
+  protected blockPerson(id: string) {
     this.userId = id;
     this.openPopup = true;
   }
 
-  closePopup() {
+  protected closePopup() {
     this.openPopup = false;
   }
 }

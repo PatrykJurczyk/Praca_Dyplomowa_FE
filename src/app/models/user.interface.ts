@@ -20,11 +20,6 @@ export interface UserModel {
   createdAt?: string;
 }
 
-export interface errorMessage {
-  message: string;
-  status: string;
-}
-
 export interface adminPage {
   user: boolean;
   manager: boolean;

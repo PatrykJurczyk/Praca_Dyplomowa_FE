@@ -22,6 +22,7 @@ export class DetailsModalComponent implements OnDestroy {
   @Input() info!: string;
   @Input() color!: any;
   @Input() buttons!: boolean;
+  @Input() email!: string;
 
   protected time!: string;
   protected houseData!: HouseModel;
@@ -33,7 +34,12 @@ export class DetailsModalComponent implements OnDestroy {
     private houseService: HouseService
   ) {}
 
-  reserveHouse(id: string) {
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  protected reserveHouse(id: string) {
     this.houseService
       .statusExist(id, { isExist: 2, reservedBy: this.userId })
       .pipe(takeUntil(this.destroy$))
@@ -41,23 +47,17 @@ export class DetailsModalComponent implements OnDestroy {
       .subscribe();
   }
 
-  onClose() {
+  protected onClose() {
     this.modalDetail.modalDetailSubject.next({
       open: false,
       idHouse: '',
     });
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
   protected updateStatus(id: string, statusHouse: number) {
     this.houseService
       .updateStatus(id, { isAccepted: statusHouse })
       .pipe(takeUntil(this.destroy$))
-      .pipe(tap(() => this.onClose()))
-      .subscribe();
+      .subscribe(() => this.onClose());
   }
 }

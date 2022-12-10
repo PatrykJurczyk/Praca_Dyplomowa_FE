@@ -5,6 +5,7 @@ import { ModalService } from '../../services/modal.service';
 import { UserModel } from '../../models/user.interface';
 import { Subject, takeUntil } from 'rxjs';
 import { UserStorage } from '../../enums/enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,31 +13,47 @@ import { UserStorage } from '../../enums/enum';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnDestroy {
-  protected readonly isLoggedIn: string | null = window.sessionStorage.getItem(
+  protected readonly isLoggedIn: string = window.sessionStorage.getItem(
     UserStorage.USER_ROLE
-  );
+  ) as string;
   protected user!: UserModel;
   protected userAvatar?: string;
   protected openNavPopup: boolean = false;
+  protected navLink: string = '/';
 
   private destroy$: Subject<void> = new Subject();
 
   constructor(
     private userService: UserService,
     private modalService: ModalService,
-    private _toastService: ToastService
+    private _toastService: ToastService,
+    private _router: Router
   ) {
+    if (window.sessionStorage.getItem(UserStorage.USER_KEY)) {
+      this.getUsers();
+    }
+
     this.userService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
       () => {
-        this.getUsers();
+        if (window.sessionStorage.getItem(UserStorage.USER_KEY)) {
+          this.getUsers();
+        }
       }
     );
+    if (window.sessionStorage.getItem(UserStorage.USER_ROLE) === 'Admin') {
+      this.navLink = '/admin';
+    }
+    if (window.sessionStorage.getItem(UserStorage.USER_ROLE) === 'Manager') {
+      this.navLink = '/manager';
+    }
+    if (window.sessionStorage.getItem(UserStorage.USER_ROLE) === 'User') {
+      this.navLink = '/';
+    }
   }
 
-  ngOnInit(): void {
-    window.sessionStorage.getItem(UserStorage.USER_KEY)
-      ? this.getUsers()
-      : null;
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   private getUsers() {
@@ -48,30 +65,26 @@ export class HeaderComponent implements OnDestroy {
         this.user = value;
       });
   }
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 
-  onClick() {
+  protected onClick() {
     !this.isLoggedIn
       ? this.modalService.modalStateSubject.next({
           isOpen: true,
           type: 'login',
         })
-      : (window.sessionStorage.clear(),
-        this.modalService.modalStateSubject.next({ isOpen: false, type: '' }),
-        this._toastService.error('Pomyślnie wylogowano'),
-        setTimeout(() => {
+      : (this.modalService.modalStateSubject.next({ isOpen: false, type: '' }),
+        window.sessionStorage.clear(),
+        this._router.navigateByUrl('/').then(() => {
+          this._toastService.error('Pomyślnie wylogowano');
           window.location.reload();
-        }, 2000));
+        }));
   }
 
-  onAvatarClick() {
+  protected onAvatarClick() {
     this.openNavPopup = !this.openNavPopup;
   }
 
-  closeNavPopoup() {
+  protected closeNavPopup() {
     this.openNavPopup = false;
   }
 }

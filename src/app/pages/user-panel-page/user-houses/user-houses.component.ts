@@ -3,7 +3,7 @@ import { HouseService } from '../../../services/house.service';
 import { Subject, takeUntil } from 'rxjs';
 import { HouseModel } from '../../../models/houseModel';
 import { isReserved, UserStorage } from '../../../enums/enum';
-import { ModalService } from "../../../services/modal.service";
+import { ModalService } from '../../../services/modal.service';
 
 @Component({
   selector: 'app-user-houses',
@@ -13,15 +13,18 @@ import { ModalService } from "../../../services/modal.service";
 export class UserHousesComponent implements OnDestroy {
   protected myHouses!: HouseModel[];
   protected archivedHouses!: HouseModel[];
-  private destroy$: Subject<void> = new Subject();
   protected houseId!: string;
-
-  openModalDetails: { open: boolean; idHouse: string } = {
+  protected openModalDetails: { open: boolean; idHouse: string } = {
     open: false,
     idHouse: '',
   };
 
-  constructor(private houseService: HouseService, private modalDetail: ModalService,) {
+  private destroy$: Subject<void> = new Subject();
+
+  constructor(
+    private houseService: HouseService,
+    private modalDetail: ModalService
+  ) {
     this.getHouses();
     this.houseService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
       () => {
@@ -38,14 +41,17 @@ export class UserHousesComponent implements OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-  getHouses() {
+
+  private getHouses() {
     this.houseService
       .getHouses()
       .pipe(takeUntil(this.destroy$))
       .subscribe((houses: HouseModel[]) => {
         this.myHouses = houses.filter(
           (house: HouseModel) =>
-            house.owner === window.sessionStorage.getItem(UserStorage.USER_KEY) && house.isExist !== isReserved.archiwizowany
+            house.owner ===
+              window.sessionStorage.getItem(UserStorage.USER_KEY) &&
+            house.isExist !== isReserved.archiwizowany
         );
 
         this.archivedHouses = houses.filter(
@@ -57,25 +63,28 @@ export class UserHousesComponent implements OnDestroy {
       });
   }
 
-  openOptions(_id: string) {
-    if (_id === this.houseId){
-      this.houseId = ''
-    } else{
-      this.houseId = _id
+  protected openOptions(_id: string) {
+    if (_id === this.houseId) {
+      this.houseId = '';
+    } else {
+      this.houseId = _id;
     }
   }
 
-  archive(_id: string, number: number) {
-    this.houseService.statusExist(_id, {isExist: number}).pipe(takeUntil(this.destroy$)).subscribe(() => this.houseId = '')
+  protected archive(_id: string, number: number) {
+    this.houseService
+      .statusExist(_id, { isExist: number })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => (this.houseId = ''));
   }
 
-  showMoreInfo(_id: string) {
-    console.log(_id)
+  protected showMoreInfo(_id: string) {
     this.openModalDetails.open = true;
     this.openModalDetails.idHouse = _id;
   }
 
-  editHouse(_id: string) {
-    this.houseService.editHouse(_id, {})
+  //todo
+  protected editHouse(_id: string) {
+    this.houseService.editHouse(_id, {});
   }
 }

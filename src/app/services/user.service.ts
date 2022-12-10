@@ -27,11 +27,15 @@ export class UserService {
   }
 
   loginUser(user: UserModel): Observable<UserModel> {
-    return this.http.post<UserModel>(API_URL + 'login', user, httpOptions);
+    return this.http
+      .post<UserModel>(API_URL + 'login', user, httpOptions)
+      .pipe(tap(() => this.Refreshrequired.next()));
   }
 
   createUser(user: UserModel): Observable<UserModel> {
-    return this.http.post<UserModel>(API_URL + '/users', user, httpOptions);
+    return this.http
+      .post<UserModel>(API_URL + '/users', user, httpOptions)
+      .pipe(tap(() => this.Refreshrequired.next()));
   }
 
   getUsers(): Observable<any> {
@@ -49,11 +53,9 @@ export class UserService {
   }
 
   updateUserPassword(id: string, data: unknown): Observable<any> {
-    return this.http.patch(
-      API_URL + 'users/' + id + '/password',
-      data,
-      httpOptions
-    ).pipe(tap(() => this.Refreshrequired.next()));
+    return this.http
+      .patch(API_URL + 'users/' + id + '/password', data, httpOptions)
+      .pipe(tap(() => this.Refreshrequired.next()));
   }
 
   updateUserFavorites(id: string, data: unknown): Observable<any> {

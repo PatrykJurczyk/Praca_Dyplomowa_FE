@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ModalService } from '../../services/modal.service';
 import { managerPage } from '../../models/user.interface';
 import { Subject, takeUntil } from 'rxjs';
@@ -10,7 +10,7 @@ import { HouseModel } from '../../models/houseModel';
   templateUrl: './manager-page.component.html',
   styleUrls: ['./manager-page.component.scss'],
 })
-export class ManagerPageComponent implements OnInit, OnDestroy {
+export class ManagerPageComponent implements OnDestroy {
   protected selectedPage!: managerPage;
   protected houseAccepted!: HouseModel[];
   protected houseToAccepted!: HouseModel[];
@@ -29,7 +29,12 @@ export class ManagerPageComponent implements OnInit, OnDestroy {
     this.getHouses();
     this.houseService.Refreshrequired.subscribe(() => {
       this.getHouses();
-    })
+    });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   private getHouses() {
@@ -48,14 +53,6 @@ export class ManagerPageComponent implements OnInit, OnDestroy {
         );
       });
   }
-
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  ngOnInit(): void {}
 
   protected mode(type: managerPage) {
     this.modalService.managerPageSubject.next(type);

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './popup-accept-cancel.component.html',
   styleUrls: ['./popup-accept-cancel.component.scss'],
 })
-export class PopupAcceptCancelComponent implements OnInit {
+export class PopupAcceptCancelComponent {
   @Output() isOpened = new EventEmitter<void>();
   @Input() openPopup!: boolean;
   @Input() title!: string;
@@ -14,13 +14,11 @@ export class PopupAcceptCancelComponent implements OnInit {
 
   constructor(private userService: UserService) {}
 
-  ngOnInit(): void {}
-
-  blockPerson() {
+  protected blockPerson() {
     this.userService.updateUserDeletion(this.userId, {}).subscribe();
   }
 
-  cancel() {
+  protected cancel() {
     this.isOpened.emit();
   }
 }

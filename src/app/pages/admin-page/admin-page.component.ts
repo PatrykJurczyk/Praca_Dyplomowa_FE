@@ -40,7 +40,10 @@ export class AdminPageComponent implements OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((house: HouseModel[]) => (this.houses = house));
   }
-
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
   private getUsers() {
     this.userService
       .getUsers()
@@ -53,16 +56,11 @@ export class AdminPageComponent implements OnDestroy {
       });
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  userClicked() {
+  protected userClicked() {
     this.modalService.adminPageSubject.next({ user: true, manager: false });
   }
 
-  managerClicked() {
+  protected managerClicked() {
     this.modalService.adminPageSubject.next({ user: false, manager: true });
   }
 }

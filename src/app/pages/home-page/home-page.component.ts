@@ -11,10 +11,11 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnDestroy {
-  protected valueOfButton: string = 'Cena rosnąco';
+  protected selectedOption: string = 'Wybierz opcję sortowania';
   protected houses: HouseModel[] = [];
   protected favourites: string[] = [];
   protected userId!: string;
+  protected email!: string;
   protected isLoggedIn: boolean = !!window.sessionStorage.getItem(
     UserStorage.USER_KEY
   );
@@ -22,14 +23,14 @@ export class HomePageComponent implements OnDestroy {
     'Wybierz opcję sortowania',
     'Cena rosnąco',
     'Cena malejąco',
-    'data dodania: najnowsze',
-    'data dodania: najstarsze',
-    'powierzchnia: od najmniejszej',
-    'powierzchnia: od największej',
+    'Data dodania: najnowsze',
+    'Data dodania: najstarsze',
+    'Powierzchnia: rosnąco',
+    'Powierzchnia: malejąco',
   ];
-  selectedOption: string = 'Wybierz opcję sortowania';
 
   private destroy$: Subject<void> = new Subject();
+
   constructor(
     private housesService: HouseService,
     private userService: UserService
@@ -41,28 +42,13 @@ export class HomePageComponent implements OnDestroy {
       }
     );
 
-    this.isLoggedIn
-      ? this.userService
-          .getUser(
-            window.sessionStorage.getItem(UserStorage.USER_KEY) as string
-          )
-          .pipe(takeUntil(this.destroy$))
-          .subscribe((value) => {
-            this.userId = value._id;
-            this.favourites = value.favorites as string[];
-          })
-      : null;
+    if (this.isLoggedIn) {
+      this.getUser();
+    }
+
     this.userService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
       () => {
-        this.userService
-          .getUser(
-            window.sessionStorage.getItem(UserStorage.USER_KEY) as string
-          )
-          .pipe(takeUntil(this.destroy$))
-          .subscribe((value) => {
-            this.userId = value._id;
-            this.favourites = value.favorites as string[];
-          });
+        this.getUser();
       }
     );
   }
@@ -72,7 +58,18 @@ export class HomePageComponent implements OnDestroy {
     this.destroy$.complete();
   }
 
-  getHouses() {
+  private getUser() {
+    this.userService
+      .getUser(window.sessionStorage.getItem(UserStorage.USER_KEY) as string)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.userId = value._id;
+        this.email = value.email;
+        this.favourites = value.favorites as string[];
+      });
+  }
+
+  private getHouses() {
     this.housesService
       .getHouses()
       .pipe(takeUntil(this.destroy$))
@@ -84,8 +81,7 @@ export class HomePageComponent implements OnDestroy {
       });
   }
 
-  // todo zapisać to w inny sposób + zminić jakoś zapis w html aby była jakaś wartość na start podana
-  onClick(): void {
+  protected onClick(): void {
     if (this.selectedOption === 'Cena rosnąco') {
       this.houses = this.houses.sort((a, b) => a.price - b.price);
     }
@@ -93,7 +89,6 @@ export class HomePageComponent implements OnDestroy {
       this.houses = this.houses.sort((a, b) => b.price - a.price);
     }
     if (this.selectedOption === 'data dodania: najnowsze') {
-      console.log(this.houses[0].createdAt);
       this.houses = this.houses.sort(
         (a, b) =>
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()

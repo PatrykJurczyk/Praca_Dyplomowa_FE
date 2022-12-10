@@ -1,10 +1,10 @@
 <div class="container">
   <div class="formTitle">
-    <h1>Welcome to YourHome!</h1>
+    <h1>Witamy w YourHome!</h1>
   </div>
   <div class="buttons">
     <button type="button" class="signInButton" (click)="setIsSignInClicked()">
-      Sign in
+      Zaloguj się
     </button>
     <button
       type="button"
@@ -12,7 +12,7 @@
       (click)="setIsSignUpClicked()"
       [ngClass]="{ borderBottomButton: isSignUpClicked }"
     >
-      New account
+      Nowe konto
     </button>
   </div>
   <div class="formWrapper">
@@ -22,7 +22,7 @@
         <input
           id="email"
           type="text"
-          placeholder="Enter email"
+          placeholder="Wprowadź adres email"
           name="email"
           formControlName="email"
         />
@@ -36,16 +36,16 @@
             class="errorIcon"
           ></ng-icon>
           <p class="errorMessage">
-            {{ 'Wprowadź poprawny email' }}
+            {{ "Wprowadź poprawny email" }}
           </p>
         </div>
       </div>
       <div class="passwordInputWrapper">
-        <label for="password">Password</label>
+        <label for="password">Hasło</label>
         <input
           id="password"
           type="password"
-          placeholder="Enter password"
+          placeholder="Wprowadź hasło"
           name="password"
           formControlName="password"
         />
@@ -60,16 +60,16 @@
             class="errorIcon"
           ></ng-icon>
           <p class="errorMessage">
-            {{ 'Hasło musi mieć minimum 6 znaków' }}
+            {{ "Hasło musi mieć minimum 6 znaków" }}
           </p>
         </div>
       </div>
       <div class="passwordInputWrapper">
-        <label for="passwordRepeat">Repeat password</label>
+        <label for="passwordRepeat">Powtórz hasło</label>
         <input
           id="passwordRepeat"
           type="password"
-          placeholder="Enter password"
+          placeholder="Powtórz hasło"
           name="password"
           formControlName="passwordRepeat"
         />
@@ -85,7 +85,7 @@
             class="errorIcon"
           ></ng-icon>
           <p class="errorMessage">
-            {{ 'Hasło musi mieć minimum 6 znaków' }}
+            {{ "Hasło musi mieć minimum 6 znaków" }}
           </p>
         </div>
       </div>
@@ -105,7 +105,7 @@
           !form.controls['passwordRepeat'].valid
         "
       >
-        <p>Sign up</p>
+        <p>Zarejestruj się</p>
       </button>
     </form>
   </div>

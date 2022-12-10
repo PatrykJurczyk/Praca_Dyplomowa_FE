@@ -1,6 +1,6 @@
 <div class="container">
   <div class="formTitle">
-    <h1>Welcome to YourHome!</h1>
+    <h1>Witamy w YourHome!</h1>
   </div>
   <div class="buttons">
     <button
@@ -9,10 +9,10 @@
       (click)="setIsSignInClicked()"
       [ngClass]="{ borderBottomButton: isSignInClicked }"
     >
-      Sign in
+      Zaloguj się
     </button>
     <button type="button" class="signUpButton" (click)="setIsSignUpClicked()">
-      New account
+      Nowe konto
     </button>
   </div>
   <div class="formWrapper">
@@ -22,7 +22,7 @@
         <input
           id="email"
           type="text"
-          placeholder="Enter email"
+          placeholder="Wprowadź adres email"
           name="email"
           formControlName="email"
         />
@@ -41,11 +41,11 @@
         </div>
       </div>
       <div class="passwordInputWrapper">
-        <label for="password">Password</label>
+        <label for="password">Hasło</label>
         <input
           id="password"
           type="password"
-          placeholder="Enter password"
+          placeholder="Wprowadź hasło"
           name="password"
           formControlName="password"
         />
@@ -68,7 +68,6 @@
       <button
         type="submit"
         class="submitButton"
-        routerLink="/"
         [ngClass]="{
           disabled:
             !form.controls['email'].valid || !form.controls['password'].valid
@@ -77,7 +76,7 @@
           !form.controls['email'].valid || !form.controls['password'].valid
         "
       >
-        <p>Sign up</p>
+        <p>Zaloguj się</p>
       </button>
     </form>
   </div>

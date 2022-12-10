@@ -40,6 +40,10 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
+    if (path?.includes('') && (userRole === 'User' || userRole === null)) {
+      return true;
+    }
+
     this.router.navigateByUrl('/forbidden');
     return false;
   }

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { ToastService } from 'angular-toastify';
 import { ModalService } from '../../../services/modal.service';
+import { Subject, takeUntil } from 'rxjs';
 
 interface changePassword {
   password: string;
@@ -17,13 +18,41 @@ interface changePassword {
 })
 export class UserNewPasswordComponent {
   form!: FormGroup;
+
+  private destroy$: Subject<void> = new Subject();
+
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private _toastService: ToastService,
     private modalService: ModalService
   ) {
-    this.form = fb.group({
+    this.form = this.initForm();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  protected onSubmit(data: changePassword): void {
+    this.userService
+      .updateUserPassword(
+        window.sessionStorage.getItem('auth-user') as string,
+        data
+      )
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this._toastService.success('Pomyślnie zmieniono hasło');
+          this.modalService.modalStateSubject.next({ isOpen: false, type: '' });
+        },
+        error: (err) => this._toastService.error(err.error.message),
+      });
+  }
+
+  private initForm(): FormGroup {
+    return this.fb.group({
       password: [
         null,
         Validators.compose([Validators.required, Validators.minLength(6)]),
@@ -37,21 +66,5 @@ export class UserNewPasswordComponent {
         Validators.compose([Validators.required, Validators.minLength(6)]),
       ],
     });
-  }
-
-  onSubmit(data: changePassword): void {
-    this.userService
-      .updateUserPassword(
-        window.sessionStorage.getItem('auth-user') as string,
-        data
-      )
-      .pipe()
-      .subscribe(
-        (value) => {
-          this._toastService.success('Pomyślnie zmieniono hasło');
-          this.modalService.modalStateSubject.next({ isOpen: false, type: '' });
-        },
-        (err) => this._toastService.error(err.error.message)
-      );
   }
 }

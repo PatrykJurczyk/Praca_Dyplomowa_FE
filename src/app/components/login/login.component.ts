@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastService } from 'angular-toastify';
 import { UserStorage } from '../../enums/enum';
 import { Subject, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ import { Subject, takeUntil } from 'rxjs';
 export class LoginComponent implements OnDestroy {
   form!: FormGroup;
   protected isSignInClicked: boolean = true;
+  protected navigateTo!: string;
 
   private destroy$: Subject<void> = new Subject();
 
@@ -22,18 +24,10 @@ export class LoginComponent implements OnDestroy {
     private userService: UserService,
     private modalService: ModalService,
     private fb: FormBuilder,
-    private _toastService: ToastService
+    private _toastService: ToastService,
+    private router: Router
   ) {
-    this.form = fb.group({
-      email: [
-        null,
-        Validators.compose([Validators.required, Validators.email]),
-      ],
-      password: [
-        null,
-        Validators.compose([Validators.required, Validators.minLength(6)]),
-      ],
-    });
+    this.form = this.initForm();
   }
 
   ngOnDestroy() {
@@ -41,13 +35,21 @@ export class LoginComponent implements OnDestroy {
     this.destroy$.complete();
   }
 
-  onSubmit(data: UserModel): void {
+  protected onSubmit(data: UserModel): void {
     this.userService
       .loginUser(data)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (data: UserModel) => {
-          console.log(data);
+      .subscribe({
+        next: (data: UserModel) => {
+          if (data.role === 'User') {
+            this.navigateTo = '/';
+          }
+          if (data.role === 'Admin') {
+            this.navigateTo = '/admin';
+          }
+          if (data.role === 'Manager') {
+            this.navigateTo = '/manager';
+          }
           window.sessionStorage.setItem(UserStorage.USER_KEY, data.id);
           window.sessionStorage.setItem(
             UserStorage.USER_ROLE,
@@ -57,22 +59,42 @@ export class LoginComponent implements OnDestroy {
             UserStorage.TOKEN_KEY,
             data.token as string
           );
-          window.location.reload();
+          this.router.navigateByUrl(this.navigateTo).then(() => {
+            this.modalService.modalStateSubject.next({
+              isOpen: false,
+              type: '',
+            });
+            this._toastService.success('Pomyślnie zalogowano');
+            window.location.reload();
+          });
         },
-        (err) => this._toastService.error(err.error.message)
-      );
+        error: (error) => this._toastService.error(error.error.message),
+      });
   }
 
-  setIsSignInClicked() {
+  protected setIsSignInClicked() {
     this.isSignInClicked = true;
     this.modalService.modalStateSubject.next({ isOpen: true, type: 'login' });
   }
 
-  setIsSignUpClicked() {
+  protected setIsSignUpClicked() {
     this.isSignInClicked = false;
     this.modalService.modalStateSubject.next({
       isOpen: true,
       type: 'register',
+    });
+  }
+
+  private initForm(): FormGroup {
+    return this.fb.group({
+      email: [
+        null,
+        Validators.compose([Validators.required, Validators.email]),
+      ],
+      password: [
+        null,
+        Validators.compose([Validators.required, Validators.minLength(6)]),
+      ],
     });
   }
 }

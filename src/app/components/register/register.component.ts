@@ -22,7 +22,42 @@ export class RegisterComponent implements OnDestroy {
     private fb: FormBuilder,
     private _toastService: ToastService
   ) {
-    this.form = fb.group({
+    this.form = this.initForm();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  protected onSubmit(data: UserModel) {
+    this.userService
+      .createUser(data)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => (
+          this.setIsSignInClicked(),
+          this._toastService.success('Pomyślnie utworzono konto')
+        ),
+        error: (error) => this._toastService.error(error.error.message),
+      });
+  }
+
+  protected setIsSignInClicked() {
+    this.isSignUpClicked = true;
+    this.modalService.modalStateSubject.next({ isOpen: true, type: 'login' });
+  }
+
+  protected setIsSignUpClicked() {
+    this.isSignUpClicked = false;
+    this.modalService.modalStateSubject.next({
+      isOpen: true,
+      type: 'register',
+    });
+  }
+
+  private initForm(): FormGroup {
+    return this.fb.group({
       email: [
         null,
         Validators.compose([Validators.required, Validators.email]),
@@ -35,37 +70,6 @@ export class RegisterComponent implements OnDestroy {
         null,
         Validators.compose([Validators.required, Validators.minLength(6)]),
       ],
-    });
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  onSubmit(data: UserModel) {
-    this.userService
-      .createUser(data)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (res) => (
-          this.setIsSignInClicked(),
-          this._toastService.success('Pomyślnie utworzono konto')
-        ),
-        (err) => this._toastService.error(err.error.message)
-      );
-  }
-
-  setIsSignInClicked() {
-    this.isSignUpClicked = true;
-    this.modalService.modalStateSubject.next({ isOpen: true, type: 'login' });
-  }
-
-  setIsSignUpClicked() {
-    this.isSignUpClicked = false;
-    this.modalService.modalStateSubject.next({
-      isOpen: true,
-      type: 'register',
     });
   }
 }
