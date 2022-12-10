@@ -33,7 +33,9 @@ export class HeaderComponent implements OnDestroy {
 
     this.userService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
       () => {
-        this.getUsers();
+        if (window.sessionStorage.getItem(UserStorage.USER_KEY)) {
+          this.getUsers();
+        }
       }
     );
   }
@@ -60,10 +62,9 @@ export class HeaderComponent implements OnDestroy {
           type: 'login',
         })
       : (this.modalService.modalStateSubject.next({ isOpen: false, type: '' }),
+        window.sessionStorage.clear(),
         this._router.navigateByUrl('/').then(() => {
-          //todo
-          // this._toastService.error('Pomyślnie wylogowano');
-          window.sessionStorage.clear();
+          this._toastService.error('Pomyślnie wylogowano');
           window.location.reload();
         }));
   }
