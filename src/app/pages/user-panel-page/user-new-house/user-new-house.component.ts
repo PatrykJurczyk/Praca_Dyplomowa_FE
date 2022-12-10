@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { HouseService } from '../../../services/house.service';
 import { UserStorage } from '../../../enums/enum';
+import { ToastService } from 'angular-toastify';
 
 @Component({
   selector: 'app-user-new-house',
@@ -16,7 +17,7 @@ import { UserStorage } from '../../../enums/enum';
 })
 export class UserNewHouseComponent {
   protected arrayOfImages = { photo: [] };
-  protected arrayOfFacilities: string[] = [
+  arrayOfFacilities: string[] = [
     'Garaż',
     'Ogród',
     'Balkon',
@@ -42,7 +43,11 @@ export class UserNewHouseComponent {
   form!: FormGroup;
   private images: File[] = [];
 
-  constructor(private fb: FormBuilder, private houseService: HouseService) {
+  constructor(
+    private fb: FormBuilder,
+    private houseService: HouseService,
+    private _toastService: ToastService
+  ) {
     this.form = this.initForm();
 
     this.arrayOfFacilities.forEach((name: string) =>
@@ -99,14 +104,28 @@ export class UserNewHouseComponent {
 
     this.getOtherFeatures.controls
       .filter((control: AbstractControl) => control.value.checked === true)
-      .forEach((control: AbstractControl) =>
-        payload.append('otherFeatures', control.value.name)
-      );
-    this.houseService.createHouse(payload).subscribe();
+      .forEach((control: AbstractControl) => {
+        if (!control.value.name) {
+          return payload.append('otherFeatures', '');
+        }
+        return payload.append('otherFeatures', control.value.name);
+      });
+    this.houseService.createHouse(payload).subscribe({
+      next: () => {
+        this.form.reset();
+        this._toastService.success('Pomyślnie dodano nowy dom.');
+        this.form
+          .get('owner')
+          ?.setValue(window.sessionStorage.getItem(UserStorage.USER_KEY));
+      },
+      error: (error) => {
+        this._toastService.error(error.error.message);
+      },
+    });
   }
 
   private initForm(): FormGroup {
-    return this.fb.group({
+    return this.fb.nonNullable.group({
       owner: window.sessionStorage.getItem(UserStorage.USER_KEY),
       country: ['', Validators.compose([Validators.required])],
       province: ['', Validators.compose([Validators.required])],
