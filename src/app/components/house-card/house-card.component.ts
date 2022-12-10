@@ -21,13 +21,13 @@ export class HouseCardComponent implements OnDestroy {
   @Input() buttons!: boolean;
 
   protected isReservedHouse: number = isReserved.zarezerwowany;
-
-  openModalDetails: { open: boolean; idHouse: string } = {
+  protected openModalDetails: { open: boolean; idHouse: string } = {
     open: false,
     idHouse: '',
   };
 
   private destroy$: Subject<void> = new Subject();
+
   constructor(
     private modalDetail: ModalService,
     private userService: UserService
@@ -42,12 +42,12 @@ export class HouseCardComponent implements OnDestroy {
     this.destroy$.complete();
   }
 
-  openDetailsModal(id: string) {
+  protected openDetailsModal(id: string) {
     this.openModalDetails.open = true;
     this.openModalDetails.idHouse = id;
   }
 
-  updateFavorite(id: string) {
+  protected updateFavorite(id: string) {
     this.userService
       .updateUserFavorites(this.userId, { favorites: id })
       .pipe(takeUntil(this.destroy$))
