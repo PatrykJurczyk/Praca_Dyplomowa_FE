@@ -19,6 +19,8 @@ export class HeaderComponent implements OnDestroy {
   protected user!: UserModel;
   protected userAvatar?: string;
   protected openNavPopup: boolean = false;
+  protected navLink: string = '/';
+
   private destroy$: Subject<void> = new Subject();
 
   constructor(
@@ -38,6 +40,15 @@ export class HeaderComponent implements OnDestroy {
         }
       }
     );
+    if (window.sessionStorage.getItem(UserStorage.USER_ROLE) === 'Admin') {
+      this.navLink = '/admin';
+    }
+    if (window.sessionStorage.getItem(UserStorage.USER_ROLE) === 'Manager') {
+      this.navLink = '/manager';
+    }
+    if (window.sessionStorage.getItem(UserStorage.USER_ROLE) === 'User') {
+      this.navLink = '/';
+    }
   }
 
   ngOnDestroy() {
