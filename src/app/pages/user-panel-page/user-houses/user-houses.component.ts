@@ -13,13 +13,13 @@ import { ModalService } from '../../../services/modal.service';
 export class UserHousesComponent implements OnDestroy {
   protected myHouses!: HouseModel[];
   protected archivedHouses!: HouseModel[];
-  private destroy$: Subject<void> = new Subject();
   protected houseId!: string;
-
-  openModalDetails: { open: boolean; idHouse: string } = {
+  protected openModalDetails: { open: boolean; idHouse: string } = {
     open: false,
     idHouse: '',
   };
+
+  private destroy$: Subject<void> = new Subject();
 
   constructor(
     private houseService: HouseService,
@@ -41,7 +41,8 @@ export class UserHousesComponent implements OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-  getHouses() {
+
+  private getHouses() {
     this.houseService
       .getHouses()
       .pipe(takeUntil(this.destroy$))
@@ -62,7 +63,7 @@ export class UserHousesComponent implements OnDestroy {
       });
   }
 
-  openOptions(_id: string) {
+  protected openOptions(_id: string) {
     if (_id === this.houseId) {
       this.houseId = '';
     } else {
@@ -70,19 +71,20 @@ export class UserHousesComponent implements OnDestroy {
     }
   }
 
-  archive(_id: string, number: number) {
+  protected archive(_id: string, number: number) {
     this.houseService
       .statusExist(_id, { isExist: number })
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => (this.houseId = ''));
   }
 
-  showMoreInfo(_id: string) {
+  protected showMoreInfo(_id: string) {
     this.openModalDetails.open = true;
     this.openModalDetails.idHouse = _id;
   }
 
-  editHouse(_id: string) {
+  //todo
+  protected editHouse(_id: string) {
     this.houseService.editHouse(_id, {});
   }
 }
