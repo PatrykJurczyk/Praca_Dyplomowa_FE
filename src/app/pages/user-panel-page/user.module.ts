@@ -14,6 +14,7 @@ import {
   bootstrapChevronDown,
   bootstrapChevronUp,
   bootstrapThreeDots,
+  bootstrapXLg,
 } from '@ng-icons/bootstrap-icons';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -35,6 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
       bootstrapChevronDown,
       bootstrapChevronUp,
       bootstrapThreeDots,
+      bootstrapXLg,
     }),
     ReactiveFormsModule,
   ],

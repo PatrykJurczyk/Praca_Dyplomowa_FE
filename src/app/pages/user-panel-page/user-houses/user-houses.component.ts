@@ -14,6 +14,8 @@ export class UserHousesComponent implements OnDestroy {
   protected myHouses!: HouseModel[];
   protected archivedHouses!: HouseModel[];
   protected houseId!: string;
+  protected houseToEdit!: string;
+  protected openEditHouse: boolean = false;
   protected openModalDetails: { open: boolean; idHouse: string } = {
     open: false,
     idHouse: '',
@@ -72,6 +74,7 @@ export class UserHousesComponent implements OnDestroy {
   }
 
   protected archive(_id: string, number: number) {
+    this.houseId = '';
     this.houseService
       .statusExist(_id, { isExist: number })
       .pipe(takeUntil(this.destroy$))
@@ -81,10 +84,19 @@ export class UserHousesComponent implements OnDestroy {
   protected showMoreInfo(_id: string) {
     this.openModalDetails.open = true;
     this.openModalDetails.idHouse = _id;
+    this.houseId = '';
   }
 
   //todo
+
+  protected closeEditHouse() {
+    this.openEditHouse = false;
+  }
+
   protected editHouse(_id: string) {
-    this.houseService.editHouse(_id, {});
+    this.openEditHouse = true;
+    this.houseId = '';
+    this.houseToEdit = _id;
+    // this.houseService.editHouse(_id, {});
   }
 }

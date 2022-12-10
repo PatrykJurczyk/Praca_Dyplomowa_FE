@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormArray,
@@ -9,13 +9,18 @@ import {
 import { HouseService } from '../../../services/house.service';
 import { UserStorage } from '../../../enums/enum';
 import { ToastService } from 'angular-toastify';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-user-new-house',
   templateUrl: './user-new-house.component.html',
   styleUrls: ['./user-new-house.component.scss'],
 })
-export class UserNewHouseComponent {
+export class UserNewHouseComponent implements OnInit {
+  @Input() set houseId(value: string) {
+    this.houseToEdit = value;
+  }
+  private houseToEdit!: string;
   protected arrayOfImages = { photo: [] };
   arrayOfFacilities: string[] = [
     'Garaż',
@@ -42,13 +47,14 @@ export class UserNewHouseComponent {
 
   form!: FormGroup;
   private images: File[] = [];
+  private destroy$: Subject<void> = new Subject();
 
   constructor(
     private fb: FormBuilder,
     private houseService: HouseService,
     private _toastService: ToastService
   ) {
-    this.form = this.initForm();
+    this.form = this.initForm(this.houseToEdit);
 
     this.arrayOfFacilities.forEach((name: string) =>
       this.getOtherFeatures.push(this.initOtherFacilitiesForm(name))
@@ -57,6 +63,15 @@ export class UserNewHouseComponent {
 
   get getOtherFeatures() {
     return this.form.get('otherFeatures') as FormArray;
+  }
+
+  ngOnInit() {
+    this.initForm(this.houseToEdit);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   protected addImages(rawImages: EventTarget | null) {
@@ -111,21 +126,27 @@ export class UserNewHouseComponent {
         return payload.append('otherFeatures', control.value.name);
       });
 
-    this.houseService.createHouse(payload).subscribe({
-      next: () => {
-        this.form.reset();
-        this._toastService.success('Pomyślnie dodano nowy dom.');
-        this.form
-          .get('owner')
-          ?.setValue(window.sessionStorage.getItem(UserStorage.USER_KEY));
-      },
-      error: () => {
-        this._toastService.error('Sprawdz poprawność formularza!');
-      },
-    });
+    this.houseService
+      .createHouse(payload)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.form.reset();
+          this._toastService.success('Pomyślnie dodano nowy dom.');
+          this.form
+            .get('owner')
+            ?.setValue(window.sessionStorage.getItem(UserStorage.USER_KEY));
+        },
+        error: () => {
+          this._toastService.error('Sprawdz poprawność formularza!');
+        },
+      });
   }
 
-  private initForm(): FormGroup {
+  private initForm(houseToEdit: string): FormGroup {
+    if (houseToEdit) {
+      console.log(houseToEdit);
+    }
     return this.fb.nonNullable.group({
       owner: window.sessionStorage.getItem(UserStorage.USER_KEY),
       country: ['', Validators.compose([Validators.required])],
