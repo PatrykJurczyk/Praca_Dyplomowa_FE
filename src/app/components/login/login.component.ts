@@ -24,16 +24,7 @@ export class LoginComponent implements OnDestroy {
     private fb: FormBuilder,
     private _toastService: ToastService
   ) {
-    this.form = fb.group({
-      email: [
-        null,
-        Validators.compose([Validators.required, Validators.email]),
-      ],
-      password: [
-        null,
-        Validators.compose([Validators.required, Validators.minLength(6)]),
-      ],
-    });
+    this.form = this.initForm();
   }
 
   ngOnDestroy() {
@@ -41,12 +32,12 @@ export class LoginComponent implements OnDestroy {
     this.destroy$.complete();
   }
 
-  onSubmit(data: UserModel): void {
+  protected onSubmit(data: UserModel): void {
     this.userService
       .loginUser(data)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (data: UserModel) => {
+      .subscribe({
+        next: (data: UserModel) => {
           console.log(data);
           window.sessionStorage.setItem(UserStorage.USER_KEY, data.id);
           window.sessionStorage.setItem(
@@ -59,20 +50,33 @@ export class LoginComponent implements OnDestroy {
           );
           window.location.reload();
         },
-        (err) => this._toastService.error(err.error.message)
-      );
+        error: (error) => this._toastService.error(error.error.message),
+      });
   }
 
-  setIsSignInClicked() {
+  protected setIsSignInClicked() {
     this.isSignInClicked = true;
     this.modalService.modalStateSubject.next({ isOpen: true, type: 'login' });
   }
 
-  setIsSignUpClicked() {
+  protected setIsSignUpClicked() {
     this.isSignInClicked = false;
     this.modalService.modalStateSubject.next({
       isOpen: true,
       type: 'register',
+    });
+  }
+
+  private initForm(): FormGroup {
+    return this.fb.group({
+      email: [
+        null,
+        Validators.compose([Validators.required, Validators.email]),
+      ],
+      password: [
+        null,
+        Validators.compose([Validators.required, Validators.minLength(6)]),
+      ],
     });
   }
 }
