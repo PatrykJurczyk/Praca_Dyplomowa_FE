@@ -1,8 +1,8 @@
 <div class="container">
-  <div class="title">Add new house</div>
+  <div class="title">Dodaj nowy dom</div>
   <form [formGroup]="form" (ngSubmit)="submit(this.form)" class="formContainer">
     <div class="wrapperAddress">
-      <div class="properTitle">Address information</div>
+      <div class="properTitle">Adres</div>
       <div class="inputWrapper">
         <input
           type="text"
@@ -60,7 +60,7 @@
       </div>
     </div>
     <div class="wrapperInformation">
-      <div class="properTitle">Property information</div>
+      <div class="properTitle">Informacje o nieruchomiści</div>
       <div class="inputWrapper">
         <input
           type="number"
@@ -136,7 +136,7 @@
       </div>
     </div>
     <div class="wrapperFacilities">
-      <div class="properTitle">More Facilities</div>
+      <div class="properTitle">Udogodnienia</div>
       <div class="moreFacilitiesSelect">
         <div
           formArrayName="otherFeatures"
@@ -155,7 +155,7 @@
       </div>
     </div>
     <textarea
-      placeholder="More information"
+      placeholder="Więciej informacji"
       name="descriptionField"
       formControlName="descriptionField"
       maxlength="350"

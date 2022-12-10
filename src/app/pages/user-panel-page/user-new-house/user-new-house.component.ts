@@ -15,9 +15,8 @@ import { UserStorage } from '../../../enums/enum';
   styleUrls: ['./user-new-house.component.scss'],
 })
 export class UserNewHouseComponent {
-  images: File[] = [];
-  arrayOfImages = { photo: [] };
-  arrayOfFacilities: string[] = [
+  protected arrayOfImages = { photo: [] };
+  protected arrayOfFacilities: string[] = [
     'Garaż',
     'Ogród',
     'Balkon',
@@ -39,26 +38,12 @@ export class UserNewHouseComponent {
     'Klimatyzacja',
     'Umeblowanie',
   ];
+
   form!: FormGroup;
+  private images: File[] = [];
 
   constructor(private fb: FormBuilder, private houseService: HouseService) {
-    this.form = fb.group({
-      owner: window.sessionStorage.getItem(UserStorage.USER_KEY),
-      country: ['', Validators.compose([Validators.required])],
-      province: ['', Validators.compose([Validators.required])],
-      city: ['', Validators.compose([Validators.required])],
-      street: ['', Validators.compose([Validators.required])],
-      houseNr: ['', Validators.compose([Validators.required])],
-      yearBuilt: ['', Validators.compose([Validators.required])],
-      price: ['', Validators.compose([Validators.required])],
-      dimension: ['', Validators.compose([Validators.required])],
-      floorsInBuilding: ['', Validators.compose([Validators.required])],
-      floor: ['', Validators.compose([Validators.required])],
-      roomsNumber: ['', Validators.compose([Validators.required])],
-      bathroomNumber: ['', Validators.compose([Validators.required])],
-      otherFeatures: this.fb.array([]),
-      descriptionField: ['', Validators.compose([Validators.required])],
-    });
+    this.form = this.initForm();
 
     this.arrayOfFacilities.forEach((name: string) =>
       this.getOtherFeatures.push(this.initOtherFacilitiesForm(name))
@@ -69,7 +54,7 @@ export class UserNewHouseComponent {
     return this.form.get('otherFeatures') as FormArray;
   }
 
-  addImages(rawImages: EventTarget | null) {
+  protected addImages(rawImages: EventTarget | null) {
     if (rawImages !== null) {
       //@ts-ignore
       this.images = Array.from(rawImages.files);
@@ -89,14 +74,14 @@ export class UserNewHouseComponent {
     }
   }
 
-  initOtherFacilitiesForm(name: string) {
+  protected initOtherFacilitiesForm(name: string) {
     return this.fb.group({
       name: name,
       checked: false,
     });
   }
 
-  submit(event: any) {
+  protected submit(event: any) {
     let payload = new FormData();
 
     this.images.forEach((image: File) =>
@@ -118,5 +103,25 @@ export class UserNewHouseComponent {
         payload.append('otherFeatures', control.value.name)
       );
     this.houseService.createHouse(payload).subscribe();
+  }
+
+  private initForm(): FormGroup {
+    return this.fb.group({
+      owner: window.sessionStorage.getItem(UserStorage.USER_KEY),
+      country: ['', Validators.compose([Validators.required])],
+      province: ['', Validators.compose([Validators.required])],
+      city: ['', Validators.compose([Validators.required])],
+      street: ['', Validators.compose([Validators.required])],
+      houseNr: ['', Validators.compose([Validators.required])],
+      yearBuilt: ['', Validators.compose([Validators.required])],
+      price: ['', Validators.compose([Validators.required])],
+      dimension: ['', Validators.compose([Validators.required])],
+      floorsInBuilding: ['', Validators.compose([Validators.required])],
+      floor: ['', Validators.compose([Validators.required])],
+      roomsNumber: ['', Validators.compose([Validators.required])],
+      bathroomNumber: ['', Validators.compose([Validators.required])],
+      otherFeatures: this.fb.array([]),
+      descriptionField: ['', Validators.compose([Validators.required])],
+    });
   }
 }
