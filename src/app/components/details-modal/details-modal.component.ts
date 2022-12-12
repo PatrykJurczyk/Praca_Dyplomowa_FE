@@ -4,6 +4,8 @@ import { ModalService } from '../../services/modal.service';
 import * as moment from 'moment/moment';
 import { HouseService } from '../../services/house.service';
 import { Subject, takeUntil, tap } from 'rxjs';
+import { UserService } from "../../services/user.service";
+import { UserModel } from "../../models/user.interface";
 
 @Component({
   selector: 'app-details-modal',
@@ -22,7 +24,7 @@ export class DetailsModalComponent implements OnDestroy {
   @Input() info!: string;
   @Input() color!: any;
   @Input() buttons!: boolean;
-  @Input() email!: string;
+  protected email!: string;
 
   protected time!: string;
   protected houseData!: HouseModel;
@@ -31,12 +33,17 @@ export class DetailsModalComponent implements OnDestroy {
 
   constructor(
     private modalDetail: ModalService,
-    private houseService: HouseService
+    private houseService: HouseService,
+    private userService: UserService,
   ) {}
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  protected getEmail(ownerId: string){
+    this.userService.getUser(ownerId).pipe(takeUntil(this.destroy$)).subscribe((value: UserModel) => this.email = value.email)
   }
 
   protected reserveHouse(id: string) {

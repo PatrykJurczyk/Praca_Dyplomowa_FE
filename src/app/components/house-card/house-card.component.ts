@@ -19,7 +19,6 @@ export class HouseCardComponent implements OnDestroy {
   @Input() info!: string;
   @Input() color!: any;
   @Input() buttons!: boolean;
-  @Input() email!: string;
 
   protected isReservedHouse: number = isReserved.zarezerwowany;
   protected openModalDetails: { open: boolean; idHouse: string } = {

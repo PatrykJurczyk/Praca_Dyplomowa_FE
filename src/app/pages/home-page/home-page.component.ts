@@ -15,7 +15,6 @@ export class HomePageComponent implements OnDestroy {
   protected houses: HouseModel[] = [];
   protected favourites: string[] = [];
   protected userId!: string;
-  protected email!: string;
   protected isLoggedIn: boolean = !!window.sessionStorage.getItem(
     UserStorage.USER_KEY
   );
@@ -64,7 +63,6 @@ export class HomePageComponent implements OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((value) => {
         this.userId = value._id;
-        this.email = value.email;
         this.favourites = value.favorites as string[];
       });
   }
