@@ -24,7 +24,7 @@ export class DetailsModalComponent implements OnDestroy {
   @Input() info!: string;
   @Input() color!: any;
   @Input() buttons!: boolean;
-  protected email!: string;
+  protected email!: string | null;
 
   protected time!: string;
   protected houseData!: HouseModel;
@@ -43,7 +43,13 @@ export class DetailsModalComponent implements OnDestroy {
   }
 
   protected getEmail(ownerId: string){
-    this.userService.getUser(ownerId).pipe(takeUntil(this.destroy$)).subscribe((value: UserModel) => this.email = value.email)
+    this.userService.getUser(ownerId).pipe(takeUntil(this.destroy$)).subscribe((value: UserModel) => {
+      if(value){
+         this.email =  value.email
+      }
+      this.email = null
+
+    })
   }
 
   protected reserveHouse(id: string) {
