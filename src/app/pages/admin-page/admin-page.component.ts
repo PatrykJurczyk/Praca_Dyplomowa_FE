@@ -61,7 +61,7 @@ export class AdminPageComponent implements OnDestroy {
         );
         this.usersCanGatRoles = value.filter(
           (value: UserModel) =>
-            value.role === 'User' &&
+            (value.role === 'User' || value.role === 'Manager') &&
             value.status === 1 &&
             !value.favorites?.length
         );
