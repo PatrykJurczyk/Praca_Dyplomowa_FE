@@ -14,7 +14,10 @@ export class UserCardComponent {
   protected userId!: string;
   protected title: string = 'Czy chcesz zablokować użytkownika?';
   protected isBlocked: boolean = false
+  protected modifyRole: boolean = false
 
+
+  @Input() addRole!: boolean
   @Input() set person(user: UserModel) {
     this.user = user;
     this.createdDatePerson = user.createdAt?.split('T')[0];
@@ -47,4 +50,15 @@ export class UserCardComponent {
   protected closePopup() {
     this.openPopup = false;
   }
+
+  protected addRoleFn() {
+    this.modifyRole = true
+  }
+
+  protected closeRoleFn() {
+    this.modifyRole = false
+  }
+
+  protected manageRole(id: string, role: string) {}
+
 }

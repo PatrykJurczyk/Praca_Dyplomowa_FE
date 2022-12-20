@@ -26,10 +26,20 @@
       </p>
     </div>
   </div>
+
   <div class="button">
-    <button (click)="blockPerson(user._id)">Blokuj użytkownika</button>
+    <button *ngIf="!addRole" (click)="blockPerson(user._id)">
+      Blokuj użytkownika
+    </button>
+    <button *ngIf="addRole" (click)="addRoleFn()" style="background: #000000">
+      Nadaj role
+    </button>
   </div>
-  <div class="isBlockedUser" *ngIf="user.status === 0" (click)="restorePerson(user._id)">
+  <div
+    class="isBlockedUser"
+    *ngIf="user.status === 0"
+    (click)="restorePerson(user._id)"
+  >
     <p class="text">Zablokowany</p>
   </div>
 </div>
@@ -42,6 +52,31 @@
     [userId]="user._id"
     [isBlocked]="isBlocked"
   ></app-popup-accept-cancel>
+
+  <ng-container *ngIf="modifyRole">
+    <div class="containerPopup" *ngIf="addRole">
+      <div class="titlePopup">
+        {{ title }}
+      </div>
+      <div class="buttonWrapperPopup">
+        <button
+          class="addManager"
+          (click)="manageRole(user._id, 'Manager')"
+          *ngIf="user.role === 'User'"
+        >
+          Nadaj managera
+        </button>
+        <button
+          class="addUser"
+          (click)="manageRole(user._id, 'User')"
+          *ngIf="user.role === 'Manager'"
+        >
+          Nadaj użytkownika
+        </button>
+        <button class="cancelPopup" (click)="closeRoleFn()">Anuluj</button>
+      </div>
+    </div>
+  </ng-container>
 </div>
 
 <div class="bgColor" *ngIf="openPopup && user._id === userId"></div>

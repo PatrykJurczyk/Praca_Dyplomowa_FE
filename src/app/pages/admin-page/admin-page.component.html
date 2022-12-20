@@ -35,7 +35,7 @@
     </ng-container>
     <ng-container *ngIf="selectedPage.manageRoleUser">
       <ng-container *ngFor="let userCanGetRole of usersCanGatRoles">
-        <app-user-card [person]="userCanGetRole" [houses]="houses"></app-user-card>
+        <app-user-card [person]="userCanGetRole" [houses]="houses" [addRole]="true"></app-user-card>
       </ng-container>
     </ng-container>
   </div>
