@@ -47,6 +47,7 @@ export class UserCardComponent implements OnDestroy {
     this.userId = id;
     this.openPopup = true;
     this.isBlocked = true;
+    this.title = 'Czy na pewno chcesz odblokować użytkownika?';
   }
 
   protected user!: UserModel;
