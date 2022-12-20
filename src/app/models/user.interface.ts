@@ -23,6 +23,7 @@ export interface UserModel {
 export interface adminPage {
   user: boolean;
   manager: boolean;
+  manageRoleUser: boolean;
 }
 
 export interface managerPage {

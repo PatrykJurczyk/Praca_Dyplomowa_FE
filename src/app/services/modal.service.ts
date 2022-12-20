@@ -17,7 +17,7 @@ export class ModalService {
     });
 
   adminPageSubject: BehaviorSubject<adminPage> = new BehaviorSubject<adminPage>(
-    { manager: false, user: true }
+    { manager: false, user: true, manageRoleUser: false }
   );
 
   managerPageSubject: BehaviorSubject<managerPage> =
