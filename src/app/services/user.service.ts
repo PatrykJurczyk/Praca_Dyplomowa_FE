@@ -69,4 +69,10 @@ export class UserService {
       .patch(API_URL + 'users/' + id + '/deletion', data, httpOptions)
       .pipe(tap(() => this.Refreshrequired.next()));
   }
+
+  updateUserRestore(id: string, data: unknown): Observable<any> {
+    return this.http
+      .patch(API_URL + 'users/' + id + '/restore', data, httpOptions)
+      .pipe(tap(() => this.Refreshrequired.next()));
+  }
 }

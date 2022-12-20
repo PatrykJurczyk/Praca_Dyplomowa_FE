@@ -11,11 +11,12 @@ export class PopupAcceptCancelComponent {
   @Input() openPopup!: boolean;
   @Input() title!: string;
   @Input() userId!: string;
+  @Input() isBlocked!: boolean
 
   constructor(private userService: UserService) {}
 
   protected blockPerson() {
-    this.userService.updateUserDeletion(this.userId, {}).subscribe();
+    this.isBlocked  ? this.userService.updateUserRestore(this.userId, {}).subscribe() : this.userService.updateUserDeletion(this.userId, {}).subscribe();
   }
 
   protected cancel() {

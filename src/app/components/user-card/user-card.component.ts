@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { UserModel } from '../../models/user.interface';
 import { HouseModel } from '../../models/houseModel';
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-user-card',
@@ -12,6 +13,7 @@ export class UserCardComponent {
   protected openPopup: boolean = false;
   protected userId!: string;
   protected title: string = 'Czy chcesz zablokować użytkownika?';
+  protected isBlocked: boolean = false
 
   @Input() set person(user: UserModel) {
     this.user = user;
@@ -27,12 +29,19 @@ export class UserCardComponent {
     );
   }
 
+  protected restorePerson(id: string) {
+    this.userId = id;
+    this.openPopup = true;
+    this.isBlocked = true
+  }
+
   protected user!: UserModel;
   protected createdDatePerson?: string;
 
   protected blockPerson(id: string) {
     this.userId = id;
     this.openPopup = true;
+    this.isBlocked = false
   }
 
   protected closePopup() {
