@@ -36,7 +36,7 @@ export class AdminPageComponent implements OnDestroy {
       }
     );
 
-    this.getHouses()
+    this.getHouses();
   }
   ngOnDestroy() {
     this.destroy$.next();
@@ -59,29 +59,48 @@ export class AdminPageComponent implements OnDestroy {
         this.managers = value.filter(
           (value: UserModel) => value.role === 'Manager'
         );
-        this.usersCanGatRoles = value.filter((value: UserModel) => value.role === 'User' && value.status === 1 && !value.favorites?.length)
+        this.usersCanGatRoles = value.filter(
+          (value: UserModel) =>
+            value.role === 'User' &&
+            value.status === 1 &&
+            !value.favorites?.length
+        );
       });
   }
 
   protected userClicked() {
-    this.modalService.adminPageSubject.next({ user: true, manager: false, manageRoleUser: false });
+    this.modalService.adminPageSubject.next({
+      user: true,
+      manager: false,
+      manageRoleUser: false,
+    });
   }
 
   protected managerClicked() {
-    this.modalService.adminPageSubject.next({ user: false, manager: true, manageRoleUser: false });
+    this.modalService.adminPageSubject.next({
+      user: false,
+      manager: true,
+      manageRoleUser: false,
+    });
   }
 
   protected manageRoleClicked() {
     this.usersCanGatRoles.forEach((user: UserModel) => {
-      if (this.houses.find((house:HouseModel) => house.owner === user._id)){
-        const index = this.usersCanGatRoles.indexOf(user)
-        this.usersCanGatRoles.splice(index, 1)
+      if (this.houses.find((house: HouseModel) => house.owner === user._id)) {
+        const index = this.usersCanGatRoles.indexOf(user);
+        this.usersCanGatRoles.splice(index, 1);
       }
-      if (this.houses.find((house:HouseModel) => house.reservedBy === user._id)){
-        const index = this.usersCanGatRoles.indexOf(user)
-        this.usersCanGatRoles.splice(index, 1)
+      if (
+        this.houses.find((house: HouseModel) => house.reservedBy === user._id)
+      ) {
+        const index = this.usersCanGatRoles.indexOf(user);
+        this.usersCanGatRoles.splice(index, 1);
       }
-    })
-    this.modalService.adminPageSubject.next({ user: false, manager: false, manageRoleUser: true });
+    });
+    this.modalService.adminPageSubject.next({
+      user: false,
+      manager: false,
+      manageRoleUser: true,
+    });
   }
 }

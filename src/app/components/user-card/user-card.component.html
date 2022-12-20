@@ -31,7 +31,11 @@
     <button *ngIf="!addRole" (click)="blockPerson(user._id)">
       Blokuj użytkownika
     </button>
-    <button *ngIf="addRole" (click)="addRoleFn()" style="background: #000000">
+    <button
+      *ngIf="addRole"
+      (click)="addRoleFn(user._id)"
+      style="background: #000000"
+    >
       Nadaj role
     </button>
   </div>
@@ -79,4 +83,7 @@
   </ng-container>
 </div>
 
-<div class="bgColor" *ngIf="openPopup && user._id === userId"></div>
+<div
+  class="bgColor"
+  *ngIf="(openPopup || modifyRole) && user._id === userId"
+></div>
