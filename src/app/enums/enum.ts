@@ -9,4 +9,5 @@ export enum isReserved {
   doRezerwacji = 1,
   zarezerwowany = 2,
   archiwizowany = 3,
+  sprzedany = 4,
 }

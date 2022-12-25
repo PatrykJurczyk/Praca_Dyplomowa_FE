@@ -5,6 +5,12 @@
     </div>
     <ng-container *ngFor="let myHouse of myHouses; let index = index">
       <div class="itemWrapper">
+        <div class="isReserved" *ngIf="myHouse.isExist === 2">
+          <p>Zarezerwowany</p>
+        </div>
+        <div class="isSold" *ngIf="myHouse.isExist === 4">
+          <p>Sprzedany</p>
+        </div>
         <div class="content">
           <img
             src="{{
@@ -33,6 +39,9 @@
             <div class="option option3" (click)="archive(myHouse._id, 3)">
               Archiwizuj
             </div>
+            <div class="option option3" (click)="sold(myHouse._id, 4)">
+              Sprzedany
+            </div>
           </div>
         </div>
       </div>
@@ -58,6 +67,9 @@
     </div>
     <ng-container *ngFor="let archiveHouse of archivedHouses">
       <div class="itemWrapper">
+        <div class="isSold" *ngIf="archiveHouse.isExist === 4">
+          <p>Sprzedany</p>
+        </div>
         <div class="content">
           <img
             src="{{
@@ -87,7 +99,11 @@
             >
               Więcej informacji
             </div>
-            <div class="option option2" (click)="archive(archiveHouse._id, 0)">
+            <div
+              class="option option2"
+              (click)="archive(archiveHouse._id, 0)"
+              *ngIf="archiveHouse.isExist !== 4"
+            >
               Przywróć dom
             </div>
           </div>

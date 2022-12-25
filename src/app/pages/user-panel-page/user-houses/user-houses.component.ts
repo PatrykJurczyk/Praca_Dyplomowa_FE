@@ -51,14 +51,16 @@ export class UserHousesComponent implements OnDestroy {
           (house: HouseModel) =>
             house.owner ===
               window.sessionStorage.getItem(UserStorage.USER_KEY) &&
-            house.isExist !== isReserved.archiwizowany
+            house.isExist !== isReserved.archiwizowany &&
+            house.isExist !== isReserved.sprzedany
         );
 
         this.archivedHouses = houses.filter(
           (house: HouseModel) =>
-            house.owner ===
+            (house.owner ===
               window.sessionStorage.getItem(UserStorage.USER_KEY) &&
-            house.isExist === isReserved.archiwizowany
+              house.isExist === isReserved.archiwizowany) ||
+            house.isExist === isReserved.sprzedany
         );
       });
   }
@@ -81,5 +83,12 @@ export class UserHousesComponent implements OnDestroy {
   protected showMoreInfo(_id: string) {
     this.openModalDetails.open = true;
     this.openModalDetails.idHouse = _id;
+  }
+
+  protected sold(_id: string, number: number) {
+    this.houseService
+      .statusExist(_id, { isExist: number })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => (this.houseId = ''));
   }
 }

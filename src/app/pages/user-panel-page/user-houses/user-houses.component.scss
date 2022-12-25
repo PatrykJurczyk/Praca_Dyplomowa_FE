@@ -41,6 +41,7 @@
       padding-top: 2px;
       padding-right: 10px;
       border-top: 1px solid #b9b9b9;
+      position: relative;
       .icon {
         position: relative;
         ng-icon {
@@ -55,14 +56,15 @@
           font-size: 18px;
           font-weight: 600;
           border-radius: 3px;
+          z-index: 1;
 
-          .option{
+          .option {
             margin: 8px;
             padding: 2px;
             cursor: pointer;
             border-bottom: 1px solid #c0c0c0;
           }
-          .option:last-child{
+          .option:last-child {
             border-bottom: none;
           }
         }
@@ -81,4 +83,22 @@
       }
     }
   }
+}
+
+.isReserved {
+  position: absolute;
+  top: 60%;
+  left: 300px;
+  border-radius: 25px;
+  background: #48c448;
+  padding: 5px 20px;
+}
+
+.isSold {
+  position: absolute;
+  top: 60%;
+  left: 300px;
+  border-radius: 25px;
+  background: #4873c4;
+  padding: 5px 20px;
 }

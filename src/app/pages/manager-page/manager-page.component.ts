@@ -4,6 +4,7 @@ import { managerPage } from '../../models/user.interface';
 import { Subject, takeUntil } from 'rxjs';
 import { HouseService } from '../../services/house.service';
 import { HouseModel } from '../../models/houseModel';
+import { isReserved } from '../../enums/enum';
 
 @Component({
   selector: 'app-manager-page',
@@ -46,7 +47,10 @@ export class ManagerPageComponent implements OnDestroy {
           (house: HouseModel) => house.isAccepted === 0
         );
         this.houseToAccepted = houses.filter(
-          (house: HouseModel) => house.isAccepted === 1 && house.isExist !== 3
+          (house: HouseModel) =>
+            house.isAccepted === 1 &&
+            house.isExist !== isReserved.archiwizowany &&
+            house.isExist !== isReserved.sprzedany
         );
         this.houseAccepted = houses.filter(
           (house: HouseModel) => house.isAccepted === 2
