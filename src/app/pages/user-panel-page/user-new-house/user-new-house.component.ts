@@ -60,14 +60,21 @@ export class UserNewHouseComponent {
   }
 
   protected addImages(rawImages: EventTarget | null) {
-    if (rawImages !== null) {
+    //@ts-ignore
+    if (rawImages.files !== null) {
       //@ts-ignore
       this.images = Array.from(rawImages.files).slice(0, 4);
 
       //@ts-ignore
       let files = rawImages.files;
       let file;
-      for (let i = 0; i < 4; i++) {
+
+      for (
+        let i = 0;
+        //@ts-ignore
+        i < (rawImages.files.length > 3 ? 4 : rawImages.files.length);
+        i++
+      ) {
         let reader = new FileReader();
         file = files[i];
         reader.onload = () => {
@@ -118,6 +125,9 @@ export class UserNewHouseComponent {
         this.form
           .get('owner')
           ?.setValue(window.sessionStorage.getItem(UserStorage.USER_KEY));
+        // this.addImages(null);
+        // this.images = [];
+        // this.form.reset();
       },
       error: () => {
         this._toastService.error('Sprawdz poprawność formularza!');
