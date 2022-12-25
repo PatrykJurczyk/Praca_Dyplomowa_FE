@@ -172,10 +172,12 @@
       <div>
         <label for="img">Wybierz zdjęcie</label>
       </div>
-      <ng-container *ngFor="let image of arrayOfImages.photo">
-        <div class="smallImg">
-          <img src="{{ image }}" alt="" />
-        </div>
+      <ng-container *ngIf="!!arrayOfImages.photo.length">
+        <ng-container *ngFor="let image of arrayOfImages.photo">
+          <div class="smallImg">
+            <img src="{{ image }}" alt="Podgląd zdjęć" />
+          </div>
+        </ng-container>
       </ng-container>
     </div>
 

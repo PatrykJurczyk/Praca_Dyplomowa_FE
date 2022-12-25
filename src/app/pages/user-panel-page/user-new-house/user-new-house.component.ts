@@ -62,7 +62,7 @@ export class UserNewHouseComponent {
 
   protected addImages(rawImages: EventTarget | null) {
     //@ts-ignore
-    if (rawImages.files !== null) {
+    if (rawImages !== null) {
       //@ts-ignore
       this.images = Array.from(rawImages.files).slice(0, 4);
 
@@ -126,6 +126,9 @@ export class UserNewHouseComponent {
         this.form
           .get('owner')
           ?.setValue(window.sessionStorage.getItem(UserStorage.USER_KEY));
+        this.arrayOfImages.photo = [];
+        this.images = [];
+        this.form.markAllAsTouched();
       },
       error: () => {
         this._toastService.error('Sprawdz poprawność formularza!');
