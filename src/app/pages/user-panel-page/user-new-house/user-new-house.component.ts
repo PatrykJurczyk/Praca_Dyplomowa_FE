@@ -49,6 +49,7 @@ export class UserNewHouseComponent {
     private _toastService: ToastService
   ) {
     this.form = this.initForm();
+    this.form.markAllAsTouched();
 
     this.arrayOfFacilities.forEach((name: string) =>
       this.getOtherFeatures.push(this.initOtherFacilitiesForm(name))
@@ -125,9 +126,6 @@ export class UserNewHouseComponent {
         this.form
           .get('owner')
           ?.setValue(window.sessionStorage.getItem(UserStorage.USER_KEY));
-        // this.addImages(null);
-        // this.images = [];
-        // this.form.reset();
       },
       error: () => {
         this._toastService.error('Sprawdz poprawność formularza!');
