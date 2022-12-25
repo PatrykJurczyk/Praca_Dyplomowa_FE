@@ -72,7 +72,9 @@
           Zarezerwuj Dom
         </button>
         <a href="mailto:{{ email }}" *ngIf="!!email">Wyślij email</a>
-        <button *ngIf="!email" (click)="getEmail(houseData.owner)">Kontakt</button>
+        <button *ngIf="!email" (click)="getEmail(houseData.owner)">
+          Kontakt
+        </button>
       </div>
     </ng-container>
     <ng-container *ngIf="manager">
