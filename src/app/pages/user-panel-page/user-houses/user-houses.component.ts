@@ -83,6 +83,7 @@ export class UserHousesComponent implements OnDestroy {
   protected showMoreInfo(_id: string) {
     this.openModalDetails.open = true;
     this.openModalDetails.idHouse = _id;
+    this.openOptions('');
   }
 
   protected sold(_id: string, number: number) {
