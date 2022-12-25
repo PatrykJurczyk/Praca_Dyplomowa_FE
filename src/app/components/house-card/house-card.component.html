@@ -53,7 +53,9 @@
             ></ng-icon>
           </div>
         </div>
-        <button (click)="openDetailsModal(house._id)">Więcej szczegółów</button>
+        <button (click)="openDetailsModal(house._id, house.owner)">
+          Więcej szczegółów
+        </button>
       </div>
     </div>
     <div *ngIf="house.isExist === isReservedHouse" class="isReserved">
@@ -69,6 +71,7 @@
       [info]="info"
       [color]="color"
       [buttons]="buttons"
+      [emailOwner]="email"
       *ngIf="
         openModalDetails.open === true && openModalDetails.idHouse === house._id
       "

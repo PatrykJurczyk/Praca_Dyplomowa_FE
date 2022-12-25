@@ -4,6 +4,7 @@ import { isReserved } from '../../enums/enum';
 import { ModalService } from '../../services/modal.service';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
+import { UserModel } from '../../models/user.interface';
 
 @Component({
   selector: 'app-house-card',
@@ -19,6 +20,8 @@ export class HouseCardComponent implements OnDestroy {
   @Input() info!: string;
   @Input() color!: any;
   @Input() buttons!: boolean;
+
+  protected email!: string | null;
 
   protected isReservedHouse: number = isReserved.zarezerwowany;
   protected openModalDetails: { open: boolean; idHouse: string } = {
@@ -42,9 +45,23 @@ export class HouseCardComponent implements OnDestroy {
     this.destroy$.complete();
   }
 
-  protected openDetailsModal(id: string) {
+  protected openDetailsModal(id: string, owner: string) {
+    this.getEmail(owner);
     this.openModalDetails.open = true;
     this.openModalDetails.idHouse = id;
+  }
+
+  protected getEmail(ownerId: string) {
+    this.userService
+      .getUser(ownerId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value: UserModel) => {
+        if (value) {
+          this.email = value.email;
+          return;
+        }
+        this.email = null;
+      });
   }
 
   protected updateFavorite(id: string) {

@@ -71,10 +71,7 @@
         <button (click)="reserveHouse(houseData._id)" *ngIf="!!userId">
           Zarezerwuj Dom
         </button>
-        <a href="mailto:{{ email }}" *ngIf="!!email">Wyślij email</a>
-        <button *ngIf="!email" (click)="getEmail(houseData.owner)">
-          Kontakt
-        </button>
+        <a href="mailto:{{ emailOwner }}">Wyślij email</a>
       </div>
     </ng-container>
     <ng-container *ngIf="manager">
