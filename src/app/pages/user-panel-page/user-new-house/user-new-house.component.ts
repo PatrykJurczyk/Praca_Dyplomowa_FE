@@ -63,9 +63,6 @@ export class UserNewHouseComponent {
   protected addImages(rawImages: EventTarget | null) {
     this.arrayOfImages.photo = [];
     this.images = [];
-    console.log(this.images);
-    console.log(this.arrayOfImages);
-    console.log(rawImages);
     //@ts-ignore
     if (rawImages !== null) {
       //@ts-ignore
