@@ -88,22 +88,22 @@ export class HomePageComponent implements OnDestroy {
     if (this.selectedOption === 'Cena malejąco') {
       this.houses = this.houses.sort((a, b) => b.price - a.price);
     }
-    if (this.selectedOption === 'data dodania: najnowsze') {
+    if (this.selectedOption === 'Data dodania: najnowsze') {
       this.houses = this.houses.sort(
         (a, b) =>
           new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
     }
-    if (this.selectedOption === 'data dodania: najstarsze') {
+    if (this.selectedOption === 'Data dodania: najstarsze') {
       this.houses = this.houses.sort(
         (a, b) =>
           new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
       );
     }
-    if (this.selectedOption === 'powierzchnia: od najmniejszej') {
+    if (this.selectedOption === 'Powierzchnia: rosnąco') {
       this.houses = this.houses.sort((a, b) => a.dimension - b.dimension);
     }
-    if (this.selectedOption === 'powierzchnia: od największej') {
+    if (this.selectedOption === 'Powierzchnia: malejąco') {
       this.houses = this.houses.sort((a, b) => b.dimension - a.dimension);
     }
   }
