@@ -42,13 +42,13 @@
             <ng-icon
               name="bootstrapHeart"
               class="heart"
-              *ngIf="!favourites.includes(house._id)"
+              *ngIf="!favourites.includes(house._id) && house.isExist !== 2"
               (click)="updateFavorite(house._id)"
             ></ng-icon>
             <ng-icon
               name="bootstrapHeartFill"
               class="heartFill"
-              *ngIf="favourites.includes(house._id)"
+              *ngIf="favourites.includes(house._id) && house.isExist !== 2"
               (click)="updateFavorite(house._id)"
             ></ng-icon>
           </div>
@@ -58,7 +58,10 @@
         </button>
       </div>
     </div>
-    <div *ngIf="house.isExist === isReservedHouse" class="isReserved">
+    <div
+      *ngIf="house.isExist === isReservedHouse && !houseReservedPage"
+      class="isReserved"
+    >
       <p>zarezerwowane</p>
     </div>
   </div>

@@ -20,6 +20,7 @@ export class HouseCardComponent implements OnDestroy {
   @Input() info!: string;
   @Input() color!: any;
   @Input() buttons!: boolean;
+  @Input() houseReservedPage!: boolean;
 
   protected email!: string | null;
 

@@ -68,7 +68,10 @@
     </div>
     <ng-container *ngIf="!manager">
       <div class="buttonWrapper" *ngIf="!(houseData.owner === userId)">
-        <button (click)="reserveHouse(houseData._id)" *ngIf="!!userId">
+        <button
+          (click)="reserveHouse(houseData._id)"
+          *ngIf="!!userId && houseData.isExist !== 2"
+        >
           Zarezerwuj Dom
         </button>
         <a href="mailto:{{ emailOwner }}">Wyślij email</a>
