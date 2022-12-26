@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { HouseModel } from '../../models/houseModel';
-import { isReserved } from '../../enums/enum';
+import { isReserved, UserStorage } from '../../enums/enum';
 import { ModalService } from '../../services/modal.service';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from '../../services/user.service';
@@ -47,7 +47,9 @@ export class HouseCardComponent implements OnDestroy {
   }
 
   protected openDetailsModal(id: string, owner: string) {
-    this.getEmail(owner);
+    if (window.sessionStorage.getItem(UserStorage.USER_ROLE) === 'User') {
+      this.getEmail(owner);
+    }
     this.openModalDetails.open = true;
     this.openModalDetails.idHouse = id;
   }

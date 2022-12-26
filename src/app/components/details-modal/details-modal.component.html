@@ -62,44 +62,48 @@
         </div>
       </div>
     </div>
-    <div class="priceContainer">
-      <span *ngIf="!!(houseData.owner === userId)">Wystawiono: {{ time }}</span>
-      <div>{{ houseData.price }}zł</div>
-    </div>
-    <ng-container *ngIf="!manager">
-      <div class="buttonWrapper" *ngIf="!(houseData.owner === userId)">
-        <button
-          (click)="reserveHouse(houseData._id)"
-          *ngIf="!!userId && houseData.isExist !== 2"
+    <div>
+      <div class="priceContainer">
+        <span *ngIf="!!(houseData.owner === userId)"
+          >Wystawiono: {{ time }}</span
         >
-          Zarezerwuj Dom
-        </button>
-        <a href="mailto:{{ emailOwner }}">Wyślij email</a>
+        <div>{{ houseData.price }}zł</div>
       </div>
-    </ng-container>
-    <ng-container *ngIf="manager">
-      <div class="info" [ngStyle]="color">
-        {{ info }}
-      </div>
-      <div *ngIf="buttons">
-        <div class="buttonContainer">
+      <ng-container *ngIf="!manager">
+        <div class="buttonWrapper" *ngIf="!(houseData.owner === userId)">
           <button
-            type="button"
-            class="accept"
-            (click)="updateStatus(houseData._id, 2)"
+            (click)="reserveHouse(houseData._id)"
+            *ngIf="!!userId && houseData.isExist !== 2"
           >
-            Akceptuj
+            Zarezerwuj Dom
           </button>
-          <button
-            type="button"
-            class="reject"
-            (click)="updateStatus(houseData._id, 0)"
-          >
-            Odrzuć
-          </button>
+          <a href="mailto:{{ emailOwner }}">Wyślij email</a>
         </div>
-      </div>
-    </ng-container>
+      </ng-container>
+      <ng-container *ngIf="manager">
+        <div class="info" [ngStyle]="color">
+          {{ info }}
+        </div>
+        <div *ngIf="buttons">
+          <div class="buttonContainer">
+            <button
+              type="button"
+              class="accept"
+              (click)="updateStatus(houseData._id, 2)"
+            >
+              Akceptuj
+            </button>
+            <button
+              type="button"
+              class="reject"
+              (click)="updateStatus(houseData._id, 0)"
+            >
+              Odrzuć
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
   </div>
   <div class="rightSide">
     <p class="propertyTitle">Informacje o nieruchomości</p>
@@ -158,7 +162,7 @@
         <p class="nameOfFacility">Brak dodatkowych udogodnien</p>
       </div>
     </div>
-    <div>
+    <div style="margin-bottom: 20px">
       <p class="propertyTitle">Więcej inforamcji</p>
       <p class="description">
         {{

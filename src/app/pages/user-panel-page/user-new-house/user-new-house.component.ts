@@ -90,7 +90,7 @@ export class UserNewHouseComponent {
   }
 
   protected initOtherFacilitiesForm(name: string) {
-    return this.fb.group({
+    return this.fb.nonNullable.group({
       name: name,
       checked: false,
     });
@@ -111,7 +111,6 @@ export class UserNewHouseComponent {
         }
       }
     );
-
     this.getOtherFeatures.controls
       .filter((control: AbstractControl) => control.value.checked === true)
       .forEach((control: AbstractControl) => {

@@ -28,6 +28,9 @@
 
   .leftSide {
     margin: 20px 23px 0px 23px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
     .title {
       font-size: 36px;
@@ -97,6 +100,7 @@
 
     .buttonWrapper {
       display: grid;
+      grid-template-columns: 1fr 1fr;
       grid-template-columns: 1fr 1fr;
       margin-bottom: 17px;
 
@@ -183,6 +187,7 @@
     }
     .description {
       font-size: 12px;
+      overflow-wrap: anywhere;
     }
   }
 }
