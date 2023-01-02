@@ -43,13 +43,13 @@ export class HomePageComponent implements OnDestroy {
 
     if (this.isLoggedIn) {
       this.getUser();
-    }
 
-    this.userService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
-      () => {
-        this.getUser();
-      }
-    );
+      this.userService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
+        () => {
+          this.getUser();
+        }
+      );
+    }
   }
 
   ngOnDestroy() {

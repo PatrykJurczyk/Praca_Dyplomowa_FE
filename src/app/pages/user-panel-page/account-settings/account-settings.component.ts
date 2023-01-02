@@ -25,12 +25,14 @@ export class AccountSettingsComponent implements OnDestroy {
     private userService: UserService,
     private _toastService: ToastService
   ) {
-    this.getUser();
-    this.userService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
-      () => {
-        this.getUser();
-      }
-    );
+    if(window.sessionStorage.getItem(UserStorage.USER_KEY)) {
+      this.getUser();
+      this.userService.Refreshrequired.pipe(takeUntil(this.destroy$)).subscribe(
+        () => {
+          this.getUser();
+        }
+      );
+    }
     this.form = this.initForm();
   }
 
