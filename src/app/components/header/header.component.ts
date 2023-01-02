@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import {Component, HostListener, OnDestroy} from '@angular/core';
 import { ToastService } from 'angular-toastify';
 import { UserService } from '../../services/user.service';
 import { ModalService } from '../../services/modal.service';
@@ -48,6 +48,13 @@ export class HeaderComponent implements OnDestroy {
     }
     if (window.sessionStorage.getItem(UserStorage.USER_ROLE) === 'User') {
       this.navLink = '/';
+    }
+  }
+
+  @HostListener("document:click", ['$event'])
+  clickedOut(event: any) {
+    if(event.target.className !== "imgNavbar") {
+      this.openNavPopup = false;
     }
   }
 

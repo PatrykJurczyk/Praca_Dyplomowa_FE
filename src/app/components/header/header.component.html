@@ -2,7 +2,7 @@
   <div class="header">
     <div class="imgWrapper">
       <img
-        src="../../../assets/image/nophoto.png"
+        src="../../../assets/image/logo.png"
         alt="Logo"
         [routerLink]="navLink"
       />
@@ -20,6 +20,7 @@
       *ngIf="isLoggedIn === 'User'"
     >
       <img
+        class="imgNavbar"
         src="{{ userAvatar ? userAvatar : '../../../assets/image/avatar.png' }}"
         alt="Awatar użytkownika"
       />
