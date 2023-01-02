@@ -3,6 +3,11 @@
     <div class="topBar">
       <p>Domy na sprzedaż</p>
     </div>
+    <div *ngIf="myHouses.length === 0" class="text-info">
+      <p>
+        Brak domów na sprzedaż
+      </p>
+    </div>
     <ng-container *ngFor="let myHouse of myHouses; let index = index">
       <div class="itemWrapper">
         <div class="isReserved" *ngIf="myHouse.isExist === 2">
@@ -64,6 +69,11 @@
   <div class="wrapper1">
     <div class="topBar">
       <p>Archiwizowane</p>
+    </div>
+    <div *ngIf="archivedHouses.length === 0" class="text-info">
+      <p>
+        Brak domów zarchwizowanych
+      </p>
     </div>
     <ng-container *ngFor="let archiveHouse of archivedHouses">
       <div class="itemWrapper">

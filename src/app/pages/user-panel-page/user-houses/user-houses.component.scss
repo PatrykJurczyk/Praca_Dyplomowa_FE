@@ -18,6 +18,18 @@
     height: calc(50vh - 62.5px - 44.5px - 90px);
     margin-top: 50px;
 
+    .text-info {
+      height: 100%;
+      display: flex;
+
+      p{
+        font-size: 30px;
+        font-style: italic;
+        text-align: center;
+        margin: auto;
+      }
+    }
+
     .topBar {
       display: flex;
       justify-content: space-between;
