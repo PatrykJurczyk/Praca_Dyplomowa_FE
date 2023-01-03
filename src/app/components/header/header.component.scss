@@ -31,13 +31,27 @@
       }
     }
 
+    .header-user-menu {
+      display: flex;
+      .menuItem {
+        cursor: pointer;
+        padding: 10px 20px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #535c68;
+
+        &:hover {
+          color: #000000;
+        }
+      }
+    }
+
     .userAvatarButton {
       width: 56px;
       height: 56px;
       background-color: #00000020;
       overflow: hidden;
       border-radius: 50%;
-      //z-index: 2;
 
       img {
         width: 100%;
