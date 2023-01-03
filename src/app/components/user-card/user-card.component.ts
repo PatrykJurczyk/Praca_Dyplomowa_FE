@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import {Component, Input, OnDestroy, Output} from '@angular/core';
 import { UserModel } from '../../models/user.interface';
 import { HouseModel } from '../../models/houseModel';
 import { UserService } from '../../services/user.service';
