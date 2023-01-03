@@ -36,7 +36,7 @@
       (click)="addRoleFn(user._id)"
       style="background: #000000"
     >
-      Nadaj role
+      Nadaj role {{ user.role === 'User' ? 'managera' : 'użytkownika' }}
     </button>
   </div>
   <div
