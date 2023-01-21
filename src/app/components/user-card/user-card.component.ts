@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, Output} from '@angular/core';
+import { Component, Input, OnDestroy, Output } from '@angular/core';
 import { UserModel } from '../../models/user.interface';
 import { HouseModel } from '../../models/houseModel';
 import { UserService } from '../../services/user.service';
@@ -14,7 +14,7 @@ export class UserCardComponent implements OnDestroy {
   protected userHouses: HouseModel[] = [];
   protected openPopup: boolean = false;
   protected userId!: string;
-  protected title: string = 'Czy chcesz zablokować użytkownika?';
+  protected title!: string;
   protected isBlocked: boolean = false;
   protected modifyRole: boolean = false;
 
@@ -22,6 +22,7 @@ export class UserCardComponent implements OnDestroy {
   @Input() set person(user: UserModel) {
     this.user = user;
     this.createdDatePerson = user.createdAt?.split('T')[0];
+    this.title = `Czy chcesz zablokować użytkownika ${user.email}?`;
   }
 
   @Input() set houses(houses: HouseModel[]) {
@@ -47,7 +48,7 @@ export class UserCardComponent implements OnDestroy {
     this.userId = id;
     this.openPopup = true;
     this.isBlocked = true;
-    this.title = 'Czy na pewno chcesz odblokować użytkownika?';
+    this.title = `Czy na pewno chcesz odblokować użytkownika ${this.user.email}?`;
   }
 
   protected user!: UserModel;
